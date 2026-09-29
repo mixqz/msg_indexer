@@ -50,4 +50,19 @@ Mac(Docker·Mono)에서 확인할 수 없었던 항목 위주. 결과(✅/❌ + 
 | E6 | Outlook을 끈 상태에서 [백업 시작] → Outlook(classic)이 자동으로 켜지고 백업 진행 | |
 | E7 | 실패가 있으면 사유 목록 캡처 + `.emailindex\outlook-backup.log` 전달 | |
 
+## F. 다국어 (v1.1.0)
+Mac의 Mono 화면에서는 한·중·일 글자 폭이 잘못 계산돼 버튼·목록 글자가 잘려 보였습니다. 아래는 실제 Windows에서만 확인할 수 있습니다.
+
+| # | 확인 | 결과 |
+|---|---|---|
+| F1 | 설정 파일이 없는 첫 실행은 **영어**로 시작 (`%APPDATA%\EmailIndexer\settings.json`을 잠시 다른 이름으로 바꿔 확인) | |
+| F2 | [Settings] → Language / 언어 → 한국어 → [Save] → 다시 실행하면 한국어 화면. 기존 사용자는 설정이 영어로 초기화되므로 한 번 바꿔야 함 | |
+| F3 | 한국어 화면: 위쪽 버튼, 왼쪽 필터, 아래 동작 버튼, 상태줄 글자가 잘리지 않음 (Mac에서는 잘려 보였던 부분) | |
+| F4 | 영어 화면에서 [Normalize file names] → 이미 `_첨부O/X`로 정리된 파일은 '건너뜀'(already)으로 나오고 이름이 바뀌지 않음 | |
+| F5 | 영어 화면에서 정규화한 새 파일은 `_AttY` / `_AttN`으로 끝나고, 한국어로 되돌려도 '정규화됨'으로 표시 | |
+| F6 | 日本語·简体中文으로 바꿔 메인·설정·도움말(F1) 창 글자가 네모(□)로 깨지지 않고, [保存] 같은 짧은 버튼이 잘리지 않음 | |
+| F7 | Español·Français로 바꿔 창을 가장 작게(900px) 줄여도 버튼이 두 줄로 넘어가며 잘리지 않음 | |
+| F8 | 언어를 바꾼 뒤에도 이전에 기록된 오류 사유가 현재 언어로 표시되고, 열 너비가 유지됨 | |
+| F9 | 기록 파일(`last-scan.log`, `actions.log`, `outlook-backup.log`)은 어느 언어에서든 영어로 남음 | |
+
 문제가 있으면 해당 번호와 함께 `.emailindex\last-scan.log`, `actions.log`, `outlook-backup.log`, `%APPDATA%\EmailIndexer\error.log`를 보내 주세요.
