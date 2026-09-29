@@ -1,0 +1,9 @@
+bin/
+obj/
+out/
+dist/
+samples/real/
+*.user
+.vs/
+.kiro/
+.DS_Store

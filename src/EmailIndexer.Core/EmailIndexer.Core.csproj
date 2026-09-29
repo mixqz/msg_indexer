@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- 플랫폼 독립 핵심 로직: Docker(Linux)에서 테스트, Windows exe에 내장 -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <RootNamespace>EmailIndexer.Core</RootNamespace>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="MimeKit" Version="4.18.1" />
+    <PackageReference Include="MsgReader" Version="6.1.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="EmailIndexer.Core.Tests" />
+  </ItemGroup>
+</Project>

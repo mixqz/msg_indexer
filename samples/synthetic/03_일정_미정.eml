@@ -1,0 +1,28 @@
+From: "Alex Kim [Sales Team]" <alex.kim@example.com>
+Date: Sun, 23 Aug 2026 17:50:00 +0900
+Subject: =?utf-8?b?66+47KCVOiDso7zqsIQg7ZqM7J2Y?=
+Message-Id: <meeting-미정@example.com>
+To: =?utf-8?b?6rmA66+87IiY?= <minsu@example.com>
+Cc: Emma <emma@example.com>
+Received: from mx.example.com by mail.example.com;
+	Sun, 23 Aug 2026 17:54:34 +0900
+Received: from client by mx.example.com; Sun, 23 Aug 2026 17:51:00 +0900
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="=-HwWuuETdrjKv41n93HXWyA=="
+
+--=-HwWuuETdrjKv41n93HXWyA==
+Content-Type: text/plain; charset=utf-8
+
+미정
+--=-HwWuuETdrjKv41n93HXWyA==
+Content-Type: text/calendar; charset=utf-8; method=REPLY
+
+BEGIN:VCALENDAR
+METHOD:REPLY
+BEGIN:VEVENT
+ATTENDEE;PARTSTAT=TENTATIVE;CN=Kim:mailto:kim@example.com
+SUMMARY:W35 team agenda
+END:VEVENT
+END:VCALENDAR
+
+--=-HwWuuETdrjKv41n93HXWyA==--

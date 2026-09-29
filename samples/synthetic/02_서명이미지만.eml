@@ -1,0 +1,25 @@
+From: "Alex Kim [Sales Team]" <alex.kim@example.com>
+Date: Sun, 23 Aug 2026 17:50:00 +0900
+Subject: W35 team agenda: =?utf-8?b?64W87J2YL+qysOyglSDsgqztla0/?=
+Message-Id: <agenda-w35@example.com>
+To: =?utf-8?b?6rmA66+87IiY?= <minsu@example.com>
+Cc: Emma <emma@example.com>
+Received: from mx.example.com by mail.example.com;
+	Sun, 23 Aug 2026 17:54:34 +0900
+Received: from client by mx.example.com; Sun, 23 Aug 2026 17:51:00 +0900
+MIME-Version: 1.0
+Content-Type: multipart/related; boundary="=-NXUvGfmPwdF0fWUycle8zQ=="
+
+--=-NXUvGfmPwdF0fWUycle8zQ==
+Content-Type: text/html; charset=utf-8
+
+<p>본문<img src="cid:logo"></p>
+--=-NXUvGfmPwdF0fWUycle8zQ==
+Content-Type: image/png; name=image001.png
+Content-Disposition: inline; filename=image001.png
+Content-Transfer-Encoding: base64
+Content-Id: <logo>
+
+ZHVtbXktaW1hZ2UwMDEucG5n
+
+--=-NXUvGfmPwdF0fWUycle8zQ==--

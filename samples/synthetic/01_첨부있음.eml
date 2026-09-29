@@ -1,0 +1,28 @@
+From: "Alex Kim [Sales Team]" <alex.kim@example.com>
+Date: Sun, 23 Aug 2026 17:50:00 +0900
+Subject: RE:
+ =?utf-8?b?7ZWc67mb66eI7Yq4IOyngeq1rCDsiJjsnoUgM+yblOu2hCDsnqzsoITshqE=?=
+ =?utf-8?b?IOyalOyyrQ==?=
+Message-Id: <abc123@example.com>
+To: =?utf-8?b?6rmA66+87IiY?= <minsu@example.com>
+Cc: Emma <emma@example.com>
+Received: from mx.example.com by mail.example.com;
+	Sun, 23 Aug 2026 17:54:34 +0900
+Received: from client by mx.example.com; Sun, 23 Aug 2026 17:51:00 +0900
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="=-kF/yh3+YPSrkwKBc+nuf9A=="
+
+--=-kF/yh3+YPSrkwKBc+nuf9A==
+Content-Type: text/plain; charset=utf-8
+
+안녕하세요.
+--=-kF/yh3+YPSrkwKBc+nuf9A==
+Content-Type: application/pdf;
+	name*=utf-8''%ED%95%9C%EB%B9%9B%EB%A7%88%ED%8A%B8%200301-0315.xlsx
+Content-Disposition: attachment;
+	filename*=utf-8''%ED%95%9C%EB%B9%9B%EB%A7%88%ED%8A%B8%200301-0315.xlsx
+Content-Transfer-Encoding: base64
+
+ZHVtbXkt7ZWc67mb66eI7Yq4IDAzMDEtMDMxNS54bHN4
+
+--=-kF/yh3+YPSrkwKBc+nuf9A==--
