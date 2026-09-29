@@ -119,13 +119,13 @@ public class LocalizationTests
 
     /// <summary>
     /// Core 코드에 번역되지 않은 한글 문구가 새로 들어오지 않게 막는다.
-    /// (파일명 규칙의 표기는 Stage 3에서 언어별로 바뀌므로 잠시 허용)
+    /// (파일명에 들어가는 언어별 고정 표기 표는 허용)
     /// </summary>
     [Fact]
     public void Core_has_no_hardcoded_korean_ui_text()
     {
         var src = FindRepoDir("src/EmailIndexer.Core");
-        var allowed = new[] { "\"(발신자 없음)\"", "\"(제목 없음)\"", "\"_첨부O\"", "\"_첨부X\"", "첨부[OX]", "(읽기 실패)", "\"한국어\"" };
+        var allowed = new[] { "new Words(", "\"한국어\"" }; // 파일명 표기 표(언어별 고정)와 언어 이름만 허용
         var hits = new List<string>();
         foreach (var file in Directory.GetFiles(src, "*.cs", SearchOption.AllDirectories)
                      .Where(p => !p.Contains($"{Path.DirectorySeparatorChar}obj{Path.DirectorySeparatorChar}")))

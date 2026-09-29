@@ -1,0 +1,236 @@
+# Email Archive Indexer — 简体中文 — 主窗口 (MainForm)
+# 格式：key = value   (\n = 换行，{0} {1} = 占位符，key.one / key.other = 复数形式)
+
+# ---- 列标题 ----
+main.col.time = 日期
+main.col.dir = 类型
+main.col.sender = 发件人
+main.col.subject = 主题
+main.col.attach = 附件
+main.col.meeting = 会议
+main.col.size = 大小
+main.col.status = 状态
+main.col.folder = 文件夹
+
+# ---- 单元格文本 ----
+main.cell.attachCount.one = {0} 个文件
+main.cell.attachCount.other = {0} 个文件
+
+# ---- 顶部栏 ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = 备份文件夹
+main.btn.changeFolder = 更改文件夹
+main.btn.scan = 扫描 (F5)
+main.btn.scanCancel = 取消扫描
+main.btn.outlookBackup = Outlook 备份
+main.btn.settings = 设置
+main.btn.help = 帮助 (F1)
+main.tip.outlookBackup = 将 Outlook (经典版) 的收件箱和已发送邮件保存为 .msg 文件（如果 Outlook 未运行，会自动启动）
+main.tip.help = 各功能的说明和键盘快捷方式
+
+# ---- 筛选面板 ----
+main.filter.title = 筛选
+main.filter.reset = 重置
+main.filter.period = 日期
+main.filter.dirInOut = 收到 / 发出
+main.filter.attach = 附件
+main.filter.meeting = 会议
+main.filter.status = 状态
+main.filter.format = 格式
+main.filter.folder = 文件夹
+main.filter.topSenders = 前 30 位发件人
+
+# ---- 日期组合框（保持此顺序；代码按 SelectedIndex 判断） ----
+main.period.all = 所有日期
+main.period.today = 今天
+main.period.last7 = 最近 7 天
+main.period.last30 = 最近 30 天
+main.period.thisYear = 今年
+main.period.custom = 自定义范围
+
+# ---- 方向 / 附件 / 会议 / 状态 / 格式复选框 ----
+main.chk.dirIn = 收到
+main.chk.dirOut = 发出
+main.chk.attYes = 有
+main.chk.attNo = 无
+main.chk.meetRequest = 会议邀请
+main.chk.meetAccepted = 已接受
+main.chk.meetDeclined = 已拒绝
+main.chk.meetTentative = 暂定
+main.chk.meetCanceled = 已取消
+main.chk.statusDuplicate = 重复
+main.chk.statusSimilar = 相似
+main.chk.statusError = 错误
+main.chk.statusNotNormalized = 未规范化
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- 搜索行 ----
+main.search.label = 搜索
+main.search.cue = 搜索 — 主题、人员、正文、附件名（多个词 = 必须全部匹配，"引号" = 完全匹配短语）
+
+# ---- 操作按钮 ----
+main.action.preview = 预览 (Enter)
+main.action.open = 打开 (Ctrl+O)
+main.action.showInFolder = 在文件夹中显示
+main.action.normalize = 规范化文件名
+main.action.move = 移动所选项
+main.action.delete = 删除所选项 (Del)
+main.action.dedupe = 清理重复项
+
+# ---- 右键菜单 ----
+main.menu.preview = 预览
+main.menu.open = 打开 (Outlook)
+main.menu.showInFolder = 在文件夹中显示
+main.menu.copyPath = 复制路径
+main.menu.normalize = 规范化文件名
+main.menu.move = 移动所选项…
+main.menu.trash = 移到回收站
+main.menu.thisSenderOnly = 仅显示此发件人
+
+# ---- 辅助功能名称 ----
+main.acc.search = 搜索邮件
+main.acc.list = 邮件列表
+main.acc.listDesc = Enter：预览，Ctrl+O：在 Outlook 中打开，Del：移到回收站
+main.acc.folderBox = 备份文件夹路径
+main.acc.tree = 文件夹筛选
+main.acc.senders = 发件人筛选
+main.acc.period = 日期筛选
+main.acc.from = 开始日期
+main.acc.to = 结束日期
+main.acc.scope = 搜索范围：{0}
+
+# ---- 文件夹树 / 发件人列表 ----
+main.tree.all = （全部）{0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = （所有发件人）
+main.sender.item = {0} ({1})
+
+# ---- 排序箭头 ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- 计数 / 状态栏 ----
+main.applied = 已应用：{0}
+main.counts = 共 {0:#,0} · 显示 {1:#,0} · 已选 {2:#,0}
+main.status.chooseFolder = 请选择邮件备份文件夹。
+main.status.loadingCache = 正在加载缓存…
+main.status.scanCanceled = 扫描已取消。
+main.status.scanFailed = 扫描失败 — 请按“扫描”重试
+main.status.fileOp = {0}：{1}
+
+# ---- 扫描进度 / 摘要 ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = 扫描完成，用时 {0:0.0} 秒
+main.summary.firstScan = 首次扫描
+main.summary.cacheRebuilt = 已重建缓存
+main.summary.added = 新增 {0:#,0}
+main.summary.changed = 已更改 {0:#,0}
+main.summary.moved = 已移动 {0:#,0}
+main.summary.removed = 已移除 {0:#,0}
+main.summary.autoTrashed.one = {0} 个新重复项已移到回收站
+main.summary.autoTrashed.other = {0} 个新重复项已移到回收站
+main.summary.errors = 错误 {0:#,0}
+
+# ---- 空状态提示 ----
+main.empty.chooseFolder = 请选择邮件备份文件夹。\n\n单击此处或单击“更改文件夹”。也可以从文件资源管理器将文件夹拖到此窗口中。
+main.empty.building = 正在生成邮件列表…\n\n首次打开文件夹时，根据文件数量可能需要一些时间。进度显示在下方的状态栏中。
+main.empty.noFiles = 在此文件夹（包括子文件夹）中找不到 .msg / .eml 文件。\n\n单击此处使用其他文件夹。若要从 Outlook 导入，请单击“Outlook 备份”。
+main.empty.noMatchesWithSearch = 没有符合条件的邮件。\n\n搜索：“{0}”\n单击此处清除搜索和所有筛选。
+main.empty.noMatches = 没有符合条件的邮件。\n\n单击此处清除搜索和所有筛选。
+
+# ---- 自动移到回收站通知（扫描后） ----
+main.autoTrash.title = 已清理新的重复项
+main.autoTrash.body.one = 新增了 {0} 个与已有邮件完全相同的文件，已将其移到回收站。原件未做任何更改。\n\n{1}\n\n如有需要，可以从 Windows 回收站还原，还原的文件不会再次被删除。
+main.autoTrash.body.other = 新增了 {0} 个与已有邮件完全相同的文件，已将其移到回收站。原件未做任何更改。\n\n{1}\n\n如有需要，可以从 Windows 回收站还原，还原的文件不会再次被删除。
+main.autoTrash.more = \n…另外还有 {0:#,0} 个
+
+# ---- 移到回收站失败（扫描后） ----
+main.trashFail.title = 清理重复项
+main.trashFail.body = 部分新的重复文件无法移到回收站（在列表中标记为“重复”）：\n\n{0}\n\n如果其他程序（例如 Outlook）正在打开这些文件，请关闭该程序后再次单击“扫描”。
+
+# ---- 扫描失败对话框 ----
+main.scanFail.title = 扫描失败
+main.scanFail.body = 无法读取备份文件夹。\n{0}\n\n{1}\n\n请确认该文件夹仍然存在并且你有权限打开它，然后再次单击“扫描”。如果仍然失败，请使用“更改文件夹”重新选择文件夹。
+
+# ---- 打开确认 ----
+main.open.title = 打开
+main.open.message = 将在 Outlook 中一次性打开所选的 {0:#,0} 个文件。
+main.open.ok = 打开 {0:#,0} 个
+main.open.failTitle = 无法打开
+main.open.failBody = 无法打开文件。\n{0}\n\n{1}\n\n请确认已安装 Outlook 并且 .msg / .eml 已与其关联。
+
+# ---- 文件操作就绪 ----
+main.busy.title = 请稍候
+main.busy.scanning = 正在扫描。请在扫描完成后重试。
+
+# ---- 目标范围 ----
+main.target.selected.one = 所选的 {0} 个文件
+main.target.selected.other = 所选的 {0:#,0} 个文件
+main.target.viewAll.one = 当前显示的全部 {0} 个文件
+main.target.viewAll.other = 当前显示的全部 {0:#,0} 个文件
+
+# ---- 规范化（重命名） ----
+main.normalize.status.rename = 重命名
+main.normalize.status.skip = 跳过
+main.normalize.status.error = 无法处理
+main.normalize.title = 规范化文件名 - 预览
+main.normalize.summary = 目标：{0}   →   重命名 {1:#,0} · 跳过 {2:#,0} · 无法处理 {3:#,0}\n规则：日期_时间_发件人_主题_有附件/无附件（收到的邮件 = 接收时间，发出的邮件 = 发送时间）。运行后，可使用“撤销上次规范化”恢复原始名称。
+main.normalize.col.action = 操作
+main.normalize.col.oldName = 更改前
+main.normalize.col.newName = 更改后
+main.normalize.col.note = 备注
+main.normalize.ok.one = 重命名 {0} 个文件
+main.normalize.ok.other = 重命名 {0:#,0} 个文件
+main.normalize.undo.one = 撤销上次规范化（{0} 个文件）
+main.normalize.undo.other = 撤销上次规范化（{0:#,0} 个文件）
+main.normalize.opTitle = 规范化文件名
+
+# ---- 撤销重命名 ----
+main.undo.title = 撤销规范化
+main.undo.message.one = 将恢复上次规范化中重命名的 {0} 个文件的原始名称。\n之后被移动或删除的文件将被跳过。
+main.undo.message.other = 将恢复上次规范化中重命名的 {0:#,0} 个文件的原始名称。\n之后被移动或删除的文件将被跳过。
+main.undo.ok.one = 恢复 {0} 个名称
+main.undo.ok.other = 恢复 {0:#,0} 个名称
+main.undo.opTitle = 撤销规范化
+
+# ---- 移动 ----
+main.move.title = 移动所选项
+main.move.needSelection = 请先选择要移动的邮件。
+main.move.browseDesc.one = 选择所选 {0} 个文件的目标文件夹
+main.move.browseDesc.other = 选择所选 {0:#,0} 个文件的目标文件夹
+main.move.confirmMessage.one = 将所选的 {0} 个文件移动到此文件夹。\n{1}
+main.move.confirmMessage.other = 将所选的 {0:#,0} 个文件移动到此文件夹。\n{1}
+main.move.outsideNote = \n\n该文件夹位于备份文件夹之外，因此移动后这些文件不会显示在此列表中。
+main.move.ok.one = 移动 {0} 个文件
+main.move.ok.other = 移动 {0:#,0} 个文件
+
+# ---- 删除 ----
+main.delete.title = 删除所选项
+main.delete.needSelection = 请先在列表中选择要删除的邮件。
+main.delete.confirmMessage.one = 将所选的 {0} 个文件移到回收站。\n可以从 Windows 回收站还原。
+main.delete.confirmMessage.other = 将所选的 {0:#,0} 个文件移到回收站。\n可以从 Windows 回收站还原。
+main.delete.ok.one = 将 {0} 个文件移到回收站
+main.delete.ok.other = 将 {0:#,0} 个文件移到回收站
+
+# ---- Outlook 备份 ----
+main.outlook.title = Outlook 备份
+main.outlook.needFolder = 请先选择用于保存邮件的备份文件夹。
+
+# ---- 清理重复项 ----
+main.dedupe.title = 清理重复项
+main.dedupe.none = 没有需要清理的重复文件。
+main.dedupe.dialogTitle = 清理重复项 - 预览
+main.dedupe.summary.one = 将 {0} 个已确认为同一邮件的文件移到回收站，每组保留一个原件。\n保留优先级：已规范化的名称 → msg 格式 → 最早收到。（不包括相似邮件。）
+main.dedupe.summary.other = 将 {0:#,0} 个已确认为同一邮件的文件移到回收站，每组保留一个原件。\n保留优先级：已规范化的名称 → msg 格式 → 最早收到。（不包括相似邮件。）
+main.dedupe.col.group = 组
+main.dedupe.col.toTrash = 要移到回收站的文件
+main.dedupe.col.toKeep = 要保留的文件
+main.dedupe.col.subject = 主题
+main.dedupe.ok.one = 将 {0} 个文件移到回收站
+main.dedupe.ok.other = 将 {0:#,0} 个文件移到回收站
+main.dedupe.opTitle = 清理重复项
+
+# ---- 更改文件夹浏览对话框 ----
+main.browse.description = 选择备份邮件 (.msg / .eml) 所在的文件夹

@@ -22,14 +22,14 @@ dlg.preview.hdr.date = 일시
 dlg.preview.hdr.attachments = 첨부
 
 # ---- 미리보기: 일시/일정/첨부 값 ----
-dlg.preview.meetingSuffix =   ·  일정: {0}
+dlg.preview.meetingSuffix = 일정: {0}
 dlg.preview.attachmentNone = 없음
 dlg.preview.attachmentCount.one = {0}개 ({1})
 dlg.preview.attachmentCount.other = {0}개 ({1})
 
 # ---- 미리보기: 링크 열기 확인 ----
 dlg.preview.link.title = 링크 열기
-dlg.preview.link.message = 메일 속 링크를 기본 브라우저로 엽니다.\n보낸 사람을 신뢰할 때만 여세요.\n\n{0}
+dlg.preview.link.message = 메일 속 링크를 기본 브라우저로 엽니다.\n발신자를 신뢰할 때만 여세요.\n\n{0}
 dlg.preview.link.open = 브라우저로 열기
 
 # ---- 실행 전 확인 표 ----

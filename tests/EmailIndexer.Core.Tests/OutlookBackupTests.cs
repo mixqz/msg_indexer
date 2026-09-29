@@ -88,7 +88,7 @@ public class OutlookBackupTests : IDisposable
         var files = Directory.GetFiles(_root, "*.msg");
         Assert.Equal(2, files.Length);
         var inboxFile = files.Single(f => f.Contains("W35"));
-        Assert.EndsWith("_W35 team agenda： 논의／결정？_첨부O.msg", inboxFile);
+        Assert.EndsWith("_W35 team agenda： 논의／결정？_AttY.msg", inboxFile);
         Assert.StartsWith("260921_", Path.GetFileName(inboxFile)); // 받은 메일 = 수신 시각
         Assert.Single(files, f => f.Contains("RE： 회신"));
         Assert.True(inbox.Items.All(i => i.Disposed));
@@ -187,7 +187,7 @@ public class OutlookBackupTests : IDisposable
         inbox.Items.Add(Item("같은 제목", "<2@x>", T));
         Run(new[] { inbox });
         var names = Directory.GetFiles(_root, "*.msg").Select(Path.GetFileName).ToList();
-        Assert.Contains(names, n => n!.EndsWith("_같은 제목_첨부X (2).msg"));
+        Assert.Contains(names, n => n!.EndsWith("_같은 제목_AttN (2).msg"));
 
         var more = new FakeFolder();
         for (int i = 0; i < 5; i++) more.Items.Add(Item($"c{i}", $"<c{i}@x>", T.AddMinutes(-i)));

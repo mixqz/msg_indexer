@@ -23,7 +23,7 @@ dlg.preview.hdr.date = Date
 dlg.preview.hdr.attachments = Attachments
 
 # ---- Preview: date/meeting/attachment values ----
-dlg.preview.meetingSuffix =   ·  Meeting: {0}
+dlg.preview.meetingSuffix = Meeting: {0}
 dlg.preview.attachmentNone = None
 dlg.preview.attachmentCount.one = {0} attachment ({1})
 dlg.preview.attachmentCount.other = {0} attachments ({1})

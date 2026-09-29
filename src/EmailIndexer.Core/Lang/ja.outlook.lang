@@ -1,0 +1,56 @@
+# Email Archive Indexer — 日本語 (Japanese) — Outlook area
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+
+# ---- Outlook backup window ----
+outlook.backup.title = Outlook バックアップ
+outlook.backup.opt.sinceLast = 前回のバックアップ以降
+outlook.backup.opt.recent = 過去
+outlook.backup.opt.days = 日間
+outlook.backup.opt.all = すべて
+outlook.backup.rangeLabel = 範囲:
+outlook.backup.intro = Outlook (クラシック) の受信トレイと送信済みアイテムのメールを .msg ファイルとして保存します。Outlook が起動していない場合は自動的に起動します。Outlook 内の元のメールはそのまま残ります。\n保存先: {0}   (サブフォルダーを作らずに直接保存し、ファイル名は命名規則に従います)\nバックアップ済みのメールはスキップします。Outlook でセキュリティの確認が表示されたら [許可] をクリックしてください。
+outlook.backup.failBox = 失敗と警告 (メールごとの理由)
+outlook.backup.start = バックアップ開始
+outlook.backup.stop = 停止
+outlook.backup.close = 閉じる
+outlook.backup.openLog = ログ ファイルを開く
+outlook.backup.stopping = \n停止しています… 現在のメールの保存が終わったら閉じることができます。
+outlook.backup.ready = 範囲を選んで [バックアップ開始] をクリックしてください。
+outlook.backup.connecting = Outlook に接続しています…
+outlook.backup.running = バックアップしています…\n{0}
+outlook.backup.errorGeneric = バックアップ中にエラーが発生しました: {0}
+outlook.backup.unknownError = 不明なエラー
+outlook.backup.doneStopped = 停止しました。
+outlook.backup.doneComplete = 完了しました。
+outlook.backup.summary = 確認 {0} · 保存 {1} · スキップ (バックアップ済み) {2} · 失敗 {3}
+outlook.backup.myAddresses = \n自動的に追加された自分のアドレス: {0}
+outlook.backup.noneChecked = 確認したメールはありません。範囲を [すべて] にするか、Outlook でフォルダーが同期されているか確認してください。
+
+# ---- Outlook COM connection / launch ----
+outlook.com.newOnly = 新しい Outlook のみがインストールされています。自動バックアップは Outlook (クラシック) でのみ動作します。\n新しい Outlook の右上にある [新しい Outlook] スイッチをオフにして、クラシックに切り替えてください。
+outlook.com.notInstalled = Outlook (クラシック) がインストールされていません。
+outlook.com.permByApp = このアプリ
+outlook.com.permByOutlook = Outlook
+outlook.com.permMismatch = Outlook は起動していますが、接続できません。{0} が管理者として実行されているため、両者の権限レベルが異なっているようです。\nOutlook とこのアプリを両方とも通常の権限で (ダブルクリックして) 起動し直してください。\n(以前のアプリでバックアップが常に空になっていた原因の多くはこれです。)
+outlook.com.connectFailed = Outlook に接続できませんでした: {0}
+outlook.com.launching = Outlook (クラシック) を起動しています… (プロファイルの選択画面が表示されたら選択してください)
+outlook.com.launchFailed = Outlook (クラシック) を起動できませんでした: {0}\nOutlook を手動で起動してから、もう一度お試しください。
+outlook.com.waitCancelled = Outlook の起動を待っている間に停止しました。
+outlook.com.newOpened = Outlook (クラシック) ではなく新しい Outlook が開きました。新しい Outlook は自動バックアップに対応していません。\n新しい Outlook の右上にある [新しい Outlook] スイッチをオフにしてクラシックに切り替えてから、もう一度お試しください。
+outlook.com.waiting = Outlook の準備ができるのを待っています… ({0} 秒)
+outlook.com.timeout = 2 分以内に Outlook の準備ができませんでした。プロファイルの選択画面やサインイン画面が開いている場合は、操作を完了してからもう一度お試しください。
+outlook.com.timeoutNewNote = \n(新しい Outlook が起動している場合は、クラシックに切り替える必要があります。)
+outlook.com.defaultAccount = 既定のアカウント
+outlook.folder.inbox = 受信トレイ
+outlook.folder.sent = 送信済みアイテム
+
+# ---- Program crash dialog ----
+outlook.crash.title = エラー
+outlook.crash.message = 予期しないエラーが発生しました。\n{0}\n\n直前の操作をもう一度お試しください。繰り返し発生する場合は、プログラムを閉じてから開き直してください。メール ファイルには影響ありません。\n同じ問題が続く場合は、次のログ ファイルを管理者に送ってください:\n{1}
+
+# ---- Environment check window ----
+outlook.env.title = {0} {1} — 環境チェック
+outlook.env.heading = ✅ アプリは正常に起動しました。[情報をコピー] で以下の内容を共有してください。
+outlook.env.copy = 情報をコピー
+outlook.env.copied = コピーしました ✓
+outlook.env.close = 閉じる

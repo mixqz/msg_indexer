@@ -232,7 +232,7 @@ namespace EmailIndexer.Core.Outlook
         {
             string? name;
             if (info.IsError)
-                name = $"{time:yyMMdd_HHmmss}_(읽기 실패)_{FileNameRule.Clean(Shorten(subject, 60))}.msg";
+                name = $"{time:yyMMdd_HHmmss}_{FileNameRule.Current.Unreadable}_{FileNameRule.Clean(Shorten(subject, 60))}.msg";
             else
             {
                 var row = new MailRow(new IndexEntry { RelPath = "x.msg", Mail = info, FolderHint = direction }, null);

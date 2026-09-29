@@ -1,0 +1,80 @@
+# Email Archive Indexer — Español
+# Formato: clave = valor   (\n = salto de línea, {0} {1} = marcadores, clave.one / clave.other = formas de plural)
+# Traductores: conserva todas las claves y todos los marcadores {n}. Consulta CONTRIBUTING.md.
+
+# ---- Mail direction / meeting / status ----
+dir.received = Recibido
+dir.sent = Enviado
+meeting.request = Solicitud
+meeting.accepted = Aceptada
+meeting.declined = Rechazada
+meeting.tentative = Provisional
+meeting.canceled = Cancelada
+meeting.other = Reunión
+status.error = Error
+status.duplicate = Duplicado
+status.keeper = Original
+status.similar = Similar
+status.normalized = Normalizado
+status.notNormalized = Sin normalizar
+
+# ---- Search scope / filter summary ----
+scope.all = Todo
+scope.subject = Asunto
+scope.people = Personas
+scope.body = Cuerpo
+scope.attachments = Adjuntos
+filter.attYes = Con datos adjuntos
+filter.attNo = Sin datos adjuntos
+filter.dateRange = {0} – {1}
+filter.dateStart = inicio
+filter.dateNow = hoy
+filter.folder = Carpeta: {0}
+filter.sender = Remitente: {0}
+filter.search = Búsqueda: {0}
+filter.searchScoped = Búsqueda: {0} ({1})
+
+# ---- Read errors (shown for unreadable files) ----
+err.empty = Archivo vacío
+err.access = No tienes permiso para leer este archivo
+err.locked = Otro programa lo está usando
+err.notfound = No se encontró el archivo
+err.notmail = No es un archivo de correo (sin encabezado de remitente, fecha ni asunto)
+err.corrupt = Archivo dañado o que no es de correo ({0})
+
+# ---- Scan progress ----
+scan.phase.list = Comprobando archivos
+scan.phase.read = Leyendo correo
+scan.phase.save = Guardando caché
+
+# ---- File operations ----
+ops.done = Completado: {0}
+ops.doneWithFailures = Completado: {0}, con errores: {1}
+plan.skip.error = Archivo ilegible
+plan.skip.already = Ya sigue la regla de nombres
+plan.error.pathTooLong = La ruta de la carpeta es demasiado larga
+plan.error.tooMany = Demasiados archivos con el mismo nombre
+plan.note.numbered = Se agregó un número (el nombre ya existe)
+plan.note.trimmed = Asunto acortado para no superar la longitud máxima de ruta
+ops.err.targetExists = Apareció un archivo con el mismo nombre
+ops.err.renamedMissing = No se encontró el archivo con el nombre cambiado (se movió o eliminó)
+ops.err.originalExists = Ya existe un archivo con el nombre original
+ops.err.destTooLong = La ruta de destino es demasiado larga
+
+# ---- Preview ----
+preview.readFailed = No se pudo leer el cuerpo del mensaje: {0}
+
+# ---- Outlook backup ----
+backup.stats = {0}: comprobados {1} · guardados {2} · omitidos {3} · con errores {4}
+backup.folderError = {0}: error al leer la carpeta — {1}
+backup.err.noFile = Outlook indicó que se completó correctamente, pero no se creó ningún archivo
+backup.warnUnreadable = [Advertencia] Se guardó, pero no se pudo leer el contenido: {0} ({1})
+backup.err.access = No tienes permiso para escribir en la carpeta de copia de seguridad
+backup.err.pathTooLong = La ruta es demasiado larga
+backup.err.notFound = No se encontró el elemento en Outlook (se movió o eliminó)
+backup.err.exchange = Problema de conexión con el servidor Exchange (comprueba el modo en línea y la red)
+backup.err.aborted = Outlook canceló la operación (por ejemplo, se denegó un aviso de seguridad)
+backup.err.tooMany = Se superó el límite de elementos abiertos de Outlook. Vuelve a intentarlo en un momento.
+
+# ---- Settings ----
+settings.restartToApply = El nuevo idioma se usará la próxima vez que inicies la aplicación.

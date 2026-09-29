@@ -23,9 +23,9 @@ namespace EmailIndexer.App
             string[] prefs;
             switch (EmailIndexer.Core.Text.L.Language)
             {
-                case "ko": prefs = new[] { "Malgun Gothic" }; break;
-                case "ja": prefs = new[] { "Yu Gothic UI", "Meiryo UI" }; break;
-                case "zh": prefs = new[] { "Microsoft YaHei UI", "Microsoft YaHei" }; break;
+                case "ko": prefs = new[] { "Malgun Gothic", "Noto Sans CJK KR" }; break;
+                case "ja": prefs = new[] { "Yu Gothic UI", "Meiryo UI", "Noto Sans CJK JP" }; break;
+                case "zh": prefs = new[] { "Microsoft YaHei UI", "Microsoft YaHei", "Noto Sans CJK SC" }; break;
                 default: prefs = new[] { "Segoe UI" }; break;
             }
             // 한글 이름·제목이 섞인 메일도 많아, 서양 언어에서도 대체 글꼴로 Malgun Gothic을 둔다

@@ -1,0 +1,56 @@
+# Email Archive Indexer — Español — área de Outlook
+# Formato: clave = valor   (\n = salto de línea, {0} {1} = marcadores, clave.one / clave.other = formas de plural)
+
+# ---- Outlook backup window ----
+outlook.backup.title = Copia de seguridad de Outlook
+outlook.backup.opt.sinceLast = Desde la última copia
+outlook.backup.opt.recent = Últimos
+outlook.backup.opt.days = días
+outlook.backup.opt.all = Todo
+outlook.backup.rangeLabel = Intervalo:
+outlook.backup.intro = Guarda el correo de la Bandeja de entrada y de Elementos enviados de Outlook (clásico) como archivos .msg. Si Outlook está cerrado, se inicia automáticamente. El correo original de Outlook no se modifica.\nUbicación: {0}   (se guarda directamente, sin subcarpetas; los nombres de archivo siguen la regla de nombres)\nEl correo que ya tiene copia de seguridad se omite. Si Outlook muestra un aviso de seguridad, haz clic en Permitir.
+outlook.backup.failBox = Errores y advertencias (motivo por mensaje)
+outlook.backup.start = Iniciar copia
+outlook.backup.stop = Detener
+outlook.backup.close = Cerrar
+outlook.backup.openLog = Abrir archivo de registro
+outlook.backup.stopping = \nDeteniendo… puedes cerrar cuando termine de guardarse el mensaje actual.
+outlook.backup.ready = Elige un intervalo y haz clic en Iniciar copia.
+outlook.backup.connecting = Conectando con Outlook…
+outlook.backup.running = Haciendo la copia de seguridad…\n{0}
+outlook.backup.errorGeneric = Error durante la copia de seguridad: {0}
+outlook.backup.unknownError = Error desconocido
+outlook.backup.doneStopped = Detenido. 
+outlook.backup.doneComplete = Listo. 
+outlook.backup.summary = Comprobados {0} · guardados {1} · omitidos (ya tenían copia) {2} · con errores {3}
+outlook.backup.myAddresses = \nMis direcciones agregadas automáticamente: {0}
+outlook.backup.noneChecked = No se comprobó ningún correo. Prueba a establecer el intervalo en Todo o comprueba que las carpetas estén sincronizadas en Outlook.
+
+# ---- Outlook COM connection / launch ----
+outlook.com.newOnly = Solo está instalado el nuevo Outlook. La copia de seguridad automática solo funciona con Outlook (clásico).\nDesactiva el modificador "Nuevo Outlook" en la esquina superior derecha del nuevo Outlook para cambiar al clásico.
+outlook.com.notInstalled = Outlook (clásico) no está instalado.
+outlook.com.permByApp = esta aplicación
+outlook.com.permByOutlook = Outlook
+outlook.com.permMismatch = Outlook se está ejecutando, pero no es posible conectarse a él. Parece que {0} se está ejecutando como administrador, así que los dos tienen niveles de permisos distintos.\nReinicia Outlook y esta aplicación con permisos estándar (doble clic).\n(Esta es la causa más habitual de que las copias de seguridad de la aplicación anterior salieran siempre vacías).
+outlook.com.connectFailed = No se pudo conectar con Outlook: {0}
+outlook.com.launching = Iniciando Outlook (clásico)… (si aparece un selector de perfiles, elige uno)
+outlook.com.launchFailed = No se pudo iniciar Outlook (clásico): {0}\nInicia Outlook manualmente y vuelve a intentarlo.
+outlook.com.waitCancelled = Se detuvo mientras se esperaba a que se iniciara Outlook.
+outlook.com.newOpened = Se abrió el "Nuevo Outlook" en lugar de Outlook (clásico). El nuevo Outlook no admite la copia de seguridad automática.\nDesactiva el modificador "Nuevo Outlook" en la esquina superior derecha del nuevo Outlook para cambiar al clásico y vuelve a intentarlo.
+outlook.com.waiting = Esperando a que Outlook esté listo… ({0} s)
+outlook.com.timeout = Outlook no estuvo listo en 2 minutos. Si hay abierto un selector de perfiles o una ventana de inicio de sesión, complétalo y vuelve a intentarlo.
+outlook.com.timeoutNewNote = \n(Si se está ejecutando el nuevo Outlook, tienes que cambiar al clásico).
+outlook.com.defaultAccount = Cuenta predeterminada
+outlook.folder.inbox = Bandeja de entrada
+outlook.folder.sent = Elementos enviados
+
+# ---- Program crash dialog ----
+outlook.crash.title = Error
+outlook.crash.message = Se produjo un error inesperado.\n{0}\n\nVuelve a intentar lo último que estabas haciendo y, si sigue ocurriendo, cierra y vuelve a abrir el programa. Tus archivos de correo no se ven afectados.\nSi el problema se repite, envía este archivo de registro a tu administrador:\n{1}
+
+# ---- Environment check window ----
+outlook.env.title = {0} {1} — Comprobación del entorno
+outlook.env.heading = ✅ La aplicación se inició correctamente. Comparte los detalles siguientes con Copiar información.
+outlook.env.copy = Copiar información
+outlook.env.copied = Copiado ✓
+outlook.env.close = Cerrar

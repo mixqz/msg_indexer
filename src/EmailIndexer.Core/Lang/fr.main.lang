@@ -1,0 +1,236 @@
+# Email Archive Indexer — Français — fenêtre principale (MainForm)
+# Format : clé = valeur   (\n = saut de ligne, {0} {1} = espaces réservés, clé.one / clé.other = formes du pluriel)
+
+# ---- En-têtes de colonnes ----
+main.col.time = Date
+main.col.dir = Type
+main.col.sender = Expéditeur
+main.col.subject = Objet
+main.col.attach = PJ
+main.col.meeting = Événement
+main.col.size = Taille
+main.col.status = État
+main.col.folder = Dossier
+
+# ---- Texte des cellules ----
+main.cell.attachCount.one = {0} fichier
+main.cell.attachCount.other = {0} fichiers
+
+# ---- Barre supérieure ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = Dossier de sauvegarde
+main.btn.changeFolder = Changer de dossier
+main.btn.scan = Analyser (F5)
+main.btn.scanCancel = Annuler l'analyse
+main.btn.outlookBackup = Sauvegarde Outlook
+main.btn.settings = Paramètres
+main.btn.help = Aide (F1)
+main.tip.outlookBackup = Enregistrer la Boîte de réception et les Éléments envoyés d'Outlook (classique) en fichiers .msg (Outlook démarre automatiquement s'il n'est pas ouvert)
+main.tip.help = Le rôle de chaque fonctionnalité et les raccourcis clavier
+
+# ---- Volet des filtres ----
+main.filter.title = Filtres
+main.filter.reset = Réinitialiser
+main.filter.period = Date
+main.filter.dirInOut = Reçu / Envoyé
+main.filter.attach = Pièces jointes
+main.filter.meeting = Événement
+main.filter.status = État
+main.filter.format = Format
+main.filter.folder = Dossier
+main.filter.topSenders = 30 principaux expéditeurs
+
+# ---- Liste des périodes (conservez cet ordre ; le code utilise SelectedIndex) ----
+main.period.all = Toutes les dates
+main.period.today = Aujourd'hui
+main.period.last7 = 7 derniers jours
+main.period.last30 = 30 derniers jours
+main.period.thisYear = Cette année
+main.period.custom = Période personnalisée
+
+# ---- Cases à cocher sens / pièces jointes / réunion / état / format ----
+main.chk.dirIn = Reçu
+main.chk.dirOut = Envoyé
+main.chk.attYes = Avec
+main.chk.attNo = Sans
+main.chk.meetRequest = Invitation
+main.chk.meetAccepted = Acceptée
+main.chk.meetDeclined = Refusée
+main.chk.meetTentative = Provisoire
+main.chk.meetCanceled = Annulée
+main.chk.statusDuplicate = Doublon
+main.chk.statusSimilar = Similaire
+main.chk.statusError = Erreur
+main.chk.statusNotNormalized = Non normalisé
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- Ligne de recherche ----
+main.search.label = Rechercher
+main.search.cue = Rechercher — objet, personnes, corps, noms des pièces jointes (plusieurs mots = tous doivent correspondre, "guillemets" = expression exacte)
+
+# ---- Boutons d'action ----
+main.action.preview = Aperçu (Enter)
+main.action.open = Ouvrir (Ctrl+O)
+main.action.showInFolder = Afficher dans le dossier
+main.action.normalize = Normaliser les noms
+main.action.move = Déplacer la sélection
+main.action.delete = Supprimer la sélection (Del)
+main.action.dedupe = Nettoyer les doublons
+
+# ---- Menu contextuel ----
+main.menu.preview = Aperçu
+main.menu.open = Ouvrir (Outlook)
+main.menu.showInFolder = Afficher dans le dossier
+main.menu.copyPath = Copier le chemin
+main.menu.normalize = Normaliser les noms de fichiers
+main.menu.move = Déplacer la sélection…
+main.menu.trash = Déplacer vers la Corbeille
+main.menu.thisSenderOnly = Afficher uniquement cet expéditeur
+
+# ---- Noms accessibles ----
+main.acc.search = Rechercher dans le courrier
+main.acc.list = Liste du courrier
+main.acc.listDesc = Enter : aperçu, Ctrl+O : ouvrir dans Outlook, Del : déplacer vers la Corbeille
+main.acc.folderBox = Chemin du dossier de sauvegarde
+main.acc.tree = Filtre par dossier
+main.acc.senders = Filtre par expéditeur
+main.acc.period = Filtre par date
+main.acc.from = Date de début
+main.acc.to = Date de fin
+main.acc.scope = Portée de la recherche : {0}
+
+# ---- Arborescence des dossiers / liste des expéditeurs ----
+main.tree.all = (Tout) {0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = (Tous les expéditeurs)
+main.sender.item = {0} ({1})
+
+# ---- Flèches de tri des en-têtes ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- Compteurs / barre d'état ----
+main.applied = Appliqué : {0}
+main.counts = Total {0:#,0} · Affichés {1:#,0} · Sélectionnés {2:#,0}
+main.status.chooseFolder = Choisissez un dossier de sauvegarde du courrier.
+main.status.loadingCache = Chargement du cache…
+main.status.scanCanceled = Analyse annulée.
+main.status.scanFailed = Échec de l'analyse — cliquez sur Analyser pour réessayer
+main.status.fileOp = {0} : {1}
+
+# ---- Progression / résumé de l'analyse ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = Analyse terminée, {0:0.0} s
+main.summary.firstScan = première analyse
+main.summary.cacheRebuilt = cache reconstruit
+main.summary.added = nouveaux {0:#,0}
+main.summary.changed = modifiés {0:#,0}
+main.summary.moved = déplacés {0:#,0}
+main.summary.removed = disparus {0:#,0}
+main.summary.autoTrashed.one = {0} nouveau doublon déplacé vers la Corbeille
+main.summary.autoTrashed.other = {0} nouveaux doublons déplacés vers la Corbeille
+main.summary.errors = erreurs {0:#,0}
+
+# ---- Indications quand la liste est vide ----
+main.empty.chooseFolder = Choisissez un dossier de sauvegarde du courrier.\n\nCliquez ici ou sur Changer de dossier. Vous pouvez aussi faire glisser un dossier de l'Explorateur de fichiers vers cette fenêtre.
+main.empty.building = Création de la liste du courrier…\n\nLa première ouverture d'un dossier peut prendre un certain temps selon le nombre de fichiers. La progression s'affiche dans la barre d'état ci-dessous.
+main.empty.noFiles = Aucun fichier .msg / .eml n'a été trouvé dans ce dossier (sous-dossiers compris).\n\nCliquez ici pour choisir un autre dossier. Pour importer depuis Outlook, cliquez sur Sauvegarde Outlook.
+main.empty.noMatchesWithSearch = Aucun courrier ne correspond à vos critères.\n\nRecherche : « {0} »\nCliquez ici pour effacer la recherche et tous les filtres.
+main.empty.noMatches = Aucun courrier ne correspond à vos critères.\n\nCliquez ici pour effacer la recherche et tous les filtres.
+
+# ---- Avis de mise à la Corbeille automatique (après l'analyse) ----
+main.autoTrash.title = Nouveaux doublons nettoyés
+main.autoTrash.body.one = {0} fichier identique à un courrier existant a été ajouté, puis déplacé vers la Corbeille. L'original n'a pas été modifié.\n\n{1}\n\nVous pouvez le restaurer depuis la Corbeille de Windows si nécessaire ; un fichier restauré ne sera pas supprimé de nouveau.
+main.autoTrash.body.other = {0} fichiers identiques à des courriers existants ont été ajoutés, puis déplacés vers la Corbeille. Les originaux n'ont pas été modifiés.\n\n{1}\n\nVous pouvez les restaurer depuis la Corbeille de Windows si nécessaire ; les fichiers restaurés ne seront pas supprimés de nouveau.
+main.autoTrash.more = \n… et {0:#,0} de plus
+
+# ---- Échecs de mise à la Corbeille (après l'analyse) ----
+main.trashFail.title = Nettoyage des doublons
+main.trashFail.body = Certains nouveaux doublons n'ont pas pu être déplacés vers la Corbeille (marqués « Doublon » dans la liste) :\n\n{0}\n\nSi un autre programme (comme Outlook) a ouvert ces fichiers, fermez-le, puis cliquez de nouveau sur Analyser.
+
+# ---- Boîte de dialogue d'échec de l'analyse ----
+main.scanFail.title = Échec de l'analyse
+main.scanFail.body = Impossible de lire le dossier de sauvegarde.\n{0}\n\n{1}\n\nVérifiez que le dossier existe toujours et que vous avez l'autorisation de l'ouvrir, puis cliquez de nouveau sur Analyser. Si l'échec persiste, utilisez Changer de dossier pour sélectionner à nouveau le dossier.
+
+# ---- Confirmation d'ouverture ----
+main.open.title = Ouvrir
+main.open.message = Ouvrir les {0:#,0} fichiers sélectionnés dans Outlook en une seule fois.
+main.open.ok = Ouvrir {0:#,0}
+main.open.failTitle = Impossible d'ouvrir
+main.open.failBody = Impossible d'ouvrir le fichier.\n{0}\n\n{1}\n\nVérifiez qu'Outlook est installé et associé aux fichiers .msg / .eml.
+
+# ---- Disponibilité des opérations sur les fichiers ----
+main.busy.title = Un instant
+main.busy.scanning = Une analyse est en cours. Réessayez lorsqu'elle sera terminée.
+
+# ---- Portée de l'opération ----
+main.target.selected.one = {0} fichier sélectionné
+main.target.selected.other = {0:#,0} fichiers sélectionnés
+main.target.viewAll.one = le fichier affiché ({0})
+main.target.viewAll.other = les {0:#,0} fichiers affichés
+
+# ---- Normalisation (renommage) ----
+main.normalize.status.rename = Renommer
+main.normalize.status.skip = Ignorer
+main.normalize.status.error = Impossible
+main.normalize.title = Normaliser les noms de fichiers - Aperçu
+main.normalize.summary = Cible : {0}   →   renommer {1:#,0} · ignorer {2:#,0} · impossible {3:#,0}\nRègle : date_heure_expéditeur_objet_AttY/N  (courrier reçu = heure de réception, courrier envoyé = heure d'envoi). Après l'exécution, utilisez Annuler le dernier renommage pour rétablir les noms d'origine.
+main.normalize.col.action = Action
+main.normalize.col.oldName = Avant
+main.normalize.col.newName = Après
+main.normalize.col.note = Remarque
+main.normalize.ok.one = Renommer {0} fichier
+main.normalize.ok.other = Renommer {0:#,0} fichiers
+main.normalize.undo.one = Annuler le dernier renommage ({0} fichier)
+main.normalize.undo.other = Annuler le dernier renommage ({0:#,0} fichiers)
+main.normalize.opTitle = Normaliser les noms de fichiers
+
+# ---- Annulation du renommage ----
+main.undo.title = Annuler le renommage
+main.undo.message.one = Rétablir le nom d'origine de {0} fichier renommé lors de la dernière normalisation.\nLes fichiers déplacés ou supprimés depuis sont ignorés.
+main.undo.message.other = Rétablir les noms d'origine des {0:#,0} fichiers renommés lors de la dernière normalisation.\nLes fichiers déplacés ou supprimés depuis sont ignorés.
+main.undo.ok.one = Rétablir {0} nom
+main.undo.ok.other = Rétablir {0:#,0} noms
+main.undo.opTitle = Annuler le renommage
+
+# ---- Déplacer ----
+main.move.title = Déplacer la sélection
+main.move.needSelection = Sélectionnez d'abord le courrier à déplacer.
+main.move.browseDesc.one = Dossier de destination du fichier sélectionné ({0})
+main.move.browseDesc.other = Dossier de destination des {0:#,0} fichiers sélectionnés
+main.move.confirmMessage.one = Déplacer le fichier sélectionné ({0}) vers ce dossier.\n{1}
+main.move.confirmMessage.other = Déplacer les {0:#,0} fichiers sélectionnés vers ce dossier.\n{1}
+main.move.outsideNote = \n\nCe dossier se trouve hors du dossier de sauvegarde : les fichiers déplacés n'apparaîtront plus dans cette liste.
+main.move.ok.one = Déplacer {0} fichier
+main.move.ok.other = Déplacer {0:#,0} fichiers
+
+# ---- Supprimer ----
+main.delete.title = Supprimer la sélection
+main.delete.needSelection = Sélectionnez d'abord dans la liste le courrier à supprimer.
+main.delete.confirmMessage.one = Déplacer le fichier sélectionné ({0}) vers la Corbeille.\nVous pouvez le restaurer depuis la Corbeille de Windows.
+main.delete.confirmMessage.other = Déplacer les {0:#,0} fichiers sélectionnés vers la Corbeille.\nVous pouvez les restaurer depuis la Corbeille de Windows.
+main.delete.ok.one = Déplacer {0} fichier vers la Corbeille
+main.delete.ok.other = Déplacer {0:#,0} fichiers vers la Corbeille
+
+# ---- Sauvegarde Outlook ----
+main.outlook.title = Sauvegarde Outlook
+main.outlook.needFolder = Choisissez d'abord le dossier de sauvegarde où enregistrer le courrier.
+
+# ---- Doublons ----
+main.dedupe.title = Nettoyer les doublons
+main.dedupe.none = Aucun doublon à nettoyer.
+main.dedupe.dialogTitle = Nettoyer les doublons - Aperçu
+main.dedupe.summary.one = Déplacer vers la Corbeille {0} fichier confirmé comme étant le même courrier, en conservant un original par groupe.\nPriorité de conservation : nom normalisé → format msg → premier arrivé. (Le courrier similaire n'est pas inclus.)
+main.dedupe.summary.other = Déplacer vers la Corbeille {0:#,0} fichiers confirmés comme étant le même courrier, en conservant un original par groupe.\nPriorité de conservation : nom normalisé → format msg → premier arrivé. (Le courrier similaire n'est pas inclus.)
+main.dedupe.col.group = Groupe
+main.dedupe.col.toTrash = Fichier à déplacer vers la Corbeille
+main.dedupe.col.toKeep = Fichier à conserver
+main.dedupe.col.subject = Objet
+main.dedupe.ok.one = Déplacer {0} vers la Corbeille
+main.dedupe.ok.other = Déplacer {0:#,0} vers la Corbeille
+main.dedupe.opTitle = Nettoyer les doublons
+
+# ---- Boîte de dialogue Changer de dossier ----
+main.browse.description = Choisissez le dossier où votre courrier (.msg / .eml) est sauvegardé

@@ -57,7 +57,7 @@ namespace EmailIndexer.Core.Files
                 var dir = Path.GetDirectoryName(old) ?? "";
                 var target = FileNameRule.BuildForDirectory(r, dir);
                 if (target == null) { p.Status = PlanStatus.Error; p.Note = L.T("plan.error.pathTooLong"); continue; }
-                if (FileNameRule.IsAlready(Path.GetFileName(old), target)) { p.Status = PlanStatus.Skip; p.Note = L.T("plan.skip.already"); continue; }
+                if (FileNameRule.IsAlreadyAnyLanguage(Path.GetFileName(old), r, dir)) { p.Status = PlanStatus.Skip; p.Note = L.T("plan.skip.already"); continue; }
 
                 if (!taken.TryGetValue(dir, out var used))
                     taken[dir] = used = new HashSet<string>(StringComparer.OrdinalIgnoreCase);

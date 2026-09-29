@@ -1,0 +1,236 @@
+# Email Archive Indexer — Español — ventana principal (MainForm)
+# Formato: clave = valor   (\n = salto de línea, {0} {1} = marcadores, clave.one / clave.other = formas de plural)
+
+# ---- Column headers ----
+main.col.time = Fecha
+main.col.dir = Tipo
+main.col.sender = Remitente
+main.col.subject = Asunto
+main.col.attach = Adjuntos
+main.col.meeting = Reunión
+main.col.size = Tamaño
+main.col.status = Estado
+main.col.folder = Carpeta
+
+# ---- Cell text ----
+main.cell.attachCount.one = {0} archivo
+main.cell.attachCount.other = {0} archivos
+
+# ---- Top bar ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = Carpeta de copia de seguridad
+main.btn.changeFolder = Cambiar carpeta
+main.btn.scan = Analizar (F5)
+main.btn.scanCancel = Cancelar análisis
+main.btn.outlookBackup = Copia de seguridad de Outlook
+main.btn.settings = Configuración
+main.btn.help = Ayuda (F1)
+main.tip.outlookBackup = Guarda la Bandeja de entrada y los Elementos enviados de Outlook (clásico) como archivos .msg (lo inicia automáticamente si no se está ejecutando)
+main.tip.help = Qué hace cada función y métodos abreviados de teclado
+
+# ---- Filter panel ----
+main.filter.title = Filtros
+main.filter.reset = Restablecer
+main.filter.period = Fecha
+main.filter.dirInOut = Recibido / Enviado
+main.filter.attach = Datos adjuntos
+main.filter.meeting = Reunión
+main.filter.status = Estado
+main.filter.format = Formato
+main.filter.folder = Carpeta
+main.filter.topSenders = 30 remitentes principales
+
+# ---- Period combo (keep this order; code switches on SelectedIndex) ----
+main.period.all = Todas las fechas
+main.period.today = Hoy
+main.period.last7 = Últimos 7 días
+main.period.last30 = Últimos 30 días
+main.period.thisYear = Este año
+main.period.custom = Intervalo personalizado
+
+# ---- Direction / attachment / meeting / status / format checkboxes ----
+main.chk.dirIn = Recibido
+main.chk.dirOut = Enviado
+main.chk.attYes = Con
+main.chk.attNo = Sin
+main.chk.meetRequest = Solicitud
+main.chk.meetAccepted = Aceptada
+main.chk.meetDeclined = Rechazada
+main.chk.meetTentative = Provisional
+main.chk.meetCanceled = Cancelada
+main.chk.statusDuplicate = Duplicado
+main.chk.statusSimilar = Similar
+main.chk.statusError = Error
+main.chk.statusNotNormalized = Sin normalizar
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- Search row ----
+main.search.label = Buscar
+main.search.cue = Buscar: asunto, personas, cuerpo, nombres de datos adjuntos (varias palabras = deben coincidir todas, "comillas" = frase exacta)
+
+# ---- Action buttons ----
+main.action.preview = Vista previa (Enter)
+main.action.open = Abrir (Ctrl+O)
+main.action.showInFolder = Mostrar en la carpeta
+main.action.normalize = Normalizar nombres
+main.action.move = Mover selección
+main.action.delete = Eliminar selección (Del)
+main.action.dedupe = Limpiar duplicados
+
+# ---- Context menu ----
+main.menu.preview = Vista previa
+main.menu.open = Abrir (Outlook)
+main.menu.showInFolder = Mostrar en la carpeta
+main.menu.copyPath = Copiar ruta
+main.menu.normalize = Normalizar nombres
+main.menu.move = Mover selección…
+main.menu.trash = Mover a la Papelera de reciclaje
+main.menu.thisSenderOnly = Mostrar solo este remitente
+
+# ---- Accessible names ----
+main.acc.search = Buscar correo
+main.acc.list = Lista de correo
+main.acc.listDesc = Enter: vista previa, Ctrl+O: abrir en Outlook, Del: mover a la Papelera de reciclaje
+main.acc.folderBox = Ruta de la carpeta de copia de seguridad
+main.acc.tree = Filtro de carpeta
+main.acc.senders = Filtro de remitente
+main.acc.period = Filtro de fecha
+main.acc.from = Fecha de inicio
+main.acc.to = Fecha de fin
+main.acc.scope = Ámbito de búsqueda: {0}
+
+# ---- Folder tree / sender list ----
+main.tree.all = (Todo) {0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = (Todos los remitentes)
+main.sender.item = {0} ({1})
+
+# ---- Sort header arrows ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- Counts / status bar ----
+main.applied = Aplicado: {0}
+main.counts = Total {0:#,0} · Mostrados {1:#,0} · Seleccionados {2:#,0}
+main.status.chooseFolder = Elige una carpeta de copia de seguridad de correo.
+main.status.loadingCache = Cargando caché…
+main.status.scanCanceled = Análisis cancelado.
+main.status.scanFailed = Error en el análisis: haz clic en Analizar para volver a intentarlo
+main.status.fileOp = {0}: {1}
+
+# ---- Scan progress / summary ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = Análisis completado, {0:0.0} s
+main.summary.firstScan = primer análisis
+main.summary.cacheRebuilt = caché reconstruida
+main.summary.added = nuevos {0:#,0}
+main.summary.changed = modificados {0:#,0}
+main.summary.moved = movidos {0:#,0}
+main.summary.removed = desaparecidos {0:#,0}
+main.summary.autoTrashed.one = {0} duplicado nuevo movido a la Papelera de reciclaje
+main.summary.autoTrashed.other = {0} duplicados nuevos movidos a la Papelera de reciclaje
+main.summary.errors = errores {0:#,0}
+
+# ---- Empty-state hints ----
+main.empty.chooseFolder = Elige una carpeta de copia de seguridad de correo.\n\nHaz clic aquí o en Cambiar carpeta. También puedes arrastrar una carpeta desde el Explorador de archivos a esta ventana.
+main.empty.building = Creando la lista de correo…\n\nLa primera vez que abres una carpeta, puede tardar un poco según el número de archivos. El progreso se muestra en la barra de estado inferior.
+main.empty.noFiles = No se encontraron archivos .msg / .eml en esta carpeta (incluidas las subcarpetas).\n\nHaz clic aquí para usar otra carpeta. Para importar desde Outlook, haz clic en Copia de seguridad de Outlook.
+main.empty.noMatchesWithSearch = Ningún correo cumple las condiciones.\n\nBúsqueda: "{0}"\nHaz clic aquí para borrar la búsqueda y todos los filtros.
+main.empty.noMatches = Ningún correo cumple las condiciones.\n\nHaz clic aquí para borrar la búsqueda y todos los filtros.
+
+# ---- Auto-trash notice (after scan) ----
+main.autoTrash.title = Se limpiaron duplicados nuevos
+main.autoTrash.body.one = Llegó {0} archivo idéntico a un correo que ya tienes y se movió a la Papelera de reciclaje. El original no se modificó.\n\n{1}\n\nSi lo necesitas, puedes restaurarlo desde la Papelera de reciclaje de Windows; los archivos restaurados no se vuelven a eliminar.
+main.autoTrash.body.other = Llegaron {0} archivos idénticos a correos que ya tienes y se movieron a la Papelera de reciclaje. Los originales no se modificaron.\n\n{1}\n\nSi lo necesitas, puedes restaurarlos desde la Papelera de reciclaje de Windows; los archivos restaurados no se vuelven a eliminar.
+main.autoTrash.more = \n… y {0:#,0} más
+
+# ---- Trash failures (after scan) ----
+main.trashFail.title = Limpieza de duplicados
+main.trashFail.body = Algunos archivos duplicados nuevos no se pudieron mover a la Papelera de reciclaje (se marcan como "Duplicado" en la lista):\n\n{0}\n\nSi otro programa (como Outlook) tiene los archivos abiertos, ciérralo y vuelve a hacer clic en Analizar.
+
+# ---- Scan failure dialog ----
+main.scanFail.title = Error en el análisis
+main.scanFail.body = No se pudo leer la carpeta de copia de seguridad.\n{0}\n\n{1}\n\nComprueba que la carpeta sigue existiendo y que tienes permiso para abrirla, y vuelve a hacer clic en Analizar. Si sigue fallando, usa Cambiar carpeta para volver a elegirla.
+
+# ---- Open confirm ----
+main.open.title = Abrir
+main.open.message = Se abrirán en Outlook a la vez los {0:#,0} archivos seleccionados.
+main.open.ok = Abrir {0:#,0}
+main.open.failTitle = No se pudo abrir
+main.open.failBody = No se pudo abrir el archivo.\n{0}\n\n{1}\n\nComprueba que Outlook esté instalado y asociado a los archivos .msg / .eml.
+
+# ---- File-ops readiness ----
+main.busy.title = Un momento
+main.busy.scanning = Hay un análisis en curso. Vuelve a intentarlo cuando termine.
+
+# ---- Target scope ----
+main.target.selected.one = {0} archivo seleccionado
+main.target.selected.other = {0:#,0} archivos seleccionados
+main.target.viewAll.one = el archivo mostrado ({0})
+main.target.viewAll.other = todos los archivos mostrados ({0:#,0})
+
+# ---- Normalize (rename) ----
+main.normalize.status.rename = Cambiar nombre
+main.normalize.status.skip = Omitir
+main.normalize.status.error = No se puede
+main.normalize.title = Normalizar nombres de archivo - Vista previa
+main.normalize.summary = Destino: {0}   →   cambiar nombre {1:#,0} · omitir {2:#,0} · no se puede {3:#,0}\nRegla: fecha_hora_remitente_asunto_AttY/N  (correo recibido = hora de recepción, correo enviado = hora de envío). Después de ejecutarlo, usa Deshacer para restaurar los nombres originales.
+main.normalize.col.action = Acción
+main.normalize.col.oldName = Antes
+main.normalize.col.newName = Después
+main.normalize.col.note = Nota
+main.normalize.ok.one = Cambiar nombre de {0} archivo
+main.normalize.ok.other = Cambiar nombre de {0:#,0} archivos
+main.normalize.undo.one = Deshacer última normalización ({0} archivo)
+main.normalize.undo.other = Deshacer última normalización ({0:#,0} archivos)
+main.normalize.opTitle = Normalizar nombres de archivo
+
+# ---- Undo rename ----
+main.undo.title = Deshacer normalización
+main.undo.message.one = Se restaurará el nombre original de {0} archivo cambiado en la última normalización.\nLos archivos movidos o eliminados desde entonces se omiten.
+main.undo.message.other = Se restaurarán los nombres originales de {0:#,0} archivos cambiados en la última normalización.\nLos archivos movidos o eliminados desde entonces se omiten.
+main.undo.ok.one = Restaurar {0} nombre
+main.undo.ok.other = Restaurar {0:#,0} nombres
+main.undo.opTitle = Deshacer normalización
+
+# ---- Move ----
+main.move.title = Mover selección
+main.move.needSelection = Primero selecciona el correo que quieres mover.
+main.move.browseDesc.one = Carpeta a la que mover {0} archivo seleccionado
+main.move.browseDesc.other = Carpeta a la que mover los {0:#,0} archivos seleccionados
+main.move.confirmMessage.one = Se moverá {0} archivo seleccionado a esta carpeta.\n{1}
+main.move.confirmMessage.other = Se moverán los {0:#,0} archivos seleccionados a esta carpeta.\n{1}
+main.move.outsideNote = \n\nEstá fuera de la carpeta de copia de seguridad, así que no aparecerá en esta lista después de moverlo.
+main.move.ok.one = Mover {0} archivo
+main.move.ok.other = Mover {0:#,0} archivos
+
+# ---- Delete ----
+main.delete.title = Eliminar selección
+main.delete.needSelection = Primero selecciona en la lista el correo que quieres eliminar.
+main.delete.confirmMessage.one = Se moverá {0} archivo seleccionado a la Papelera de reciclaje.\nPuedes restaurarlo desde la Papelera de reciclaje de Windows.
+main.delete.confirmMessage.other = Se moverán los {0:#,0} archivos seleccionados a la Papelera de reciclaje.\nPuedes restaurarlos desde la Papelera de reciclaje de Windows.
+main.delete.ok.one = Mover {0} archivo a la Papelera
+main.delete.ok.other = Mover {0:#,0} archivos a la Papelera
+
+# ---- Outlook backup ----
+main.outlook.title = Copia de seguridad de Outlook
+main.outlook.needFolder = Primero elige una carpeta de copia de seguridad donde guardar el correo.
+
+# ---- Dedupe ----
+main.dedupe.title = Limpiar duplicados
+main.dedupe.none = No hay archivos duplicados que limpiar.
+main.dedupe.dialogTitle = Limpiar duplicados - Vista previa
+main.dedupe.summary.one = Se moverá a la Papelera de reciclaje {0} archivo confirmado como el mismo correo; se conserva un original por grupo.\nPrioridad para conservar: nombre normalizado → formato msg → el que llegó primero. (El correo similar no se incluye).
+main.dedupe.summary.other = Se moverán a la Papelera de reciclaje {0:#,0} archivos confirmados como el mismo correo; se conserva un original por grupo.\nPrioridad para conservar: nombre normalizado → formato msg → el que llegó primero. (El correo similar no se incluye).
+main.dedupe.col.group = Grupo
+main.dedupe.col.toTrash = Archivo que se moverá a la Papelera
+main.dedupe.col.toKeep = Archivo que se conserva
+main.dedupe.col.subject = Asunto
+main.dedupe.ok.one = Mover {0} a la Papelera
+main.dedupe.ok.other = Mover {0:#,0} a la Papelera
+main.dedupe.opTitle = Limpiar duplicados
+
+# ---- Change-folder browse dialog ----
+main.browse.description = Elige la carpeta donde está la copia de seguridad de tu correo (.msg / .eml)

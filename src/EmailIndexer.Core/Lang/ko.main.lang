@@ -24,7 +24,7 @@ main.btn.scanCancel = 스캔 취소
 main.btn.outlookBackup = Outlook 백업
 main.btn.settings = 설정
 main.btn.help = 도움말 (F1)
-main.tip.outlookBackup = Outlook(classic)의 받은편지함·보낸편지함을 msg로 저장 (꺼져 있으면 자동 실행)
+main.tip.outlookBackup = Outlook(classic)의 받은편지함·보낸편지함을 .msg 파일로 저장 (꺼져 있으면 자동 실행)
 main.tip.help = 각 기능 설명과 단축키
 
 # ---- 필터 패널 ----
@@ -66,7 +66,7 @@ main.chk.fmtEml = eml
 
 # ---- 검색 줄 ----
 main.search.label = 검색
-main.search.cue = 검색 — 제목·사람·본문·첨부파일명 (여러 단어 = 모두 포함, "따옴표" = 구문)
+main.search.cue = 검색 — 제목·사람·본문·첨부파일명 (여러 단어 = 모두 포함, "따옴표" = 문구 그대로)
 
 # ---- 동작 버튼 ----
 main.action.preview = 미리보기 (Enter)
@@ -84,13 +84,13 @@ main.menu.showInFolder = 폴더에서 보기
 main.menu.copyPath = 경로 복사
 main.menu.normalize = 파일명 정규화
 main.menu.move = 선택 이동…
-main.menu.trash = 휴지통으로 삭제
+main.menu.trash = 휴지통으로 보내기
 main.menu.thisSenderOnly = 이 발신자만 보기
 
 # ---- 접근성 이름 ----
 main.acc.search = 메일 검색
 main.acc.list = 메일 목록
-main.acc.listDesc = Enter: 미리보기, Ctrl+O: Outlook으로 열기, Del: 휴지통으로 삭제
+main.acc.listDesc = Enter: 미리보기, Ctrl+O: Outlook으로 열기, Del: 휴지통으로 보내기
 main.acc.folderBox = 백업 폴더 경로
 main.acc.tree = 폴더 필터
 main.acc.senders = 발신자 필터
@@ -112,7 +112,7 @@ main.sort.desc = {0} ▼
 # ---- 개수 / 상태줄 ----
 main.applied = 적용: {0}
 main.counts = 전체 {0:#,0} · 표시 {1:#,0} · 선택 {2:#,0}
-main.status.chooseFolder = 백업 폴더를 선택하세요.
+main.status.chooseFolder = 메일 백업 폴더를 선택하세요.
 main.status.loadingCache = 캐시 불러오는 중…
 main.status.scanCanceled = 스캔을 취소했습니다.
 main.status.scanFailed = 스캔 실패 — [스캔]을 눌러 다시 시도하세요
@@ -121,7 +121,7 @@ main.status.fileOp = {0}: {1}
 # ---- 스캔 진행 / 요약 ----
 main.scan.progress = {0} {1:#,0} / {2:#,0}
 main.scan.progressIndeterminate = {0}…
-main.summary.done = 스캔 완료 {0:0.0}초
+main.summary.done = 스캔 완료, {0:0.0}초
 main.summary.firstScan = 첫 스캔
 main.summary.cacheRebuilt = 캐시 재구축
 main.summary.added = 신규 {0:#,0}
@@ -161,7 +161,7 @@ main.open.failTitle = 열기 실패
 main.open.failBody = 파일을 열 수 없습니다.\n{0}\n\n{1}\n\nOutlook이 설치되어 .msg/.eml에 연결되어 있는지 확인하세요.
 
 # ---- 파일 작업 준비 ----
-main.busy.title = 잠시만요
+main.busy.title = 잠시 기다려 주세요
 main.busy.scanning = 스캔 중입니다. 스캔이 끝난 뒤 다시 시도하세요.
 
 # ---- 대상 범위 ----
@@ -175,7 +175,7 @@ main.normalize.status.rename = 변경
 main.normalize.status.skip = 건너뜀
 main.normalize.status.error = 불가
 main.normalize.title = 파일명 정규화 - 미리보기
-main.normalize.summary = 대상: {0}   →   변경 {1:#,0} · 건너뜀 {2:#,0} · 불가 {3:#,0}\n규칙: 날짜_시간_발신자_제목_첨부O/X  (받은 메일=수신 시각, 보낸 메일=발신 시각). 실행 후 [되돌리기]로 원래 이름으로 돌릴 수 있습니다.
+main.normalize.summary = 대상: {0}   →   변경 {1:#,0} · 건너뜀 {2:#,0} · 불가 {3:#,0}\n규칙: 날짜_시간_발신자_제목_첨부O/X  (받은 메일=수신 시각, 보낸 메일=발신 시각). 실행 후 [마지막 정규화 되돌리기]로 원래 이름으로 돌릴 수 있습니다.
 main.normalize.col.action = 처리
 main.normalize.col.oldName = 변경 전
 main.normalize.col.newName = 변경 후
@@ -227,8 +227,8 @@ main.dedupe.col.group = 묶음
 main.dedupe.col.toTrash = 휴지통으로 보낼 파일
 main.dedupe.col.toKeep = 남길 파일
 main.dedupe.col.subject = 제목
-main.dedupe.ok.one = {0}개 휴지통으로
-main.dedupe.ok.other = {0:#,0}개 휴지통으로
+main.dedupe.ok.one = {0}개 휴지통으로 보내기
+main.dedupe.ok.other = {0:#,0}개 휴지통으로 보내기
 main.dedupe.opTitle = 중복 정리
 
 # ---- 폴더 선택 대화상자 ----

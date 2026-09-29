@@ -160,7 +160,7 @@ namespace EmailIndexer.App
             }
             _status.ForeColor = SystemColors.ControlText;
             SavedCount += report.Saved;
-            _status.Text = (report.Cancelled ? L.T("outlook.backup.doneStopped") : L.T("outlook.backup.doneComplete")) +
+            _status.Text = (report.Cancelled ? L.T("outlook.backup.doneStopped") : L.T("outlook.backup.doneComplete")) + " " + // 번역 파일은 앞뒤 공백을 지우므로 여기서 띄운다
                            L.F("outlook.backup.summary",
                                report.Checked.ToString("#,0", L.Culture), report.Saved.ToString("#,0", L.Culture),
                                report.Skipped.ToString("#,0", L.Culture), report.Failed.ToString("#,0", L.Culture)) + "\n" +

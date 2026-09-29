@@ -1,0 +1,49 @@
+# Email Archive Indexer — 简体中文 — 对话框 (dlg.*)
+# 格式：key = value   (\n = 换行，{0} {1} = 占位符，key.one / key.other = 复数形式)
+
+# ---- 预览窗口 ----
+dlg.preview.title = 预览
+dlg.preview.titleWithFile = 预览 - {0}
+dlg.preview.subjectAccessible = 主题
+dlg.preview.noSubject = （无主题）
+dlg.preview.viewText = 文本视图
+dlg.preview.viewFormatted = 格式视图
+dlg.preview.prev = ◀ 上一封
+dlg.preview.next = 下一封 ▶
+dlg.preview.copyBody = 复制正文
+dlg.preview.openInOutlook = 在 Outlook 中打开
+dlg.preview.showInFolder = 在文件夹中显示
+dlg.preview.close = 关闭
+
+# ---- 预览：标头行标签 ----
+dlg.preview.hdr.from = 发件人
+dlg.preview.hdr.to = 收件人
+dlg.preview.hdr.cc = 抄送
+dlg.preview.hdr.date = 日期
+dlg.preview.hdr.attachments = 附件
+
+# ---- 预览：日期 / 会议 / 附件值 ----
+dlg.preview.meetingSuffix = 会议：{0}
+dlg.preview.attachmentNone = 无
+dlg.preview.attachmentCount.one = {0} 个附件（{1}）
+dlg.preview.attachmentCount.other = {0} 个附件（{1}）
+
+# ---- 预览：打开链接确认 ----
+dlg.preview.link.title = 打开链接
+dlg.preview.link.message = 将在默认浏览器中打开邮件中的链接。\n请仅在信任发件人时打开。\n\n{0}
+dlg.preview.link.open = 在浏览器中打开
+
+# ---- 计划对话框 ----
+dlg.plan.cancel = 取消
+
+# ---- 设置 ----
+dlg.settings.title = 设置
+dlg.settings.help = 我的邮件地址（每行一个）\n来自这些发件人的邮件将被视为发出的邮件，并使用发送时间进行命名和排序。\n运行 Outlook 备份时，会自动添加你的帐户地址。
+dlg.settings.cancel = 取消
+dlg.settings.save = 保存
+dlg.settings.envCheck = 环境检查
+
+# ---- 通用 UI 辅助 (Ui.cs) ----
+dlg.ui.confirm.cancel = 取消
+dlg.ui.open.failedTitle = 无法打开
+dlg.ui.open.failedMessage = 无法打开文件。\n{0}\n\n{1}\n\n请确认已安装 Outlook 并且 .msg/.eml 文件已与其关联。

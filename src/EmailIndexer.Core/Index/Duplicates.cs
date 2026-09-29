@@ -13,7 +13,8 @@ namespace EmailIndexer.Core.Index
     public static class Duplicates
     {
         private static readonly Regex NormalizedName = new Regex(
-            @"^\d{6}_\d{6}_.+_첨부[OX](\s\(\d+\))?\.(msg|eml)$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            @"^\d{6}_\d{6}_.+" + Files.FileNameRule.AnyAttachmentMarker + @"(\s\(\d+\))?\.(msg|eml)$",
+            RegexOptions.IgnoreCase | RegexOptions.Compiled);
 
         public static bool LooksNormalized(string relPath) => NormalizedName.IsMatch(Path.GetFileName(relPath));
 

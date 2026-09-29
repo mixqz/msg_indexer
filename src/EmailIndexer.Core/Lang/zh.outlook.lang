@@ -1,0 +1,56 @@
+# Email Archive Indexer — 简体中文 — Outlook 部分
+# 格式：key = value   (\n = 换行，{0} {1} = 占位符，key.one / key.other = 复数形式)
+
+# ---- Outlook 备份窗口 ----
+outlook.backup.title = Outlook 备份
+outlook.backup.opt.sinceLast = 自上次备份以来
+outlook.backup.opt.recent = 最近
+outlook.backup.opt.days = 天
+outlook.backup.opt.all = 全部
+outlook.backup.rangeLabel = 范围：
+outlook.backup.intro = 将 Outlook (经典版) 收件箱和已发送邮件中的邮件保存为 .msg 文件。如果 Outlook 已关闭，会自动启动。Outlook 中的原始邮件不会被更改。\n保存位置：{0}   （直接保存，不创建子文件夹；文件名遵循命名规则）\n已备份的邮件将被跳过。如果 Outlook 显示安全提示，请单击“允许”。
+outlook.backup.failBox = 失败和警告（每封邮件的原因）
+outlook.backup.start = 开始备份
+outlook.backup.stop = 停止
+outlook.backup.close = 关闭
+outlook.backup.openLog = 打开日志文件
+outlook.backup.stopping = \n正在停止…当前邮件保存完成后即可关闭。
+outlook.backup.ready = 请选择范围，然后单击“开始备份”。
+outlook.backup.connecting = 正在连接到 Outlook…
+outlook.backup.running = 正在备份…\n{0}
+outlook.backup.errorGeneric = 备份时出错：{0}
+outlook.backup.unknownError = 未知错误
+outlook.backup.doneStopped = 已停止。
+outlook.backup.doneComplete = 已完成。
+outlook.backup.summary = 已检查 {0} · 已保存 {1} · 已跳过（已备份） {2} · 失败 {3}
+outlook.backup.myAddresses = \n已自动添加到“我的地址”：{0}
+outlook.backup.noneChecked = 未检查到任何邮件。请尝试将范围设为“全部”，或确认 Outlook 中的文件夹已同步。
+
+# ---- Outlook COM 连接 / 启动 ----
+outlook.com.newOnly = 仅安装了新版 Outlook。自动备份仅适用于 Outlook (经典版)。\n请关闭新版 Outlook 右上角的“新版 Outlook”开关，切换到经典版。
+outlook.com.notInstalled = 未安装 Outlook (经典版)。
+outlook.com.permByApp = 此应用
+outlook.com.permByOutlook = Outlook
+outlook.com.permMismatch = Outlook 正在运行，但无法连接。{0} 似乎正以管理员身份运行，因此两者的权限级别不同。\n请以普通权限（双击）重新启动 Outlook 和此应用。\n（这是旧应用备份结果始终为空的最常见原因。）
+outlook.com.connectFailed = 无法连接到 Outlook：{0}
+outlook.com.launching = 正在启动 Outlook (经典版)…（如果出现配置文件选择窗口，请选择一个）
+outlook.com.launchFailed = 无法启动 Outlook (经典版)：{0}\n请手动启动 Outlook，然后重试。
+outlook.com.waitCancelled = 在等待 Outlook 启动时已停止。
+outlook.com.newOpened = 打开的是“新版 Outlook”，而不是 Outlook (经典版)。新版 Outlook 不支持自动备份。\n请关闭新版 Outlook 右上角的“新版 Outlook”开关切换到经典版，然后重试。
+outlook.com.waiting = 正在等待 Outlook 准备就绪…（{0} 秒）
+outlook.com.timeout = Outlook 在 2 分钟内未准备就绪。如果打开了配置文件选择或登录窗口，请完成操作后重试。
+outlook.com.timeoutNewNote = \n（如果正在运行新版 Outlook，需要切换到经典版。）
+outlook.com.defaultAccount = 默认帐户
+outlook.folder.inbox = 收件箱
+outlook.folder.sent = 已发送邮件
+
+# ---- 程序崩溃对话框 ----
+outlook.crash.title = 错误
+outlook.crash.message = 发生了意外错误。\n{0}\n\n请再次尝试刚才的操作；如果问题持续出现，请关闭并重新打开程序。你的邮件文件不受影响。\n如果同一问题反复出现，请将此日志文件发送给你的管理员：\n{1}
+
+# ---- 环境检查窗口 ----
+outlook.env.title = {0} {1} — 环境检查
+outlook.env.heading = ✅ 应用已正常启动。请使用“复制信息”分享以下详细信息。
+outlook.env.copy = 复制信息
+outlook.env.copied = 已复制 ✓
+outlook.env.close = 关闭

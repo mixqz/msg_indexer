@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,9 +18,39 @@ namespace EmailIndexer.Core.Mail
         private static ParserOptions CreateOptions()
         {
             var o = ParserOptions.Default.Clone();
-            // 문자셋 표기 없이 8bit로 들어온 한글 헤더 대비 (cp949)
-            try { o.CharsetEncoding = Encoding.GetEncoding(949); } catch { /* 환경에 없으면 기본값 */ }
+            // 문자셋 표기 없이 8bit로 들어온 헤더·본문 대비: PC 지역 설정의 ANSI 코드 페이지
+            // (한국어 949, 일본어 932, 중국어 간체 936, 서유럽 1252 …). UTF-8은 MimeKit이 먼저 시도한다.
+            try { o.CharsetEncoding = Encoding.GetEncoding(FallbackCodePage(CultureInfo.CurrentCulture.Name)); }
+            catch { /* 환경에 없으면 기본값 */ }
             return o;
+        }
+
+        /// <summary>
+        /// 문자셋 표기가 없는 오래된 메일에 쓸 대체 코드 페이지 = 해당 지역 Windows의 ANSI 코드 페이지.
+        /// 문화권 데이터가 없는 환경에서도 같게 동작하도록 표로 고정. 모르는 지역은 1252(서유럽).
+        /// </summary>
+        internal static int FallbackCodePage(string? cultureName)
+        {
+            var name = (cultureName ?? "").ToLowerInvariant();
+            var lang = name.Split('-')[0];
+            switch (lang)
+            {
+                case "ko": return 949;
+                case "ja": return 932;
+                case "zh":
+                    return name.Contains("tw") || name.Contains("hk") || name.Contains("mo") || name.Contains("hant") ? 950 : 936;
+                case "th": return 874;
+                case "vi": return 1258;
+                case "ru": case "uk": case "be": case "bg": case "mk": case "kk": return 1251;
+                case "sr": return name.Contains("latn") ? 1250 : 1251;
+                case "pl": case "cs": case "sk": case "hu": case "sl": case "hr": case "ro": case "sq": case "bs": return 1250;
+                case "el": return 1253;
+                case "tr": case "az": return 1254;
+                case "he": return 1255;
+                case "ar": case "fa": case "ur": return 1256;
+                case "lt": case "lv": case "et": return 1257;
+                default: return 1252;
+            }
         }
 
         public static void Fill(string path, MailInfo info)

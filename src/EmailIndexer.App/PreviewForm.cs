@@ -116,7 +116,7 @@ namespace EmailIndexer.App
                 (L.T("dlg.preview.hdr.to"), Short(string.Join("; ", m.To))),
             };
             if (m.Cc.Count > 0) rows.Add((L.T("dlg.preview.hdr.cc"), Short(string.Join("; ", m.Cc))));
-            rows.Add((L.T("dlg.preview.hdr.date"), $"{r.LocalTime.ToString("yyyy-MM-dd (ddd) HH:mm:ss", L.Culture)}  ·  {Display.Direction(r.Direction)}{(meeting.Length > 0 ? L.F("dlg.preview.meetingSuffix", meeting) : "")}"));
+            rows.Add((L.T("dlg.preview.hdr.date"), $"{r.LocalTime.ToString("yyyy-MM-dd (ddd) HH:mm:ss", L.Culture)}  ·  {Display.Direction(r.Direction)}{(meeting.Length > 0 ? "  ·  " + L.F("dlg.preview.meetingSuffix", meeting) : "")}"));
             rows.Add((L.T("dlg.preview.hdr.attachments"), m.HasAttachments ? L.P("dlg.preview.attachmentCount", m.AttachmentNames.Count, Short(string.Join(", ", m.AttachmentNames))) : L.T("dlg.preview.attachmentNone")));
             _meta.SuspendLayout();
             _meta.Controls.Clear();

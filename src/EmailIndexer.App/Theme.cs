@@ -46,6 +46,7 @@ namespace EmailIndexer.App
                         break;
                     case StatusStrip ss:
                         ss.BackColor = AppBg;
+                        ss.Font = Ui.Base; // ToolStrip은 폼 글꼴을 물려받지 않아 언어별 글꼴을 직접 지정
                         ss.SizingGrip = false;
                         ss.Renderer = new FlatStripRenderer();
                         break;

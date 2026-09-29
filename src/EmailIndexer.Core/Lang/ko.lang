@@ -34,22 +34,22 @@ filter.searchScoped = 검색: {0} ({1})
 
 # ---- 읽기 오류 ----
 err.empty = 빈 파일
-err.access = 파일 접근 권한 없음
+err.access = 이 파일을 읽을 권한 없음
 err.locked = 다른 프로그램이 사용 중
-err.notfound = 파일 없음
+err.notfound = 파일을 찾을 수 없음
 err.notmail = 메일 형식이 아님 (발신자·날짜·제목 헤더 없음)
 err.corrupt = 손상되었거나 메일 형식이 아닌 파일 ({0})
 
 # ---- 스캔 진행 ----
-scan.phase.list = 파일 목록 확인
+scan.phase.list = 파일 확인 중
 scan.phase.read = 메일 읽는 중
-scan.phase.save = 캐시 저장
+scan.phase.save = 캐시 저장 중
 
 # ---- 파일 작업 ----
 ops.done = {0}건 완료
 ops.doneWithFailures = {0}건 완료, {1}건 실패
 plan.skip.error = 읽기 오류 파일
-plan.skip.already = 이미 규칙대로
+plan.skip.already = 이미 규칙에 맞음
 plan.error.pathTooLong = 폴더 경로가 너무 김
 plan.error.tooMany = 같은 이름이 너무 많음
 plan.note.numbered = 같은 이름이 있어 번호 붙임
@@ -67,7 +67,7 @@ backup.stats = {0}: 확인 {1} · 저장 {2} · 건너뜀 {3} · 실패 {4}
 backup.folderError = {0}: 폴더를 읽는 중 오류 — {1}
 backup.err.noFile = Outlook이 저장했다고 했지만 파일이 생기지 않았습니다
 backup.warnUnreadable = [경고] 저장은 됐지만 내용을 읽지 못함: {0} ({1})
-backup.err.access = 저장 폴더에 쓸 권한이 없습니다
+backup.err.access = 백업 폴더에 쓸 권한이 없습니다
 backup.err.pathTooLong = 경로가 너무 깁니다
 backup.err.notFound = Outlook에서 항목을 찾을 수 없습니다 (이동·삭제됨)
 backup.err.exchange = Exchange 서버 연결 문제 (온라인 모드·네트워크 확인)

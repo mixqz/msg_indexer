@@ -1,0 +1,80 @@
+# Email Archive Indexer — 简体中文
+# 格式：key = value   (\n = 换行，{0} {1} = 占位符，key.one / key.other = 复数形式)
+# 译者：请保留所有 key 和 {n} 占位符。参见 CONTRIBUTING.md。
+
+# ---- 邮件方向 / 会议 / 状态 ----
+dir.received = 收到
+dir.sent = 发出
+meeting.request = 会议邀请
+meeting.accepted = 已接受
+meeting.declined = 已拒绝
+meeting.tentative = 暂定
+meeting.canceled = 已取消
+meeting.other = 会议
+status.error = 错误
+status.duplicate = 重复
+status.keeper = 重复（原件）
+status.similar = 相似
+status.normalized = 已规范化
+status.notNormalized = 未规范化
+
+# ---- 搜索范围 / 筛选摘要 ----
+scope.all = 全部
+scope.subject = 主题
+scope.people = 人员
+scope.body = 正文
+scope.attachments = 附件
+filter.attYes = 有附件
+filter.attNo = 无附件
+filter.dateRange = {0} – {1}
+filter.dateStart = 最早
+filter.dateNow = 现在
+filter.folder = 文件夹：{0}
+filter.sender = 发件人：{0}
+filter.search = 搜索：{0}
+filter.searchScoped = 搜索：{0}（{1}）
+
+# ---- 读取错误（无法读取的文件） ----
+err.empty = 空文件
+err.access = 没有读取此文件的权限
+err.locked = 正被其他程序使用
+err.notfound = 找不到文件
+err.notmail = 不是邮件文件（没有发件人、日期或主题标头）
+err.corrupt = 文件已损坏或不是邮件文件 ({0})
+
+# ---- 扫描进度 ----
+scan.phase.list = 正在检查文件
+scan.phase.read = 正在读取邮件
+scan.phase.save = 正在保存缓存
+
+# ---- 文件操作 ----
+ops.done = 已完成：{0}
+ops.doneWithFailures = 已完成：{0}，失败：{1}
+plan.skip.error = 无法读取的文件
+plan.skip.already = 已符合命名规则
+plan.error.pathTooLong = 文件夹路径过长
+plan.error.tooMany = 同名文件过多
+plan.note.numbered = 已添加编号（名称已被使用）
+plan.note.trimmed = 已缩短主题以符合路径长度限制
+ops.err.targetExists = 出现了同名文件
+ops.err.renamedMissing = 找不到已重命名的文件（已移动或删除）
+ops.err.originalExists = 已存在使用原名称的文件
+ops.err.destTooLong = 目标路径过长
+
+# ---- 预览 ----
+preview.readFailed = 无法读取邮件正文：{0}
+
+# ---- Outlook 备份 ----
+backup.stats = {0}：已检查 {1} · 已保存 {2} · 已跳过 {3} · 失败 {4}
+backup.folderError = {0}：读取文件夹时出错 — {1}
+backup.err.noFile = Outlook 报告成功，但没有创建文件
+backup.warnUnreadable = [警告] 已保存，但无法读取内容：{0}（{1}）
+backup.err.access = 没有写入备份文件夹的权限
+backup.err.pathTooLong = 路径过长
+backup.err.notFound = 在 Outlook 中找不到该项目（已移动或删除）
+backup.err.exchange = Exchange 服务器连接问题（请检查联机模式和网络）
+backup.err.aborted = Outlook 取消了操作（例如拒绝了安全提示）
+backup.err.tooMany = 超出了 Outlook 打开项目数的限制。请稍后重试。
+
+# ---- 设置 ----
+settings.restartToApply = 下次启动应用时将使用新语言。

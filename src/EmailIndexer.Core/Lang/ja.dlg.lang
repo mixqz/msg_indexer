@@ -1,0 +1,49 @@
+# Email Archive Indexer — 日本語 (Japanese) — dialogs (dlg.*)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural)
+
+# ---- Preview window ----
+dlg.preview.title = プレビュー
+dlg.preview.titleWithFile = プレビュー - {0}
+dlg.preview.subjectAccessible = 件名
+dlg.preview.noSubject = (件名なし)
+dlg.preview.viewText = テキスト表示
+dlg.preview.viewFormatted = 書式付き表示
+dlg.preview.prev = ◀ 前へ
+dlg.preview.next = 次へ ▶
+dlg.preview.copyBody = 本文をコピー
+dlg.preview.openInOutlook = Outlook で開く
+dlg.preview.showInFolder = フォルダーに表示
+dlg.preview.close = 閉じる
+
+# ---- Preview: header row labels ----
+dlg.preview.hdr.from = 差出人
+dlg.preview.hdr.to = 宛先
+dlg.preview.hdr.cc = CC
+dlg.preview.hdr.date = 日時
+dlg.preview.hdr.attachments = 添付ファイル
+
+# ---- Preview: date/meeting/attachment values ----
+dlg.preview.meetingSuffix = 会議: {0}
+dlg.preview.attachmentNone = なし
+dlg.preview.attachmentCount.one = 添付ファイル {0} 個 ({1})
+dlg.preview.attachmentCount.other = 添付ファイル {0} 個 ({1})
+
+# ---- Preview: open-link confirmation ----
+dlg.preview.link.title = リンクを開く
+dlg.preview.link.message = メッセージ内のリンクを既定のブラウザーで開きます。\n差出人が信頼できる場合にのみ開いてください。\n\n{0}
+dlg.preview.link.open = ブラウザーで開く
+
+# ---- Plan dialog ----
+dlg.plan.cancel = キャンセル
+
+# ---- Settings ----
+dlg.settings.title = 設定
+dlg.settings.help = 自分のメール アドレス (1 行に 1 つ)\nこれらのアドレスから送信されたメールは送信メールとして扱われ、ファイル名と並べ替えには送信日時が使われます。\nOutlook バックアップを実行すると、アカウントのアドレスが自動的に追加されます。
+dlg.settings.cancel = キャンセル
+dlg.settings.save = 保存
+dlg.settings.envCheck = 環境チェック
+
+# ---- Shared UI helpers (Ui.cs) ----
+dlg.ui.confirm.cancel = キャンセル
+dlg.ui.open.failedTitle = 開けませんでした
+dlg.ui.open.failedMessage = ファイルを開けませんでした。\n{0}\n\n{1}\n\nOutlook がインストールされ、.msg/.eml ファイルに関連付けられていることを確認してください。

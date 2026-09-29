@@ -22,7 +22,7 @@ outlook.backup.unknownError = 알 수 없는 오류
 outlook.backup.doneStopped = 중지됨. 
 outlook.backup.doneComplete = 완료. 
 outlook.backup.summary = 확인 {0} · 저장 {1} · 건너뜀(이미 백업됨) {2} · 실패 {3}
-outlook.backup.myAddresses = \n내 주소 자동 등록: {0}
+outlook.backup.myAddresses = \n자동으로 추가된 내 주소: {0}
 outlook.backup.noneChecked = 확인한 메일이 없습니다. 기간을 '전체'로 바꿔 보거나 Outlook에서 폴더가 동기화되었는지 확인하세요.
 
 # ---- Outlook COM 연결 / 실행 ----

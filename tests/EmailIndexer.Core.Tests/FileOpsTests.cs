@@ -27,8 +27,8 @@ public class FileNameRuleTests
     public void Matches_example_format()
     {
         var r = Row("W35 team agenda");
-        Assert.Equal($"{Stamp(r)}_Alex Kim [Sales Team]_W35 team agenda_첨부X.msg", FileNameRule.Build(r));
-        Assert.EndsWith("_첨부O.eml", FileNameRule.Build(Row("x", attach: true, fmt: MailFormat.Eml)));
+        Assert.Equal($"{Stamp(r)}_Alex Kim [Sales Team]_W35 team agenda_AttN.msg", FileNameRule.Build(r));
+        Assert.EndsWith("_AttY.eml", FileNameRule.Build(Row("x", attach: true, fmt: MailFormat.Eml)));
     }
 
     [Fact]
@@ -53,7 +53,7 @@ public class FileNameRuleTests
     public void Missing_values_get_placeholders()
     {
         var n = FileNameRule.Build(Row("", sender: "", email: ""));
-        Assert.Contains("_(발신자 없음)_(제목 없음)_첨부X", n);
+        Assert.Contains("_(no sender)_(no subject)_AttN", n);
         Assert.Contains("_bob@x.com_", FileNameRule.Build(Row("s", sender: "", email: "bob@x.com")));
     }
 
@@ -65,7 +65,7 @@ public class FileNameRuleTests
         var dir = @"C:\Users\me\Desktop\이메일 백업\Inbox\2026-08";
         var n = FileNameRule.BuildForDirectory(r, dir)!;
         Assert.True(dir.Length + 1 + n.Length <= FileNameRule.MaxPath);
-        Assert.Contains("…_첨부X.msg", n);
+        Assert.Contains("…_AttN.msg", n);
         Assert.StartsWith(Stamp(r) + "_Alex Kim", n);
 
         var shortR = Row("짧은 제목");
@@ -88,10 +88,10 @@ public class FileNameRuleTests
     [Fact]
     public void Already_normalized_detection()
     {
-        Assert.True(FileNameRule.IsAlready("a_첨부X.msg", "a_첨부X.msg"));
-        Assert.True(FileNameRule.IsAlready("a_첨부X (2).msg", "a_첨부X.msg"));
-        Assert.False(FileNameRule.IsAlready("b.msg", "a_첨부X.msg"));
-        Assert.True(Duplicates.LooksNormalized("260823_175434_Alex_W35_첨부X (3).msg"));
+        Assert.True(FileNameRule.IsAlready("a_AttN.msg", "a_AttN.msg"));
+        Assert.True(FileNameRule.IsAlready("a_AttN (2).msg", "a_AttN.msg"));
+        Assert.False(FileNameRule.IsAlready("b.msg", "a_AttN.msg"));
+        Assert.True(Duplicates.LooksNormalized("260823_175434_Alex_W35_AttN (3).msg"));
     }
 }
 
@@ -133,8 +133,8 @@ public class FileOpsTests : IDisposable
         Assert.Equal(2, plans.Count(p => p.Status == PlanStatus.Rename));
         Assert.Single(plans, p => p.Status == PlanStatus.Skip && p.Note == L.T("plan.skip.error"));
         var names = plans.Where(p => p.Status == PlanStatus.Rename).Select(p => p.NewName).ToList();
-        Assert.Contains(names, n => n.EndsWith("_W35 team agenda_첨부O.eml"));
-        Assert.Contains(names, n => n.EndsWith("_W35 team agenda_첨부O (2).eml"));
+        Assert.Contains(names, n => n.EndsWith("_W35 team agenda_AttY.eml"));
+        Assert.Contains(names, n => n.EndsWith("_W35 team agenda_AttY (2).eml"));
 
         var res = FileOps.ApplyRenames(_root, plans);
         Assert.Equal(2, res.Done);

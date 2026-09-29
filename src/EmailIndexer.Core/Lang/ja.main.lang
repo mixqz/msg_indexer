@@ -1,0 +1,236 @@
+# Email Archive Indexer — 日本語 (Japanese) — main window (MainForm)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+
+# ---- Column headers ----
+main.col.time = 日時
+main.col.dir = 種類
+main.col.sender = 差出人
+main.col.subject = 件名
+main.col.attach = 添付
+main.col.meeting = 会議
+main.col.size = サイズ
+main.col.status = 状態
+main.col.folder = フォルダー
+
+# ---- Cell text ----
+main.cell.attachCount.one = {0} 個
+main.cell.attachCount.other = {0} 個
+
+# ---- Top bar ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = バックアップ フォルダー
+main.btn.changeFolder = フォルダーの変更
+main.btn.scan = スキャン (F5)
+main.btn.scanCancel = スキャンのキャンセル
+main.btn.outlookBackup = Outlook バックアップ
+main.btn.settings = 設定
+main.btn.help = ヘルプ (F1)
+main.tip.outlookBackup = Outlook (クラシック) の受信トレイと送信済みアイテムを .msg ファイルとして保存します (起動していない場合は自動的に起動します)
+main.tip.help = 各機能の説明とキーボード ショートカット
+
+# ---- Filter panel ----
+main.filter.title = フィルター
+main.filter.reset = リセット
+main.filter.period = 期間
+main.filter.dirInOut = 受信 / 送信
+main.filter.attach = 添付ファイル
+main.filter.meeting = 会議
+main.filter.status = 状態
+main.filter.format = 形式
+main.filter.folder = フォルダー
+main.filter.topSenders = 差出人 上位 30
+
+# ---- Period combo (keep this order; code switches on SelectedIndex) ----
+main.period.all = すべての期間
+main.period.today = 今日
+main.period.last7 = 過去 7 日間
+main.period.last30 = 過去 30 日間
+main.period.thisYear = 今年
+main.period.custom = 期間を指定
+
+# ---- Direction / attachment / meeting / status / format checkboxes ----
+main.chk.dirIn = 受信
+main.chk.dirOut = 送信
+main.chk.attYes = あり
+main.chk.attNo = なし
+main.chk.meetRequest = 会議出席依頼
+main.chk.meetAccepted = 承諾
+main.chk.meetDeclined = 辞退
+main.chk.meetTentative = 仮承諾
+main.chk.meetCanceled = キャンセル
+main.chk.statusDuplicate = 重複
+main.chk.statusSimilar = 類似
+main.chk.statusError = エラー
+main.chk.statusNotNormalized = 未正規化
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- Search row ----
+main.search.label = 検索
+main.search.cue = 検索 — 件名、人物、本文、添付ファイル名 (複数の語 = すべてに一致、"引用符" = 完全一致)
+
+# ---- Action buttons ----
+main.action.preview = プレビュー (Enter)
+main.action.open = 開く (Ctrl+O)
+main.action.showInFolder = フォルダーに表示
+main.action.normalize = ファイル名の正規化
+main.action.move = 選択項目を移動
+main.action.delete = 選択項目を削除 (Del)
+main.action.dedupe = 重複の整理
+
+# ---- Context menu ----
+main.menu.preview = プレビュー
+main.menu.open = 開く (Outlook)
+main.menu.showInFolder = フォルダーに表示
+main.menu.copyPath = パスのコピー
+main.menu.normalize = ファイル名の正規化
+main.menu.move = 選択項目を移動…
+main.menu.trash = ごみ箱に移動
+main.menu.thisSenderOnly = この差出人のみ表示
+
+# ---- Accessible names ----
+main.acc.search = メールの検索
+main.acc.list = メールの一覧
+main.acc.listDesc = Enter: プレビュー、Ctrl+O: Outlook で開く、Del: ごみ箱に移動
+main.acc.folderBox = バックアップ フォルダーのパス
+main.acc.tree = フォルダー フィルター
+main.acc.senders = 差出人フィルター
+main.acc.period = 期間フィルター
+main.acc.from = 開始日
+main.acc.to = 終了日
+main.acc.scope = 検索範囲: {0}
+
+# ---- Folder tree / sender list ----
+main.tree.all = (すべて) {0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = (すべての差出人)
+main.sender.item = {0} ({1})
+
+# ---- Sort header arrows ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- Counts / status bar ----
+main.applied = 適用中: {0}
+main.counts = 合計 {0:#,0} · 表示 {1:#,0} · 選択 {2:#,0}
+main.status.chooseFolder = メールのバックアップ フォルダーを選択してください。
+main.status.loadingCache = キャッシュを読み込んでいます…
+main.status.scanCanceled = スキャンをキャンセルしました。
+main.status.scanFailed = スキャンに失敗しました — [スキャン] を押してもう一度お試しください
+main.status.fileOp = {0}: {1}
+
+# ---- Scan progress / summary ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = スキャン完了 ({0:0.0} 秒)
+main.summary.firstScan = 初回スキャン
+main.summary.cacheRebuilt = キャッシュを再構築
+main.summary.added = 新規 {0:#,0}
+main.summary.changed = 変更 {0:#,0}
+main.summary.moved = 移動 {0:#,0}
+main.summary.removed = 削除 {0:#,0}
+main.summary.autoTrashed.one = 新しい重複 {0} 個をごみ箱に移動
+main.summary.autoTrashed.other = 新しい重複 {0} 個をごみ箱に移動
+main.summary.errors = エラー {0:#,0}
+
+# ---- Empty-state hints ----
+main.empty.chooseFolder = メールのバックアップ フォルダーを選択してください。\n\nここをクリックするか、[フォルダーの変更] を押してください。エクスプローラーからこのウィンドウにフォルダーをドラッグすることもできます。
+main.empty.building = メールの一覧を作成しています…\n\n初めてフォルダーを開くときは、ファイル数によっては時間がかかることがあります。進行状況は下のステータス バーに表示されます。
+main.empty.noFiles = このフォルダー (サブフォルダーを含む) に .msg / .eml ファイルが見つかりませんでした。\n\n別のフォルダーを使うには、ここを押してください。Outlook から取り込むには、[Outlook バックアップ] を押してください。
+main.empty.noMatchesWithSearch = 条件に一致するメールはありません。\n\n検索: "{0}"\nここを押すと、検索とすべてのフィルターをクリアします。
+main.empty.noMatches = 条件に一致するメールはありません。\n\nここを押すと、検索とすべてのフィルターをクリアします。
+
+# ---- Auto-trash notice (after scan) ----
+main.autoTrash.title = 新しい重複を整理しました
+main.autoTrash.body.one = 既存のメールと同一のファイルが {0} 個追加されたため、ごみ箱に移動しました。元のファイルはそのままです。\n\n{1}\n\n必要に応じて Windows のごみ箱から元に戻せます。元に戻したファイルが再び削除されることはありません。
+main.autoTrash.body.other = 既存のメールと同一のファイルが {0} 個追加されたため、ごみ箱に移動しました。元のファイルはそのままです。\n\n{1}\n\n必要に応じて Windows のごみ箱から元に戻せます。元に戻したファイルが再び削除されることはありません。
+main.autoTrash.more = \n… ほか {0:#,0} 個
+
+# ---- Trash failures (after scan) ----
+main.trashFail.title = 重複の整理
+main.trashFail.body = 一部の新しい重複ファイルをごみ箱に移動できませんでした (一覧では「重複」と表示されます):\n\n{0}\n\n別のプログラム (Outlook など) でファイルが開かれている場合は、そのプログラムを閉じてから、もう一度 [スキャン] を押してください。
+
+# ---- Scan failure dialog ----
+main.scanFail.title = スキャンの失敗
+main.scanFail.body = バックアップ フォルダーを読み取れませんでした。\n{0}\n\n{1}\n\nフォルダーが存在し、開く権限があることを確認してから、もう一度 [スキャン] を押してください。失敗が続く場合は、[フォルダーの変更] でフォルダーを選び直してください。
+
+# ---- Open confirm ----
+main.open.title = 開く
+main.open.message = 選択した {0:#,0} 個のファイルを Outlook でまとめて開きます。
+main.open.ok = {0:#,0} 個を開く
+main.open.failTitle = 開けませんでした
+main.open.failBody = ファイルを開けませんでした。\n{0}\n\n{1}\n\nOutlook がインストールされ、.msg / .eml に関連付けられていることを確認してください。
+
+# ---- File-ops readiness ----
+main.busy.title = お待ちください
+main.busy.scanning = スキャン中です。完了してからもう一度お試しください。
+
+# ---- Target scope ----
+main.target.selected.one = 選択した {0} 個のファイル
+main.target.selected.other = 選択した {0:#,0} 個のファイル
+main.target.viewAll.one = 表示中の全 {0} 個のファイル
+main.target.viewAll.other = 表示中の全 {0:#,0} 個のファイル
+
+# ---- Normalize (rename) ----
+main.normalize.status.rename = 名前の変更
+main.normalize.status.skip = スキップ
+main.normalize.status.error = 不可
+main.normalize.title = ファイル名の正規化 - プレビュー
+main.normalize.summary = 対象: {0}   →   名前の変更 {1:#,0} · スキップ {2:#,0} · 不可 {3:#,0}\n規則: 日付_時刻_差出人_件名_添付有/無  (受信メール = 受信日時、送信メール = 送信日時)。実行後は [前回の正規化を元に戻す] で元の名前に戻せます。
+main.normalize.col.action = 操作
+main.normalize.col.oldName = 変更前
+main.normalize.col.newName = 変更後
+main.normalize.col.note = 備考
+main.normalize.ok.one = {0} 個の名前を変更
+main.normalize.ok.other = {0:#,0} 個の名前を変更
+main.normalize.undo.one = 前回の正規化を元に戻す ({0} 個)
+main.normalize.undo.other = 前回の正規化を元に戻す ({0:#,0} 個)
+main.normalize.opTitle = ファイル名の正規化
+
+# ---- Undo rename ----
+main.undo.title = 正規化を元に戻す
+main.undo.message.one = 前回の正規化で名前を変更した {0} 個のファイルを元の名前に戻します。\nその後に移動または削除されたファイルはスキップします。
+main.undo.message.other = 前回の正規化で名前を変更した {0:#,0} 個のファイルを元の名前に戻します。\nその後に移動または削除されたファイルはスキップします。
+main.undo.ok.one = {0} 個の名前を戻す
+main.undo.ok.other = {0:#,0} 個の名前を戻す
+main.undo.opTitle = 正規化を元に戻す
+
+# ---- Move ----
+main.move.title = 選択項目を移動
+main.move.needSelection = 先に移動するメールを選択してください。
+main.move.browseDesc.one = 選択した {0} 個のファイルの移動先フォルダー
+main.move.browseDesc.other = 選択した {0:#,0} 個のファイルの移動先フォルダー
+main.move.confirmMessage.one = 選択した {0} 個のファイルを次のフォルダーに移動します。\n{1}
+main.move.confirmMessage.other = 選択した {0:#,0} 個のファイルを次のフォルダーに移動します。\n{1}
+main.move.outsideNote = \n\nバックアップ フォルダーの外にあるため、移動後はこの一覧に表示されません。
+main.move.ok.one = {0} 個を移動
+main.move.ok.other = {0:#,0} 個を移動
+
+# ---- Delete ----
+main.delete.title = 選択項目を削除
+main.delete.needSelection = 先に一覧から削除するメールを選択してください。
+main.delete.confirmMessage.one = 選択した {0} 個のファイルをごみ箱に移動します。\nWindows のごみ箱から元に戻せます。
+main.delete.confirmMessage.other = 選択した {0:#,0} 個のファイルをごみ箱に移動します。\nWindows のごみ箱から元に戻せます。
+main.delete.ok.one = {0} 個をごみ箱に移動
+main.delete.ok.other = {0:#,0} 個をごみ箱に移動
+
+# ---- Outlook backup ----
+main.outlook.title = Outlook バックアップ
+main.outlook.needFolder = 先にメールの保存先となるバックアップ フォルダーを選択してください。
+
+# ---- Dedupe ----
+main.dedupe.title = 重複の整理
+main.dedupe.none = 整理する重複ファイルはありません。
+main.dedupe.dialogTitle = 重複の整理 - プレビュー
+main.dedupe.summary.one = 同じメールと確認された {0} 個のファイルをごみ箱に移動し、グループごとに元のファイルを 1 つ残します。\n残す優先順位: 正規化済みの名前 → msg 形式 → 先に取り込まれたもの。(類似メールは含まれません。)
+main.dedupe.summary.other = 同じメールと確認された {0:#,0} 個のファイルをごみ箱に移動し、グループごとに元のファイルを 1 つ残します。\n残す優先順位: 正規化済みの名前 → msg 形式 → 先に取り込まれたもの。(類似メールは含まれません。)
+main.dedupe.col.group = グループ
+main.dedupe.col.toTrash = ごみ箱に移動するファイル
+main.dedupe.col.toKeep = 残すファイル
+main.dedupe.col.subject = 件名
+main.dedupe.ok.one = {0} 個をごみ箱に移動
+main.dedupe.ok.other = {0:#,0} 個をごみ箱に移動
+main.dedupe.opTitle = 重複の整理
+
+# ---- Change-folder browse dialog ----
+main.browse.description = メール (.msg / .eml) がバックアップされているフォルダーを選択してください

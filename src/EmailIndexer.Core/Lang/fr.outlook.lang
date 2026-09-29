@@ -1,0 +1,56 @@
+# Email Archive Indexer — Français — zone Outlook
+# Format : clé = valeur   (\n = saut de ligne, {0} {1} = espaces réservés, clé.one / clé.other = formes du pluriel)
+
+# ---- Fenêtre de sauvegarde Outlook ----
+outlook.backup.title = Sauvegarde Outlook
+outlook.backup.opt.sinceLast = Depuis la dernière sauvegarde
+outlook.backup.opt.recent = Derniers
+outlook.backup.opt.days = jours
+outlook.backup.opt.all = Tout
+outlook.backup.rangeLabel = Plage :
+outlook.backup.intro = Enregistre le courrier de la Boîte de réception et des Éléments envoyés d'Outlook (classique) en fichiers .msg. Si Outlook est fermé, il démarre automatiquement. Le courrier d'origine dans Outlook n'est pas modifié.\nEmplacement : {0}   (enregistrement direct, sans sous-dossiers ; les noms de fichiers suivent la règle de nommage)\nLe courrier déjà sauvegardé est ignoré. Si Outlook affiche une invite de sécurité, cliquez sur Autoriser.
+outlook.backup.failBox = Échecs et avertissements (motif par message)
+outlook.backup.start = Démarrer la sauvegarde
+outlook.backup.stop = Arrêter
+outlook.backup.close = Fermer
+outlook.backup.openLog = Ouvrir le journal
+outlook.backup.stopping = \nArrêt en cours… vous pourrez fermer une fois l'enregistrement du message actuel terminé.
+outlook.backup.ready = Choisissez une plage, puis cliquez sur Démarrer la sauvegarde.
+outlook.backup.connecting = Connexion à Outlook…
+outlook.backup.running = Sauvegarde en cours…\n{0}
+outlook.backup.errorGeneric = Erreur pendant la sauvegarde : {0}
+outlook.backup.unknownError = Erreur inconnue
+outlook.backup.doneStopped = Arrêté. 
+outlook.backup.doneComplete = Terminé. 
+outlook.backup.summary = Vérifiés {0} · enregistrés {1} · ignorés (déjà sauvegardés) {2} · échecs {3}
+outlook.backup.myAddresses = \nMes adresses ajoutées automatiquement : {0}
+outlook.backup.noneChecked = Aucun courrier n'a été vérifié. Essayez de définir la plage sur Tout, ou vérifiez que les dossiers sont synchronisés dans Outlook.
+
+# ---- Connexion COM / démarrage d'Outlook ----
+outlook.com.newOnly = Seul le nouvel Outlook est installé. La sauvegarde automatique fonctionne uniquement avec Outlook (classique).\nDésactivez le commutateur « Nouvel Outlook » en haut à droite du nouvel Outlook pour revenir à la version classique.
+outlook.com.notInstalled = Outlook (classique) n'est pas installé.
+outlook.com.permByApp = cette application
+outlook.com.permByOutlook = Outlook
+outlook.com.permMismatch = Outlook est ouvert, mais la connexion est impossible. Il semble que {0} s'exécute en tant qu'administrateur : les deux programmes n'ont donc pas le même niveau d'autorisation.\nRedémarrez Outlook et cette application avec les autorisations standard (double-clic).\n(C'est la raison la plus fréquente pour laquelle les sauvegardes de l'ancienne application étaient toujours vides.)
+outlook.com.connectFailed = Impossible de se connecter à Outlook : {0}
+outlook.com.launching = Démarrage d'Outlook (classique)… (si un sélecteur de profil s'affiche, choisissez un profil)
+outlook.com.launchFailed = Impossible de démarrer Outlook (classique) : {0}\nDémarrez Outlook vous-même, puis réessayez.
+outlook.com.waitCancelled = Arrêté pendant l'attente du démarrage d'Outlook.
+outlook.com.newOpened = Le nouvel Outlook s'est ouvert à la place d'Outlook (classique). Le nouvel Outlook ne prend pas en charge la sauvegarde automatique.\nDésactivez le commutateur « Nouvel Outlook » en haut à droite du nouvel Outlook pour revenir à la version classique, puis réessayez.
+outlook.com.waiting = En attente qu'Outlook soit prêt… ({0} s)
+outlook.com.timeout = Outlook n'était pas prêt au bout de 2 minutes. Si un sélecteur de profil ou une fenêtre de connexion s'affiche, terminez l'opération, puis réessayez.
+outlook.com.timeoutNewNote = \n(Si le nouvel Outlook est ouvert, vous devez revenir à la version classique.)
+outlook.com.defaultAccount = Compte par défaut
+outlook.folder.inbox = Boîte de réception
+outlook.folder.sent = Éléments envoyés
+
+# ---- Boîte de dialogue de plantage ----
+outlook.crash.title = Erreur
+outlook.crash.message = Une erreur inattendue s'est produite.\n{0}\n\nRefaites la dernière opération ; si le problème persiste, fermez puis rouvrez le programme. Vos fichiers de courrier ne sont pas affectés.\nSi le même problème se reproduit, envoyez ce fichier journal à votre administrateur :\n{1}
+
+# ---- Fenêtre de vérification de l'environnement ----
+outlook.env.title = {0} {1} — Vérification de l'environnement
+outlook.env.heading = ✅ L'application a démarré normalement. Utilisez Copier les infos pour transmettre les informations ci-dessous.
+outlook.env.copy = Copier les infos
+outlook.env.copied = Copié ✓
+outlook.env.close = Fermer

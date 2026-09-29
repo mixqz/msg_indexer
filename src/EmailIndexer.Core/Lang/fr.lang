@@ -1,0 +1,80 @@
+# Email Archive Indexer — Français
+# Format : clé = valeur   (\n = saut de ligne, {0} {1} = espaces réservés, clé.one / clé.other = formes du pluriel)
+# Traducteurs : conservez chaque clé et chaque espace réservé {n}. Voir CONTRIBUTING.md.
+
+# ---- Sens du courrier / réunion / état ----
+dir.received = Reçu
+dir.sent = Envoyé
+meeting.request = Invitation
+meeting.accepted = Acceptée
+meeting.declined = Refusée
+meeting.tentative = Provisoire
+meeting.canceled = Annulée
+meeting.other = Réunion
+status.error = Erreur
+status.duplicate = Doublon
+status.keeper = Original
+status.similar = Similaire
+status.normalized = Normalisé
+status.notNormalized = Non normalisé
+
+# ---- Portée de la recherche / résumé des filtres ----
+scope.all = Tout
+scope.subject = Objet
+scope.people = Personnes
+scope.body = Corps
+scope.attachments = Pièces jointes
+filter.attYes = Avec pièces jointes
+filter.attNo = Sans pièces jointes
+filter.dateRange = {0} – {1}
+filter.dateStart = début
+filter.dateNow = aujourd'hui
+filter.folder = Dossier : {0}
+filter.sender = Expéditeur : {0}
+filter.search = Recherche : {0}
+filter.searchScoped = Recherche : {0} ({1})
+
+# ---- Erreurs de lecture (fichiers illisibles) ----
+err.empty = Fichier vide
+err.access = Vous n'avez pas l'autorisation de lire ce fichier
+err.locked = Utilisé par un autre programme
+err.notfound = Fichier introuvable
+err.notmail = Ce n'est pas un fichier de courrier (aucun en-tête d'expéditeur, de date ou d'objet)
+err.corrupt = Fichier endommagé ou qui n'est pas un courrier ({0})
+
+# ---- Progression de l'analyse ----
+scan.phase.list = Vérification des fichiers
+scan.phase.read = Lecture du courrier
+scan.phase.save = Enregistrement du cache
+
+# ---- Opérations sur les fichiers ----
+ops.done = Terminé : {0}
+ops.doneWithFailures = Terminé : {0}, échecs : {1}
+plan.skip.error = Fichier illisible
+plan.skip.already = Respecte déjà la règle de nommage
+plan.error.pathTooLong = Le chemin du dossier est trop long
+plan.error.tooMany = Trop de fichiers portent le même nom
+plan.note.numbered = Numéro ajouté (nom déjà utilisé)
+plan.note.trimmed = Objet raccourci pour respecter la longueur maximale du chemin
+ops.err.targetExists = Un fichier du même nom est apparu
+ops.err.renamedMissing = Fichier renommé introuvable (déplacé ou supprimé)
+ops.err.originalExists = Un fichier portant le nom d'origine existe déjà
+ops.err.destTooLong = Le chemin de destination est trop long
+
+# ---- Aperçu ----
+preview.readFailed = Impossible de lire le corps du message : {0}
+
+# ---- Sauvegarde Outlook ----
+backup.stats = {0} : vérifiés {1} · enregistrés {2} · ignorés {3} · échecs {4}
+backup.folderError = {0} : erreur lors de la lecture du dossier — {1}
+backup.err.noFile = Outlook a signalé une réussite, mais aucun fichier n'a été créé
+backup.warnUnreadable = [Avertissement] Enregistré, mais le contenu est illisible : {0} ({1})
+backup.err.access = Vous n'avez pas l'autorisation d'écrire dans le dossier de sauvegarde
+backup.err.pathTooLong = Le chemin est trop long
+backup.err.notFound = Élément introuvable dans Outlook (déplacé ou supprimé)
+backup.err.exchange = Problème de connexion au serveur Exchange (vérifiez le mode en ligne et le réseau)
+backup.err.aborted = Outlook a annulé l'opération (par exemple, une invite de sécurité a été refusée)
+backup.err.tooMany = La limite d'éléments ouverts d'Outlook a été dépassée. Réessayez dans un instant.
+
+# ---- Paramètres ----
+settings.restartToApply = La nouvelle langue sera utilisée au prochain démarrage de l'application.

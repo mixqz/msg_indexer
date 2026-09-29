@@ -14,7 +14,7 @@ def crlf(p: pathlib.Path) -> bytes:
 
 with zipfile.ZipFile(out, "w", zipfile.ZIP_DEFLATED) as z:
     z.write(exe, "EmailIndexer.exe")
-    z.writestr("사용안내.txt", crlf(root / "docs/사용안내.md"))
+    z.writestr("사용안내.txt", crlf(root / "docs/guide/USER_GUIDE.ko.md"))
     z.writestr("테스트 체크리스트.txt", crlf(root / "docs/windows-test-checklist.md"))
 
 sha = hashlib.sha256(exe.read_bytes()).hexdigest()

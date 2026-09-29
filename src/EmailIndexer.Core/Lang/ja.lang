@@ -1,0 +1,80 @@
+# Email Archive Indexer — 日本語 (Japanese)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+# Translators: keep every key and every {n} placeholder. See CONTRIBUTING.md.
+
+# ---- Mail direction / meeting / status ----
+dir.received = 受信
+dir.sent = 送信
+meeting.request = 会議出席依頼
+meeting.accepted = 承諾
+meeting.declined = 辞退
+meeting.tentative = 仮承諾
+meeting.canceled = キャンセル
+meeting.other = 会議
+status.error = エラー
+status.duplicate = 重複
+status.keeper = 重複 (元)
+status.similar = 類似
+status.normalized = 正規化済み
+status.notNormalized = 未正規化
+
+# ---- Search scope / filter summary ----
+scope.all = すべて
+scope.subject = 件名
+scope.people = 人物
+scope.body = 本文
+scope.attachments = 添付ファイル
+filter.attYes = 添付ファイルあり
+filter.attNo = 添付ファイルなし
+filter.dateRange = {0} – {1}
+filter.dateStart = 最初
+filter.dateNow = 現在
+filter.folder = フォルダー: {0}
+filter.sender = 差出人: {0}
+filter.search = 検索: {0}
+filter.searchScoped = 検索: {0} ({1})
+
+# ---- Read errors (shown for unreadable files) ----
+err.empty = 空のファイル
+err.access = このファイルを読み取る権限がありません
+err.locked = 別のプログラムで使用中です
+err.notfound = ファイルが見つかりません
+err.notmail = メール ファイルではありません (差出人、日付、件名のヘッダーがありません)
+err.corrupt = 破損したファイルか、メール ファイルではありません ({0})
+
+# ---- Scan progress ----
+scan.phase.list = ファイルを確認中
+scan.phase.read = メールを読み込み中
+scan.phase.save = キャッシュを保存中
+
+# ---- File operations ----
+ops.done = 完了: {0}
+ops.doneWithFailures = 完了: {0}、失敗: {1}
+plan.skip.error = 読み取れないファイル
+plan.skip.already = 既に命名規則に従っています
+plan.error.pathTooLong = フォルダーのパスが長すぎます
+plan.error.tooMany = 同じ名前のファイルが多すぎます
+plan.note.numbered = 番号を追加 (同じ名前が既に使われています)
+plan.note.trimmed = パスの長さ制限に合わせて件名を短縮
+ops.err.targetExists = 同じ名前のファイルが後から作成されました
+ops.err.renamedMissing = 名前を変更したファイルが見つかりません (移動または削除済み)
+ops.err.originalExists = 元の名前のファイルが既に存在します
+ops.err.destTooLong = 移動先のパスが長すぎます
+
+# ---- Preview ----
+preview.readFailed = メッセージの本文を読み取れませんでした: {0}
+
+# ---- Outlook backup ----
+backup.stats = {0}: 確認 {1} · 保存 {2} · スキップ {3} · 失敗 {4}
+backup.folderError = {0}: フォルダーの読み取り中にエラーが発生しました — {1}
+backup.err.noFile = Outlook は成功と報告しましたが、ファイルが作成されませんでした
+backup.warnUnreadable = [警告] 保存しましたが、内容を読み取れませんでした: {0} ({1})
+backup.err.access = バックアップ フォルダーへの書き込み権限がありません
+backup.err.pathTooLong = パスが長すぎます
+backup.err.notFound = Outlook にアイテムが見つかりません (移動または削除済み)
+backup.err.exchange = Exchange サーバーとの接続に問題があります (オンライン モードとネットワークを確認してください)
+backup.err.aborted = Outlook が操作をキャンセルしました (セキュリティの確認を拒否した場合など)
+backup.err.tooMany = Outlook で同時に開けるアイテム数の上限を超えました。しばらくしてからもう一度お試しください。
+
+# ---- Settings ----
+settings.restartToApply = 新しい言語は、次回アプリを起動したときに適用されます。

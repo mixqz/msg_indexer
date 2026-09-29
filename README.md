@@ -10,7 +10,7 @@ Windows 11용 무설치 이메일 백업(.msg/.eml) 인덱서. 명세: `docs/spe
 python3 package.py  # 배포 zip → dist/EmailIndexer-v<버전>.zip (exe + 사용안내 + 테스트 체크리스트)
 ```
 
-- 사용자 안내: `docs/사용안내.md` · 실기 테스트: `docs/windows-test-checklist.md` · 명세: `docs/spec.md`
+- 사용자 안내: `docs/guide/USER_GUIDE.<언어>.md` · 실기 테스트: `docs/windows-test-checklist.md` · 명세: `docs/spec.md`
 - 버전: `src/EmailIndexer.Core/AppInfo.cs`, `src/EmailIndexer.App/EmailIndexer.App.csproj`, `app.manifest` 세 곳을 함께 올린다.
 
 ## 구조

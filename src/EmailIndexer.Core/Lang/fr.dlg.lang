@@ -1,0 +1,49 @@
+# Email Archive Indexer — Français — boîtes de dialogue (dlg.*)
+# Format : clé = valeur   (\n = saut de ligne, {0} {1} = espaces réservés, clé.one / clé.other = pluriel)
+
+# ---- Fenêtre d'aperçu ----
+dlg.preview.title = Aperçu
+dlg.preview.titleWithFile = Aperçu - {0}
+dlg.preview.subjectAccessible = Objet
+dlg.preview.noSubject = (Sans objet)
+dlg.preview.viewText = Affichage texte
+dlg.preview.viewFormatted = Affichage mis en forme
+dlg.preview.prev = ◀ Précédent
+dlg.preview.next = Suivant ▶
+dlg.preview.copyBody = Copier le corps
+dlg.preview.openInOutlook = Ouvrir dans Outlook
+dlg.preview.showInFolder = Afficher dans le dossier
+dlg.preview.close = Fermer
+
+# ---- Aperçu : libellés de l'en-tête ----
+dlg.preview.hdr.from = De
+dlg.preview.hdr.to = À
+dlg.preview.hdr.cc = Cc
+dlg.preview.hdr.date = Date
+dlg.preview.hdr.attachments = Pièces jointes
+
+# ---- Aperçu : valeurs date / réunion / pièces jointes ----
+dlg.preview.meetingSuffix = Réunion : {0}
+dlg.preview.attachmentNone = Aucune
+dlg.preview.attachmentCount.one = {0} pièce jointe ({1})
+dlg.preview.attachmentCount.other = {0} pièces jointes ({1})
+
+# ---- Aperçu : confirmation d'ouverture de lien ----
+dlg.preview.link.title = Ouvrir le lien
+dlg.preview.link.message = Un lien du message va s'ouvrir dans votre navigateur par défaut.\nNe l'ouvrez que si vous faites confiance à l'expéditeur.\n\n{0}
+dlg.preview.link.open = Ouvrir dans le navigateur
+
+# ---- Boîte de dialogue de plan ----
+dlg.plan.cancel = Annuler
+
+# ---- Paramètres ----
+dlg.settings.title = Paramètres
+dlg.settings.help = Mes adresses de courrier (une par ligne)\nLe courrier provenant de ces expéditeurs est traité comme du courrier envoyé, et l'heure d'envoi sert au nom de fichier et au tri.\nUne sauvegarde Outlook ajoute automatiquement l'adresse de votre compte.
+dlg.settings.cancel = Annuler
+dlg.settings.save = Enregistrer
+dlg.settings.envCheck = Vérifier l'environnement
+
+# ---- Éléments d'interface partagés (Ui.cs) ----
+dlg.ui.confirm.cancel = Annuler
+dlg.ui.open.failedTitle = Impossible d'ouvrir
+dlg.ui.open.failedMessage = Impossible d'ouvrir le fichier.\n{0}\n\n{1}\n\nVérifiez qu'Outlook est installé et associé aux fichiers .msg/.eml.
