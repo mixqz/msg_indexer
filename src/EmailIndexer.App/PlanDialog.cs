@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using EmailIndexer.Core.Text;
 
 namespace EmailIndexer.App
 {
@@ -46,7 +47,7 @@ namespace EmailIndexer.App
             body.Controls.Add(list);
 
             var bar = new FlowLayoutPanel { Dock = DockStyle.Bottom, Height = 46, FlowDirection = FlowDirection.RightToLeft, Padding = new Padding(8, 8, 8, 0) };
-            var cancel = Ui.Btn("취소", (_, __) => Close(), 90);
+            var cancel = Ui.Btn(L.T("dlg.plan.cancel"), (_, __) => Close(), 90);
             cancel.DialogResult = DialogResult.Cancel;
             _ok = Ui.Btn(okText, (_, __) => { DialogResult = DialogResult.OK; Close(); });
             _ok.Enabled = okEnabled;

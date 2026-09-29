@@ -147,8 +147,8 @@ public class OutlookBackupTests : IDisposable
         var r = Run(new[] { inbox });
         Assert.Equal(1, r.Saved);
         Assert.Equal(2, r.Failed);
-        Assert.Contains(r.Failures, f => f.Contains("쓸 권한이 없습니다"));
-        Assert.Contains(r.Failures, f => f.Contains("파일이 생기지 않았습니다"));
+        Assert.Contains(r.Failures, f => f.Contains("No permission to write"));
+        Assert.Contains(r.Failures, f => f.Contains("no file was created"));
         Assert.Empty(Directory.GetFiles(_root, "~eidx_*", SearchOption.AllDirectories));
         Assert.Contains("FAILED", File.ReadAllText(Path.Combine(IndexStore.IndexDir(_root), OutlookBackup.LogName)));
     }
@@ -212,7 +212,7 @@ public class OutlookBackupTests : IDisposable
     [Fact]
     public void Explain_common_errors()
     {
-        Assert.Contains("권한", OutlookBackup.Explain(new UnauthorizedAccessException()));
-        Assert.Contains("경로", OutlookBackup.Explain(new PathTooLongException()));
+        Assert.Contains("permission", OutlookBackup.Explain(new UnauthorizedAccessException()));
+        Assert.Contains("path", OutlookBackup.Explain(new PathTooLongException()));
     }
 }

@@ -51,7 +51,7 @@ namespace EmailIndexer.Core.Mail
                 {
                     var n = embedded.FileName;
                     MailReader.AddUnique(info.AttachmentNames,
-                        !string.IsNullOrEmpty(n) ? n : (embedded.Subject ?? "첨부 메일") + ".msg");
+                        !string.IsNullOrEmpty(n) ? n : (embedded.Subject ?? "attached-message") + ".msg");
                     continue;
                 }
                 if (!(obj is Storage.Attachment a)) continue;
@@ -61,7 +61,7 @@ namespace EmailIndexer.Core.Mail
                     cidRefs ??= HtmlText.CidReferences(Html());
                     if (cidRefs.Contains(a.ContentId.Trim('<', '>'))) continue; // 본문 삽입 이미지
                 }
-                MailReader.AddUnique(info.AttachmentNames, string.IsNullOrEmpty(a.FileName) ? "첨부" : a.FileName);
+                MailReader.AddUnique(info.AttachmentNames, string.IsNullOrEmpty(a.FileName) ? "attachment" : a.FileName);
             }
         }
 

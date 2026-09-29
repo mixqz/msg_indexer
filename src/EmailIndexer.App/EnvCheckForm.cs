@@ -6,6 +6,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Windows.Forms;
 using EmailIndexer.Core;
+using EmailIndexer.Core.Text;
 using Microsoft.Win32;
 
 namespace EmailIndexer.App
@@ -20,15 +21,15 @@ namespace EmailIndexer.App
 
         public EnvCheckForm()
         {
-            Text = $"{AppInfo.Name} {AppInfo.Version} — 실행 환경 점검";
+            Text = L.F("outlook.env.title", AppInfo.Name, AppInfo.Version);
             Size = new Size(720, 460);
             StartPosition = FormStartPosition.CenterScreen;
-            Font = new Font("Malgun Gothic", 10F);
+            Font = new Font(Ui.Base.FontFamily, 10F);
             Icon = Ui.AppIcon ?? Icon;
 
             var title = new Label
             {
-                Text = "✅ 앱이 정상 실행되었습니다. 아래 내용을 [정보 복사]로 전달해 주세요.",
+                Text = L.T("outlook.env.heading"),
                 Dock = DockStyle.Top,
                 Height = 40,
                 TextAlign = ContentAlignment.MiddleLeft,
@@ -45,13 +46,13 @@ namespace EmailIndexer.App
                 Text = BuildReport(),
             };
 
-            var copy = new Button { Text = "정보 복사", Width = 120, Height = 32 };
+            var copy = new Button { Text = L.T("outlook.env.copy"), Width = 120, Height = 32 };
             copy.Click += (_, __) =>
             {
                 Clipboard.SetText(_report.Text);
-                copy.Text = "복사됨 ✓";
+                copy.Text = L.T("outlook.env.copied");
             };
-            var close = new Button { Text = "닫기", Width = 90, Height = 32 };
+            var close = new Button { Text = L.T("outlook.env.close"), Width = 90, Height = 32 };
             close.Click += (_, __) => Close();
 
             var buttons = new FlowLayoutPanel
@@ -73,21 +74,21 @@ namespace EmailIndexer.App
         private static string BuildReport()
         {
             var sb = new StringBuilder();
-            sb.AppendLine($"앱 버전      : {AppInfo.Version}");
-            sb.AppendLine($"Windows      : {Safe(GetWindowsVersion)}");
-            sb.AppendLine($"64비트 OS    : {Environment.Is64BitOperatingSystem}");
-            sb.AppendLine($".NET 런타임  : {Safe(GetNetFrameworkVersion)}");
-            sb.AppendLine($"권한         : {Safe(() => IsAdmin() ? "관리자 (주의: Outlook 연동 시 문제 가능)" : "일반 사용자 ✓")}");
-            sb.AppendLine($"Outlook      : {Safe(GetOutlookState)}");
-            sb.AppendLine($"실행 위치    : {Application.ExecutablePath}");
-            sb.AppendLine($"화면 배율    : {Safe(() => $"{DpiPercent()}%")}");
+            sb.AppendLine($"App version   : {AppInfo.Version}");
+            sb.AppendLine($"Windows       : {Safe(GetWindowsVersion)}");
+            sb.AppendLine($"64-bit OS     : {Environment.Is64BitOperatingSystem}");
+            sb.AppendLine($".NET runtime  : {Safe(GetNetFrameworkVersion)}");
+            sb.AppendLine($"Permissions   : {Safe(() => IsAdmin() ? "Administrator (note: may cause problems with Outlook integration)" : "Standard user \u2713")}");
+            sb.AppendLine($"Outlook       : {Safe(GetOutlookState)}");
+            sb.AppendLine($"Run location  : {Application.ExecutablePath}");
+            sb.AppendLine($"Display scale : {Safe(() => $"{DpiPercent()}%")}");
             return sb.ToString();
         }
 
         private static string Safe(Func<string> f)
         {
             try { return f(); }
-            catch (Exception ex) { return "확인 실패: " + ex.Message; }
+            catch (Exception ex) { return "check failed: " + ex.Message; }
         }
 
         private static string GetWindowsVersion()
@@ -99,14 +100,14 @@ namespace EmailIndexer.App
             // Windows 11도 ProductName이 "Windows 10"으로 남아 있어 빌드 번호로 보정
             if (int.TryParse(build, out var b) && b >= 22000)
                 product = product.Replace("Windows 10", "Windows 11");
-            return $"{product} {display} (빌드 {build})";
+            return $"{product} {display} (build {build})";
         }
 
         private static string GetNetFrameworkVersion()
         {
             using var key = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full");
             var release = key?.GetValue("Release") is int r ? r : 0;
-            var ver = release >= 533320 ? "4.8.1" : release >= 528040 ? "4.8" : "4.8 미만 (지원 안 됨)";
+            var ver = release >= 533320 ? "4.8.1" : release >= 528040 ? "4.8" : "below 4.8 (not supported)";
             return $"{ver} (release {release})";
         }
 
@@ -120,9 +121,9 @@ namespace EmailIndexer.App
         {
             bool classic = Process.GetProcessesByName("OUTLOOK").Any();
             bool newOutlook = Process.GetProcessesByName("olk").Any();
-            if (classic) return "Outlook(classic) 실행 중 ✓";
-            if (newOutlook) return "새 Outlook만 실행 중 (자동 백업 불가)";
-            return "실행 중 아님";
+            if (classic) return "Outlook (classic) running \u2713";
+            if (newOutlook) return "Only new Outlook running (automatic backup unavailable)";
+            return "Not running";
         }
 
         private static int DpiPercent()

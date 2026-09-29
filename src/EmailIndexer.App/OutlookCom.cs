@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading;
 using EmailIndexer.Core.Mail;
 using EmailIndexer.Core.Outlook;
+using EmailIndexer.Core.Text;
 
 namespace EmailIndexer.App
 {
@@ -34,8 +35,8 @@ namespace EmailIndexer.App
             var type = Type.GetTypeFromProgID("Outlook.Application");
             if (type == null)
                 return (ConnectState.NotInstalled, null, newOutlook
-                    ? "새 Outlook만 설치되어 있습니다. 자동 백업은 Outlook(classic)에서만 됩니다.\n새 Outlook 오른쪽 위의 '새 Outlook' 스위치를 꺼서 classic으로 전환하세요."
-                    : "Outlook(classic)이 설치되어 있지 않습니다.");
+                    ? L.T("outlook.com.newOnly")
+                    : L.T("outlook.com.notInstalled"));
             if (!classic)
                 return LaunchAndConnect(type, newOutlook, status, ct);
             try
@@ -49,15 +50,14 @@ namespace EmailIndexer.App
             }
             catch (Exception ex)
             {
-                return (ConnectState.Failed, null, "Outlook 연결 실패: " + ex.Message);
+                return (ConnectState.Failed, null, L.F("outlook.com.connectFailed", ex.Message));
             }
         }
 
         private static string PermissionMessage()
         {
-            var me = IsAdmin() ? "이 앱이 '관리자 권한'으로" : "Outlook이 '관리자 권한'으로";
-            return $"Outlook은 실행 중이지만 연결할 수 없습니다. {me} 실행되어 권한 수준이 서로 다른 것으로 보입니다.\n" +
-                   "Outlook과 이 앱을 모두 일반 권한(더블클릭)으로 다시 실행하세요.\n(기존 앱에서 백업이 항상 0개였던 대표적인 원인입니다)";
+            var who = IsAdmin() ? L.T("outlook.com.permByApp") : L.T("outlook.com.permByOutlook");
+            return L.F("outlook.com.permMismatch", who);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace EmailIndexer.App
         /// </summary>
         private static (ConnectState, object?, string) LaunchAndConnect(Type type, bool newOutlookRunning, Action<string>? status, CancellationToken ct)
         {
-            status?.Invoke("Outlook(classic)을 실행하는 중… (프로필 선택 창이 뜨면 선택해 주세요)");
+            status?.Invoke(L.T("outlook.com.launching"));
             try
             {
                 // App Paths에 등록된 classic Outlook 실행 (설치 경로를 몰라도 됨)
@@ -74,7 +74,7 @@ namespace EmailIndexer.App
             }
             catch (Exception ex)
             {
-                return (ConnectState.Failed, null, "Outlook(classic)을 실행하지 못했습니다: " + ex.Message + "\nOutlook을 직접 켠 뒤 다시 시도하세요.");
+                return (ConnectState.Failed, null, L.F("outlook.com.launchFailed", ex.Message));
             }
 
             var sw = Stopwatch.StartNew();
@@ -82,7 +82,7 @@ namespace EmailIndexer.App
             while (sw.Elapsed < TimeSpan.FromMinutes(2))
             {
                 if (ct.WaitHandle.WaitOne(1000))
-                    return (ConnectState.Failed, null, "Outlook 실행을 기다리다 중지했습니다.");
+                    return (ConnectState.Failed, null, L.T("outlook.com.waitCancelled"));
 
                 bool running = Process.GetProcessesByName("OUTLOOK").Any();
                 if (!running)
@@ -90,16 +90,15 @@ namespace EmailIndexer.App
                     // '새 Outlook' 전환 스위치가 켜져 있으면 classic 대신 새 Outlook이 열린다
                     if (sw.Elapsed > TimeSpan.FromSeconds(20) && Process.GetProcessesByName("olk").Any())
                         return (ConnectState.NewOutlookOnly, null,
-                            "Outlook(classic) 대신 '새 Outlook'이 열렸습니다. 새 Outlook은 자동 백업을 지원하지 않습니다.\n" +
-                            "새 Outlook 오른쪽 위의 '새 Outlook' 스위치를 꺼서 classic으로 전환한 뒤 다시 시도하세요.");
+                            L.T("outlook.com.newOpened"));
                     continue;
                 }
                 seenAt ??= sw.Elapsed;
-                status?.Invoke($"Outlook이 준비되기를 기다리는 중… ({(int)sw.Elapsed.TotalSeconds}초)");
+                status?.Invoke(L.F("outlook.com.waiting", (int)sw.Elapsed.TotalSeconds));
 
                 try { return (ConnectState.Ok, Marshal.GetActiveObject("Outlook.Application"), ""); }
                 catch (COMException) { /* 아직 등록 전 */ }
-                catch (Exception ex) { return (ConnectState.Failed, null, "Outlook 연결 실패: " + ex.Message); }
+                catch (Exception ex) { return (ConnectState.Failed, null, L.F("outlook.com.connectFailed", ex.Message)); }
 
                 // 실행 개체 등록이 늦는 경우: Outlook은 단일 인스턴스라 CreateInstance가 실행 중인 Outlook을 돌려준다
                 if (sw.Elapsed - seenAt.Value > TimeSpan.FromSeconds(8))
@@ -113,8 +112,8 @@ namespace EmailIndexer.App
                 }
             }
             return (ConnectState.Failed, null,
-                "Outlook이 2분 안에 준비되지 않았습니다. 프로필 선택·로그인 창이 떠 있다면 완료한 뒤 다시 시도하세요." +
-                (newOutlookRunning ? "\n(새 Outlook이 실행 중이라면 classic으로 전환이 필요합니다)" : ""));
+                L.T("outlook.com.timeout") +
+                (newOutlookRunning ? L.T("outlook.com.timeoutNewNote") : ""));
         }
 
         private static bool IsAdmin()
@@ -165,8 +164,8 @@ namespace EmailIndexer.App
 
             if (folders.Count == 0)
             {
-                Add(Retry(() => ns.GetDefaultFolder(olFolderInbox)), "기본 계정", MailDirection.Received);
-                Add(Retry(() => ns.GetDefaultFolder(olFolderSentMail)), "기본 계정", MailDirection.Sent);
+                Add(Retry(() => ns.GetDefaultFolder(olFolderInbox)), L.T("outlook.com.defaultAccount"), MailDirection.Received);
+                Add(Retry(() => ns.GetDefaultFolder(olFolderSentMail)), L.T("outlook.com.defaultAccount"), MailDirection.Sent);
             }
             return (folders, addresses);
         }
@@ -202,7 +201,7 @@ namespace EmailIndexer.App
             {
                 _folder = folder;
                 Direction = dir;
-                var kind = dir == MailDirection.Sent ? "보낸편지함" : "받은편지함";
+                var kind = dir == MailDirection.Sent ? L.T("outlook.folder.sent") : L.T("outlook.folder.inbox");
                 DisplayName = $"{account} / {kind}";
                 Key = $"{account}|{(dir == MailDirection.Sent ? "sent" : "inbox")}".ToLowerInvariant();
             }

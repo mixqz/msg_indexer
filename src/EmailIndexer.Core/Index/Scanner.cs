@@ -1,4 +1,5 @@
 using System;
+using EmailIndexer.Core.Text;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -55,7 +56,7 @@ namespace EmailIndexer.Core.Index
             foreach (var e in loaded.Entries) old[e.RelPath] = e;
 
             // 1) 폴더 목록 비교
-            progress?.Report(new ScanProgress { Phase = "파일 목록 확인" });
+            progress?.Report(new ScanProgress { Phase = L.T("scan.phase.list") });
             var files = EnumerateMailFiles(root).ToList();
             var current = new List<IndexEntry>(files.Count);
             var toRead = new List<(string full, string rel, IndexEntry? prev)>();
@@ -107,7 +108,7 @@ namespace EmailIndexer.Core.Index
                 fresh.Add((entry, item.prev));
                 var d = Interlocked.Increment(ref done);
                 if (d % 50 == 0 || d == toRead.Count)
-                    progress?.Report(new ScanProgress { Phase = "메일 읽는 중", Done = d, Total = toRead.Count });
+                    progress?.Report(new ScanProgress { Phase = L.T("scan.phase.read"), Done = d, Total = toRead.Count });
             }
 
             Parallel.ForEach(rest,
@@ -168,7 +169,7 @@ namespace EmailIndexer.Core.Index
                             loaded.TrashedHashes.Add(n.ContentHash);
                             if (n.Mail.MessageId.Length > 0) loaded.TrashedHashes.Add(IdKey(n.Mail.MessageId));
                             result.AutoTrashed.Add(new KeyValuePair<string, string>(n.RelPath, existing.RelPath));
-                            ActionLog.Write(root, "TRASH_DUPLICATE", n.RelPath, "기존 파일: " + existing.RelPath);
+                            ActionLog.Write(root, "TRASH_DUPLICATE", n.RelPath, "kept: " + existing.RelPath);
                         }
                         else
                         {
@@ -187,7 +188,7 @@ namespace EmailIndexer.Core.Index
             result.Total = current.Count;
             result.Errors = current.Count(e => e.Mail.IsError);
 
-            progress?.Report(new ScanProgress { Phase = "캐시 저장" });
+            progress?.Report(new ScanProgress { Phase = L.T("scan.phase.save") });
             IndexStore.Save(root, current, loaded.TrashedHashes);
             result.Elapsed = sw.Elapsed;
             WriteScanLog(root, result);
@@ -203,8 +204,8 @@ namespace EmailIndexer.Core.Index
             try
             {
                 var sb = new System.Text.StringBuilder();
-                sb.AppendLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} 전체 {r.Total} 신규 {r.Added} 변경 {r.Changed} 이동 {r.Moved} " +
-                              $"사라짐 {r.Removed} 그대로 {r.Unchanged} 오류 {r.Errors} 자동휴지통 {r.AutoTrashed.Count} {r.Elapsed.TotalSeconds:0.00}s");
+                sb.AppendLine($"{DateTime.Now:yyyy-MM-dd HH:mm:ss} total {r.Total} added {r.Added} changed {r.Changed} moved {r.Moved} " +
+                              $"removed {r.Removed} unchanged {r.Unchanged} errors {r.Errors} auto-trashed {r.AutoTrashed.Count} {r.Elapsed.TotalSeconds:0.00}s");
                 foreach (var e in r.Entries.Where(e => e.Mail.IsError).Take(500))
                     sb.AppendLine($"ERROR\t{e.RelPath}\t{e.Mail.ParseError}");
                 foreach (var t in r.TrashFailures) sb.AppendLine("TRASH_FAILED\t" + t);

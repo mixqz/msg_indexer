@@ -1,4 +1,5 @@
 using System;
+using EmailIndexer.Core.Text;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -52,7 +53,7 @@ namespace EmailIndexer.Core.Outlook
         public int Saved { get; set; }
         public int Skipped { get; set; }
         public int Failed { get; set; }
-        public override string ToString() => $"{Folder}: 확인 {Checked:#,0} / 저장 {Saved:#,0} / 건너뜀 {Skipped:#,0} / 실패 {Failed:#,0}";
+        public override string ToString() => L.F("backup.stats", Folder, Checked.ToString("#,0", L.Culture), Saved.ToString("#,0", L.Culture), Skipped.ToString("#,0", L.Culture), Failed.ToString("#,0", L.Culture));
     }
 
     public sealed class BackupReport
@@ -126,7 +127,7 @@ namespace EmailIndexer.Core.Outlook
             IProgress<BackupFolderStats>? progress = null, CancellationToken ct = default)
         {
             var report = new BackupReport();
-            Log($"=== 백업 시작 ({options.Range}{(options.Range == BackupRange.LastDays ? " " + options.Days + "일" : "")})");
+            Log($"=== backup start ({options.Range}{(options.Range == BackupRange.LastDays ? " " + options.Days + " days" : "")})");
             foreach (var folder in folders)
             {
                 var stats = new BackupFolderStats { Folder = folder.DisplayName };
@@ -153,16 +154,16 @@ namespace EmailIndexer.Core.Outlook
                 }
                 catch (Exception ex)
                 {
-                    report.Failures.Add($"{folder.DisplayName}: 폴더를 읽는 중 오류 - {ex.Message}");
+                    report.Failures.Add(L.F("backup.folderError", folder.DisplayName, ex.Message));
                     Log($"FOLDER_ERROR\t{folder.DisplayName}\t{ex.Message}");
                 }
                 progress?.Report(stats);
-                Log(stats.ToString());
+                Log($"{stats.Folder}: checked {stats.Checked} saved {stats.Saved} skipped {stats.Skipped} failed {stats.Failed}");
                 if (completed && stats.Failed == 0) SetLastRun(folder.Key, started);
                 if (report.Cancelled) break;
             }
             SaveState();
-            Log($"=== 끝: 저장 {report.Saved} / 건너뜀 {report.Skipped} / 실패 {report.Failed}{(report.Cancelled ? " (취소됨)" : "")}");
+            Log($"=== end: saved {report.Saved} / skipped {report.Skipped} / failed {report.Failed}{(report.Cancelled ? " (cancelled)" : "")}");
             return report;
         }
 
@@ -190,7 +191,7 @@ namespace EmailIndexer.Core.Outlook
 
                 var fi = new FileInfo(temp);
                 if (!fi.Exists || fi.Length == 0)
-                    throw new IOException("Outlook이 저장했다고 했지만 파일이 생기지 않았습니다");
+                    throw new IOException(L.T("backup.err.noFile"));
 
                 var info = MailReader.Read(temp);
                 if (!info.IsError && info.MessageId.Length > 0 && _knownIds.Contains(info.MessageId))
@@ -213,7 +214,7 @@ namespace EmailIndexer.Core.Outlook
                 report.SavedFiles.Add(rel);
                 if (info.IsError)
                 {
-                    report.Failures.Add($"[경고] 저장은 됐지만 내용을 읽지 못함: {rel} ({info.ParseError})");
+                    report.Failures.Add(L.F("backup.warnUnreadable", rel, Display.Error(info)));
                     Log($"SAVED_UNREADABLE\t{rel}\t{info.ParseError}");
                 }
             }
@@ -247,12 +248,12 @@ namespace EmailIndexer.Core.Outlook
         {
             var m = ex.Message ?? "";
             var hr = (uint)ex.HResult;
-            if (hr == 0x80070005 || ex is UnauthorizedAccessException) return "저장 폴더에 쓸 권한이 없습니다";
-            if (ex is PathTooLongException) return "경로가 너무 깁니다";
-            if (hr == 0x8004010F || m.IndexOf("not found", StringComparison.OrdinalIgnoreCase) >= 0) return "Outlook에서 항목을 찾을 수 없습니다 (이동·삭제됨)";
-            if (hr == 0x80040115 || hr == 0x8004011D) return "Exchange 서버 연결 문제 (온라인 모드·네트워크 확인)";
-            if (hr == 0x80004004) return "Outlook에서 작업이 취소되었습니다 (보안 확인 창 거부 등)";
-            if (m.IndexOf("too many", StringComparison.OrdinalIgnoreCase) >= 0) return "Outlook이 동시에 열 수 있는 항목 한도 초과 — 잠시 후 다시 시도";
+            if (hr == 0x80070005 || ex is UnauthorizedAccessException) return L.T("backup.err.access");
+            if (ex is PathTooLongException) return L.T("backup.err.pathTooLong");
+            if (hr == 0x8004010F || m.IndexOf("not found", StringComparison.OrdinalIgnoreCase) >= 0) return L.T("backup.err.notFound");
+            if (hr == 0x80040115 || hr == 0x8004011D) return L.T("backup.err.exchange");
+            if (hr == 0x80004004) return L.T("backup.err.aborted");
+            if (m.IndexOf("too many", StringComparison.OrdinalIgnoreCase) >= 0) return L.T("backup.err.tooMany");
             return $"{ex.GetType().Name}: {m}";
         }
 

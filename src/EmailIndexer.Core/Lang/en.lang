@@ -1,0 +1,80 @@
+# Email Archive Indexer — English (source language)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+# Translators: keep every key and every {n} placeholder. See CONTRIBUTING.md.
+
+# ---- Mail direction / meeting / status ----
+dir.received = Received
+dir.sent = Sent
+meeting.request = Invite
+meeting.accepted = Accepted
+meeting.declined = Declined
+meeting.tentative = Tentative
+meeting.canceled = Canceled
+meeting.other = Meeting
+status.error = Error
+status.duplicate = Duplicate
+status.keeper = Original
+status.similar = Similar
+status.normalized = Renamed
+status.notNormalized = Not renamed
+
+# ---- Search scope / filter summary ----
+scope.all = All
+scope.subject = Subject
+scope.people = People
+scope.body = Body
+scope.attachments = Attachments
+filter.attYes = With attachments
+filter.attNo = No attachments
+filter.dateRange = {0} – {1}
+filter.dateStart = start
+filter.dateNow = now
+filter.folder = Folder: {0}
+filter.sender = Sender: {0}
+filter.search = Search: {0}
+filter.searchScoped = Search: {0} ({1})
+
+# ---- Read errors (shown for unreadable files) ----
+err.empty = Empty file
+err.access = No permission to read this file
+err.locked = In use by another program
+err.notfound = File not found
+err.notmail = Not an email file (no sender, date or subject header)
+err.corrupt = Damaged or not an email file ({0})
+
+# ---- Scan progress ----
+scan.phase.list = Checking files
+scan.phase.read = Reading mail
+scan.phase.save = Saving cache
+
+# ---- File operations ----
+ops.done = Completed: {0}
+ops.doneWithFailures = Completed: {0}, failed: {1}
+plan.skip.error = Unreadable file
+plan.skip.already = Already follows the naming rule
+plan.error.pathTooLong = Folder path is too long
+plan.error.tooMany = Too many files with the same name
+plan.note.numbered = Number added (name already in use)
+plan.note.trimmed = Subject shortened to fit the path length limit
+ops.err.targetExists = A file with the same name appeared
+ops.err.renamedMissing = Renamed file not found (moved or deleted)
+ops.err.originalExists = A file with the original name already exists
+ops.err.destTooLong = Destination path is too long
+
+# ---- Preview ----
+preview.readFailed = Couldn't read the message body: {0}
+
+# ---- Outlook backup ----
+backup.stats = {0}: checked {1} · saved {2} · skipped {3} · failed {4}
+backup.folderError = {0}: error while reading the folder — {1}
+backup.err.noFile = Outlook reported success, but no file was created
+backup.warnUnreadable = [Warning] Saved, but the contents couldn't be read: {0} ({1})
+backup.err.access = No permission to write to the backup folder
+backup.err.pathTooLong = The path is too long
+backup.err.notFound = Item not found in Outlook (moved or deleted)
+backup.err.exchange = Exchange server connection problem (check online mode and the network)
+backup.err.aborted = Outlook canceled the operation (for example, a security prompt was denied)
+backup.err.tooMany = Outlook's limit on open items was exceeded. Try again in a moment.
+
+# ---- Settings ----
+settings.restartToApply = The new language will be used the next time you start the app.

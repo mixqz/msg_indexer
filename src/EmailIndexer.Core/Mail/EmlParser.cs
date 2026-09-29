@@ -27,7 +27,7 @@ namespace EmailIndexer.Core.Mail
             var msg = MimeMessage.Load(Options, path);
             if (msg.From.Count == 0 && msg.Sender == null && !msg.Headers.Contains(HeaderId.Date)
                 && !msg.Headers.Contains(HeaderId.Subject))
-                throw new System.IO.InvalidDataException("메일 형식이 아님 (발신자·날짜·제목 헤더 없음)");
+                throw new System.IO.InvalidDataException("err.notmail");
 
             info.Subject = msg.Subject ?? "";
             info.MessageId = msg.MessageId ?? "";
@@ -73,7 +73,7 @@ namespace EmailIndexer.Core.Mail
             {
                 var sub = mp.Message?.Subject;
                 MailReader.AddUnique(info.AttachmentNames,
-                    mp.ContentDisposition?.FileName ?? (string.IsNullOrEmpty(sub) ? "첨부 메일.eml" : sub + ".eml"));
+                    mp.ContentDisposition?.FileName ?? (string.IsNullOrEmpty(sub) ? "attached-message.eml" : sub + ".eml"));
                 return;
             }
             if (!(entity is MimePart part)) return;
@@ -89,12 +89,12 @@ namespace EmailIndexer.Core.Mail
                 // Outlook이 보낸 winmail.dat: 안에 든 실제 첨부를 꺼내 판정
                 foreach (var inner in tnef.ExtractAttachments())
                     if (inner is MimePart ip && IsRealAttachment(ip, cidRefs))
-                        MailReader.AddUnique(info.AttachmentNames, ip.FileName ?? "첨부");
+                        MailReader.AddUnique(info.AttachmentNames, ip.FileName ?? "attachment");
                 return;
             }
 
             if (IsRealAttachment(part, cidRefs))
-                MailReader.AddUnique(info.AttachmentNames, part.FileName ?? "첨부");
+                MailReader.AddUnique(info.AttachmentNames, part.FileName ?? "attachment");
         }
 
         internal static bool IsRealAttachment(MimePart part, HashSet<string> cidRefs)

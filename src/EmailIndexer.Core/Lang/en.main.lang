@@ -1,0 +1,236 @@
+# Email Archive Indexer — English — main window (MainForm)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+
+# ---- Column headers ----
+main.col.time = Date
+main.col.dir = Type
+main.col.sender = Sender
+main.col.subject = Subject
+main.col.attach = Attach
+main.col.meeting = Event
+main.col.size = Size
+main.col.status = Status
+main.col.folder = Folder
+
+# ---- Cell text ----
+main.cell.attachCount.one = {0} file
+main.cell.attachCount.other = {0} files
+
+# ---- Top bar ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = Backup folder
+main.btn.changeFolder = Change folder
+main.btn.scan = Scan (F5)
+main.btn.scanCancel = Cancel scan
+main.btn.outlookBackup = Outlook backup
+main.btn.settings = Settings
+main.btn.help = Help (F1)
+main.tip.outlookBackup = Save the Inbox and Sent Items from Outlook (classic) as .msg files (starts it automatically if it isn't running)
+main.tip.help = What each feature does, and keyboard shortcuts
+
+# ---- Filter panel ----
+main.filter.title = Filters
+main.filter.reset = Reset
+main.filter.period = Date
+main.filter.dirInOut = Received / Sent
+main.filter.attach = Attachments
+main.filter.meeting = Event
+main.filter.status = Status
+main.filter.format = Format
+main.filter.folder = Folder
+main.filter.topSenders = Top 30 senders
+
+# ---- Period combo (keep this order; code switches on SelectedIndex) ----
+main.period.all = All dates
+main.period.today = Today
+main.period.last7 = Last 7 days
+main.period.last30 = Last 30 days
+main.period.thisYear = This year
+main.period.custom = Custom range
+
+# ---- Direction / attachment / meeting / status / format checkboxes ----
+main.chk.dirIn = Received
+main.chk.dirOut = Sent
+main.chk.attYes = With
+main.chk.attNo = Without
+main.chk.meetRequest = Invite
+main.chk.meetAccepted = Accepted
+main.chk.meetDeclined = Declined
+main.chk.meetTentative = Tentative
+main.chk.meetCanceled = Canceled
+main.chk.statusDuplicate = Duplicate
+main.chk.statusSimilar = Similar
+main.chk.statusError = Error
+main.chk.statusNotNormalized = Not renamed
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- Search row ----
+main.search.label = Search
+main.search.cue = Search — subject, people, body, attachment names (multiple words = all must match, "quotes" = exact phrase)
+
+# ---- Action buttons ----
+main.action.preview = Preview (Enter)
+main.action.open = Open (Ctrl+O)
+main.action.showInFolder = Show in folder
+main.action.normalize = Normalize file names
+main.action.move = Move selected
+main.action.delete = Delete selected (Del)
+main.action.dedupe = Clean up duplicates
+
+# ---- Context menu ----
+main.menu.preview = Preview
+main.menu.open = Open (Outlook)
+main.menu.showInFolder = Show in folder
+main.menu.copyPath = Copy path
+main.menu.normalize = Normalize file names
+main.menu.move = Move selected…
+main.menu.trash = Move to Recycle Bin
+main.menu.thisSenderOnly = Show only this sender
+
+# ---- Accessible names ----
+main.acc.search = Search mail
+main.acc.list = Mail list
+main.acc.listDesc = Enter: preview, Ctrl+O: open in Outlook, Del: move to Recycle Bin
+main.acc.folderBox = Backup folder path
+main.acc.tree = Folder filter
+main.acc.senders = Sender filter
+main.acc.period = Date filter
+main.acc.from = Start date
+main.acc.to = End date
+main.acc.scope = Search scope: {0}
+
+# ---- Folder tree / sender list ----
+main.tree.all = (All) {0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = (All senders)
+main.sender.item = {0} ({1})
+
+# ---- Sort header arrows ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- Counts / status bar ----
+main.applied = Applied: {0}
+main.counts = Total {0:#,0} · Showing {1:#,0} · Selected {2:#,0}
+main.status.chooseFolder = Choose a mail backup folder.
+main.status.loadingCache = Loading cache…
+main.status.scanCanceled = Scan canceled.
+main.status.scanFailed = Scan failed — press Scan to try again
+main.status.fileOp = {0}: {1}
+
+# ---- Scan progress / summary ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = Scan complete, {0:0.0}s
+main.summary.firstScan = first scan
+main.summary.cacheRebuilt = cache rebuilt
+main.summary.added = new {0:#,0}
+main.summary.changed = changed {0:#,0}
+main.summary.moved = moved {0:#,0}
+main.summary.removed = gone {0:#,0}
+main.summary.autoTrashed.one = {0} new duplicate moved to Recycle Bin
+main.summary.autoTrashed.other = {0} new duplicates moved to Recycle Bin
+main.summary.errors = errors {0:#,0}
+
+# ---- Empty-state hints ----
+main.empty.chooseFolder = Choose a mail backup folder.\n\nPress here or Change folder. You can also drag a folder from File Explorer onto this window.
+main.empty.building = Building the mail list…\n\nThe first time you open a folder, it can take a while depending on the number of files. Progress is shown in the status bar below.
+main.empty.noFiles = No .msg / .eml files were found in this folder (including subfolders).\n\nPress here to use a different folder. To import from Outlook, press Outlook backup.
+main.empty.noMatchesWithSearch = No mail matches your conditions.\n\nSearch: "{0}"\nPress here to clear the search and all filters.
+main.empty.noMatches = No mail matches your conditions.\n\nPress here to clear the search and all filters.
+
+# ---- Auto-trash notice (after scan) ----
+main.autoTrash.title = New duplicates cleaned up
+main.autoTrash.body.one = {0} file identical to mail you already have came in and was moved to the Recycle Bin. The original is untouched.\n\n{1}\n\nYou can restore it from the Windows Recycle Bin if needed, and restored files won't be deleted again.
+main.autoTrash.body.other = {0} files identical to mail you already have came in and were moved to the Recycle Bin. The originals are untouched.\n\n{1}\n\nYou can restore them from the Windows Recycle Bin if needed, and restored files won't be deleted again.
+main.autoTrash.more = \n… and {0:#,0} more
+
+# ---- Trash failures (after scan) ----
+main.trashFail.title = Duplicate cleanup
+main.trashFail.body = Some new duplicate files couldn't be moved to the Recycle Bin (marked as "Duplicate" in the list):\n\n{0}\n\nIf another program (such as Outlook) has the files open, close it and press Scan again.
+
+# ---- Scan failure dialog ----
+main.scanFail.title = Scan failed
+main.scanFail.body = Couldn't read the backup folder.\n{0}\n\n{1}\n\nCheck that the folder still exists and that you have permission to open it, then press Scan again. If it keeps failing, use Change folder to pick the folder again.
+
+# ---- Open confirm ----
+main.open.title = Open
+main.open.message = Open the {0:#,0} selected files in Outlook all at once.
+main.open.ok = Open {0:#,0}
+main.open.failTitle = Couldn't open
+main.open.failBody = Couldn't open the file.\n{0}\n\n{1}\n\nCheck that Outlook is installed and associated with .msg / .eml.
+
+# ---- File-ops readiness ----
+main.busy.title = One moment
+main.busy.scanning = A scan is in progress. Try again once it finishes.
+
+# ---- Target scope ----
+main.target.selected.one = {0} selected file
+main.target.selected.other = {0:#,0} selected files
+main.target.viewAll.one = all {0} file shown
+main.target.viewAll.other = all {0:#,0} files shown
+
+# ---- Normalize (rename) ----
+main.normalize.status.rename = Rename
+main.normalize.status.skip = Skip
+main.normalize.status.error = Can't
+main.normalize.title = Normalize file names - Preview
+main.normalize.summary = Target: {0}   →   rename {1:#,0} · skip {2:#,0} · can't {3:#,0}\nRule: date_time_sender_subject_attachY/N  (received mail = time received, sent mail = time sent). After running, use Undo to restore the original names.
+main.normalize.col.action = Action
+main.normalize.col.oldName = Before
+main.normalize.col.newName = After
+main.normalize.col.note = Note
+main.normalize.ok.one = Rename {0} file
+main.normalize.ok.other = Rename {0:#,0} files
+main.normalize.undo.one = Undo last normalize ({0} file)
+main.normalize.undo.other = Undo last normalize ({0:#,0} files)
+main.normalize.opTitle = Normalize file names
+
+# ---- Undo rename ----
+main.undo.title = Undo normalize
+main.undo.message.one = Restore the original name of {0} file renamed in the last normalize.\nFiles moved or deleted since then are skipped.
+main.undo.message.other = Restore the original names of {0:#,0} files renamed in the last normalize.\nFiles moved or deleted since then are skipped.
+main.undo.ok.one = Restore {0} name
+main.undo.ok.other = Restore {0:#,0} names
+main.undo.opTitle = Undo normalize
+
+# ---- Move ----
+main.move.title = Move selected
+main.move.needSelection = Select the mail to move first.
+main.move.browseDesc.one = Folder to move the {0} selected file to
+main.move.browseDesc.other = Folder to move the {0:#,0} selected files to
+main.move.confirmMessage.one = Move the {0} selected file to this folder.\n{1}
+main.move.confirmMessage.other = Move the {0:#,0} selected files to this folder.\n{1}
+main.move.outsideNote = \n\nIt's outside the backup folder, so it won't appear in this list after moving.
+main.move.ok.one = Move {0} file
+main.move.ok.other = Move {0:#,0} files
+
+# ---- Delete ----
+main.delete.title = Delete selected
+main.delete.needSelection = Select the mail to delete from the list first.
+main.delete.confirmMessage.one = Move the {0} selected file to the Recycle Bin.\nYou can restore it from the Windows Recycle Bin.
+main.delete.confirmMessage.other = Move the {0:#,0} selected files to the Recycle Bin.\nYou can restore them from the Windows Recycle Bin.
+main.delete.ok.one = Move {0} file to Recycle Bin
+main.delete.ok.other = Move {0:#,0} files to Recycle Bin
+
+# ---- Outlook backup ----
+main.outlook.title = Outlook backup
+main.outlook.needFolder = Choose a backup folder to save the mail to first.
+
+# ---- Dedupe ----
+main.dedupe.title = Clean up duplicates
+main.dedupe.none = No duplicate files to clean up.
+main.dedupe.dialogTitle = Clean up duplicates - Preview
+main.dedupe.summary.one = Move {0} file confirmed to be the same mail to the Recycle Bin, keeping one original per group.\nKeep priority: normalized name → msg format → first to arrive. (Similar mail isn't included.)
+main.dedupe.summary.other = Move {0:#,0} files confirmed to be the same mail to the Recycle Bin, keeping one original per group.\nKeep priority: normalized name → msg format → first to arrive. (Similar mail isn't included.)
+main.dedupe.col.group = Group
+main.dedupe.col.toTrash = File to move to Recycle Bin
+main.dedupe.col.toKeep = File to keep
+main.dedupe.col.subject = Subject
+main.dedupe.ok.one = Move {0} to Recycle Bin
+main.dedupe.ok.other = Move {0:#,0} to Recycle Bin
+main.dedupe.opTitle = Clean up duplicates
+
+# ---- Change-folder browse dialog ----
+main.browse.description = Choose the folder where your mail (.msg / .eml) is backed up

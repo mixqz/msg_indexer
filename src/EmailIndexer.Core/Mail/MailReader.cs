@@ -26,7 +26,7 @@ namespace EmailIndexer.Core.Mail
             {
                 info.FileSize = fi.Length;
                 info.FileModifiedUtc = fi.LastWriteTimeUtc;
-                if (fi.Length == 0) throw new InvalidDataException("빈 파일");
+                if (fi.Length == 0) throw new InvalidDataException("err.empty");
 
                 if (info.Format == MailFormat.Msg) MsgParser.Fill(path, info);
                 else EmlParser.Fill(path, info);
@@ -63,11 +63,12 @@ namespace EmailIndexer.Core.Mail
 
         private static string Describe(Exception ex)
         {
-            if (ex is UnauthorizedAccessException) return "파일 접근 권한 없음";
-            if (ex is IOException io && io.Message.Contains("being used")) return "다른 프로그램이 사용 중";
-            if (ex is FileNotFoundException) return "파일 없음";
-            if (ex is InvalidDataException) return ex.Message;
-            return $"손상되었거나 메일 형식이 아닌 파일 ({ex.GetType().Name}: {ex.Message})";
+            // 캐시에 언어와 무관한 "코드\t상세"로 저장 → 화면에서 Display.Error가 현재 언어로 표시
+            if (ex is UnauthorizedAccessException) return "err.access\t";
+            if (ex is FileNotFoundException) return "err.notfound\t";
+            if (ex is IOException io && io.Message.IndexOf("being used", StringComparison.OrdinalIgnoreCase) >= 0) return "err.locked\t";
+            if (ex is InvalidDataException && ex.Message.StartsWith("err.")) return ex.Message + "\t";
+            return $"err.corrupt\t{ex.GetType().Name}: {ex.Message}";
         }
     }
 }

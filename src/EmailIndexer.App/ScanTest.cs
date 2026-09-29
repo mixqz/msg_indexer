@@ -23,16 +23,16 @@ namespace EmailIndexer.App
             {
                 var m = MailReader.Read(f);
                 var dir = MailClassifier.GetDirection(m, null);
-                if (m.IsError) { err++; sb.AppendLine($"[오류] {Path.GetFileName(f)} :: {m.ParseError}"); continue; }
+                if (m.IsError) { err++; sb.AppendLine($"[Error] {Path.GetFileName(f)} :: {EmailIndexer.Core.View.Display.Error(m)}"); continue; }
                 ok++;
                 sb.AppendLine(string.Join(" | ",
                     Path.GetFileName(f),
                     MailClassifier.GetReferenceTime(m, dir).ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"),
                     m.SenderName, m.Subject,
-                    m.HasAttachments ? "첨부O(" + string.Join(",", m.AttachmentNames) + ")" : "첨부X",
+                    m.HasAttachments ? "Attachments(" + string.Join(",", m.AttachmentNames) + ")" : "No attachments",
                     m.Meeting.ToString(), m.FileSize + "B"));
             }
-            sb.Insert(0, $"파일 {files.Count}개, 성공 {ok}, 오류 {err}, {sw.ElapsedMilliseconds}ms{Environment.NewLine}");
+            sb.Insert(0, $"{files.Count} files, {ok} ok, {err} errors, {sw.ElapsedMilliseconds}ms{Environment.NewLine}");
             var report = sb.ToString();
             File.WriteAllText(Path.Combine(folder, "scan-test.txt"), report, new UTF8Encoding(true));
             Console.Out.Write(report);
@@ -48,11 +48,11 @@ namespace EmailIndexer.App
             var trash = new DryRunTrash();
             var r = new EmailIndexer.Core.Index.Scanner(trash).Scan(folder);
             var sb = new StringBuilder();
-            sb.AppendLine($"{(r.FirstScan ? "첫 스캔" : "증분 스캔")} {r.Elapsed.TotalSeconds:F2}초: 전체 {r.Total}, 신규 {r.Added}, 변경 {r.Changed}, " +
-                          $"삭제됨 {r.Removed}, 이동 {r.Moved}, 그대로 {r.Unchanged}, 오류 {r.Errors}");
+            sb.AppendLine($"{(r.FirstScan ? "First scan" : "Incremental scan")} {r.Elapsed.TotalSeconds:F2}s: total {r.Total}, added {r.Added}, changed {r.Changed}, " +
+                          $"removed {r.Removed}, moved {r.Moved}, unchanged {r.Unchanged}, errors {r.Errors}");
             foreach (var e in r.Entries.Where(e => e.Dup != EmailIndexer.Core.Index.DupStatus.None))
-                sb.AppendLine($"[{e.Dup}] 그룹{e.DupGroup} {e.RelPath}{(e.KeeperRelPath != null ? " → 남길 파일: " + e.KeeperRelPath : "")}");
-            foreach (var t in r.TrashFailures) sb.AppendLine("[자동삭제 보류] " + t);
+                sb.AppendLine($"[{e.Dup}] group{e.DupGroup} {e.RelPath}{(e.KeeperRelPath != null ? " -> keeper: " + e.KeeperRelPath : "")}");
+            foreach (var t in r.TrashFailures) sb.AppendLine("[auto-delete skipped] " + t);
             var report = sb.ToString();
             File.WriteAllText(Path.Combine(folder, "index-test.txt"), report, new UTF8Encoding(true));
             Console.Out.Write(report);
@@ -63,7 +63,7 @@ namespace EmailIndexer.App
         {
             public bool SendToRecycleBin(string path, out string? error)
             {
-                error = "진단 모드라 삭제하지 않음";
+                error = "diagnostic mode: not deleted";
                 return false;
             }
         }

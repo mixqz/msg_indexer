@@ -1,0 +1,235 @@
+# Email Archive Indexer — 한국어 — 메인 화면 (MainForm)
+
+# ---- 열 제목 ----
+main.col.time = 일시
+main.col.dir = 구분
+main.col.sender = 발신자
+main.col.subject = 제목
+main.col.attach = 첨부
+main.col.meeting = 일정
+main.col.size = 크기
+main.col.status = 상태
+main.col.folder = 폴더
+
+# ---- 셀 텍스트 ----
+main.cell.attachCount.one = {0}개
+main.cell.attachCount.other = {0}개
+
+# ---- 상단 바 ----
+main.top.appName = Email Archive Indexer
+main.top.backupFolder = 백업 폴더
+main.btn.changeFolder = 폴더 변경
+main.btn.scan = 스캔 (F5)
+main.btn.scanCancel = 스캔 취소
+main.btn.outlookBackup = Outlook 백업
+main.btn.settings = 설정
+main.btn.help = 도움말 (F1)
+main.tip.outlookBackup = Outlook(classic)의 받은편지함·보낸편지함을 msg로 저장 (꺼져 있으면 자동 실행)
+main.tip.help = 각 기능 설명과 단축키
+
+# ---- 필터 패널 ----
+main.filter.title = 필터
+main.filter.reset = 초기화
+main.filter.period = 기간
+main.filter.dirInOut = 받음 / 보냄
+main.filter.attach = 첨부
+main.filter.meeting = 일정
+main.filter.status = 상태
+main.filter.format = 형식
+main.filter.folder = 폴더
+main.filter.topSenders = 발신자 TOP 30
+
+# ---- 기간 콤보 (순서 유지; 코드가 SelectedIndex로 분기) ----
+main.period.all = 전체 기간
+main.period.today = 오늘
+main.period.last7 = 최근 7일
+main.period.last30 = 최근 30일
+main.period.thisYear = 올해
+main.period.custom = 직접 지정
+
+# ---- 받음/보냄 · 첨부 · 일정 · 상태 · 형식 체크박스 ----
+main.chk.dirIn = 받음
+main.chk.dirOut = 보냄
+main.chk.attYes = 있음
+main.chk.attNo = 없음
+main.chk.meetRequest = 초대
+main.chk.meetAccepted = 수락
+main.chk.meetDeclined = 거절
+main.chk.meetTentative = 미정
+main.chk.meetCanceled = 취소
+main.chk.statusDuplicate = 중복
+main.chk.statusSimilar = 유사
+main.chk.statusError = 오류
+main.chk.statusNotNormalized = 미정규화
+main.chk.fmtMsg = msg
+main.chk.fmtEml = eml
+
+# ---- 검색 줄 ----
+main.search.label = 검색
+main.search.cue = 검색 — 제목·사람·본문·첨부파일명 (여러 단어 = 모두 포함, "따옴표" = 구문)
+
+# ---- 동작 버튼 ----
+main.action.preview = 미리보기 (Enter)
+main.action.open = 열기 (Ctrl+O)
+main.action.showInFolder = 폴더에서 보기
+main.action.normalize = 파일명 정규화
+main.action.move = 선택 이동
+main.action.delete = 선택 삭제 (Del)
+main.action.dedupe = 중복 정리
+
+# ---- 컨텍스트 메뉴 ----
+main.menu.preview = 미리보기
+main.menu.open = 열기 (Outlook)
+main.menu.showInFolder = 폴더에서 보기
+main.menu.copyPath = 경로 복사
+main.menu.normalize = 파일명 정규화
+main.menu.move = 선택 이동…
+main.menu.trash = 휴지통으로 삭제
+main.menu.thisSenderOnly = 이 발신자만 보기
+
+# ---- 접근성 이름 ----
+main.acc.search = 메일 검색
+main.acc.list = 메일 목록
+main.acc.listDesc = Enter: 미리보기, Ctrl+O: Outlook으로 열기, Del: 휴지통으로 삭제
+main.acc.folderBox = 백업 폴더 경로
+main.acc.tree = 폴더 필터
+main.acc.senders = 발신자 필터
+main.acc.period = 기간 필터
+main.acc.from = 시작일
+main.acc.to = 종료일
+main.acc.scope = 검색 범위: {0}
+
+# ---- 폴더 트리 / 발신자 목록 ----
+main.tree.all = (전체) {0:#,0}
+main.tree.node = {0} ({1:#,0})
+main.sender.all = (전체 발신자)
+main.sender.item = {0} ({1})
+
+# ---- 정렬 머리글 화살표 ----
+main.sort.asc = {0} ▲
+main.sort.desc = {0} ▼
+
+# ---- 개수 / 상태줄 ----
+main.applied = 적용: {0}
+main.counts = 전체 {0:#,0} · 표시 {1:#,0} · 선택 {2:#,0}
+main.status.chooseFolder = 백업 폴더를 선택하세요.
+main.status.loadingCache = 캐시 불러오는 중…
+main.status.scanCanceled = 스캔을 취소했습니다.
+main.status.scanFailed = 스캔 실패 — [스캔]을 눌러 다시 시도하세요
+main.status.fileOp = {0}: {1}
+
+# ---- 스캔 진행 / 요약 ----
+main.scan.progress = {0} {1:#,0} / {2:#,0}
+main.scan.progressIndeterminate = {0}…
+main.summary.done = 스캔 완료 {0:0.0}초
+main.summary.firstScan = 첫 스캔
+main.summary.cacheRebuilt = 캐시 재구축
+main.summary.added = 신규 {0:#,0}
+main.summary.changed = 변경 {0:#,0}
+main.summary.moved = 이동 {0:#,0}
+main.summary.removed = 사라짐 {0:#,0}
+main.summary.autoTrashed.one = 새 중복 {0}건 휴지통으로 이동
+main.summary.autoTrashed.other = 새 중복 {0}건 휴지통으로 이동
+main.summary.errors = 오류 {0:#,0}
+
+# ---- 빈 상태 안내 ----
+main.empty.chooseFolder = 메일 백업 폴더를 선택하세요.\n\n여기를 누르거나 [폴더 변경]을 누르세요. 탐색기에서 폴더를 이 창으로 끌어다 놓아도 됩니다.
+main.empty.building = 메일 목록을 만드는 중…\n\n처음 여는 폴더는 파일 수에 따라 시간이 걸립니다. 진행 상황은 아래 상태줄에 표시됩니다.
+main.empty.noFiles = 이 폴더(하위 폴더 포함)에서 .msg / .eml 파일을 찾지 못했습니다.\n\n다른 폴더를 쓰려면 여기를 누르세요. Outlook에서 가져오려면 [Outlook 백업]을 누르세요.
+main.empty.noMatchesWithSearch = 조건에 맞는 메일이 없습니다.\n\n검색어: "{0}"\n여기를 누르면 검색어와 필터를 모두 초기화합니다.
+main.empty.noMatches = 조건에 맞는 메일이 없습니다.\n\n여기를 누르면 검색어와 필터를 모두 초기화합니다.
+
+# ---- 자동 휴지통 정리 안내 (스캔 후) ----
+main.autoTrash.title = 새 중복 파일 정리
+main.autoTrash.body.one = 이미 있는 메일과 같은 파일 {0}개가 새로 들어와 휴지통으로 보냈습니다. 원본은 그대로 남아 있습니다.\n\n{1}\n\n필요하면 Windows 휴지통에서 복원할 수 있으며, 복원한 파일은 다시 지우지 않습니다.
+main.autoTrash.body.other = 이미 있는 메일과 같은 파일 {0}개가 새로 들어와 휴지통으로 보냈습니다. 원본은 그대로 남아 있습니다.\n\n{1}\n\n필요하면 Windows 휴지통에서 복원할 수 있으며, 복원한 파일은 다시 지우지 않습니다.
+main.autoTrash.more = \n… 외 {0:#,0}개
+
+# ---- 휴지통 이동 실패 (스캔 후) ----
+main.trashFail.title = 중복 정리
+main.trashFail.body = 새 중복 파일 일부를 휴지통으로 보내지 못했습니다 (목록에 '중복'으로 표시됨):\n\n{0}\n\n다른 프로그램(Outlook 등)이 파일을 열고 있다면 닫은 뒤 [스캔]을 다시 누르세요.
+
+# ---- 스캔 실패 대화상자 ----
+main.scanFail.title = 스캔 실패
+main.scanFail.body = 백업 폴더를 읽지 못했습니다.\n{0}\n\n{1}\n\n폴더가 그대로 있는지, 접근 권한이 있는지 확인한 뒤 [스캔]을 다시 누르세요. 계속 실패하면 [폴더 변경]으로 폴더를 다시 선택하세요.
+
+# ---- 열기 확인 ----
+main.open.title = 열기
+main.open.message = 선택한 {0:#,0}개 파일을 Outlook에서 한꺼번에 엽니다.
+main.open.ok = {0:#,0}개 열기
+main.open.failTitle = 열기 실패
+main.open.failBody = 파일을 열 수 없습니다.\n{0}\n\n{1}\n\nOutlook이 설치되어 .msg/.eml에 연결되어 있는지 확인하세요.
+
+# ---- 파일 작업 준비 ----
+main.busy.title = 잠시만요
+main.busy.scanning = 스캔 중입니다. 스캔이 끝난 뒤 다시 시도하세요.
+
+# ---- 대상 범위 ----
+main.target.selected.one = 선택한 {0}개
+main.target.selected.other = 선택한 {0:#,0}개
+main.target.viewAll.one = 현재 표시된 {0}개 전체
+main.target.viewAll.other = 현재 표시된 {0:#,0}개 전체
+
+# ---- 정규화 (이름 바꾸기) ----
+main.normalize.status.rename = 변경
+main.normalize.status.skip = 건너뜀
+main.normalize.status.error = 불가
+main.normalize.title = 파일명 정규화 - 미리보기
+main.normalize.summary = 대상: {0}   →   변경 {1:#,0} · 건너뜀 {2:#,0} · 불가 {3:#,0}\n규칙: 날짜_시간_발신자_제목_첨부O/X  (받은 메일=수신 시각, 보낸 메일=발신 시각). 실행 후 [되돌리기]로 원래 이름으로 돌릴 수 있습니다.
+main.normalize.col.action = 처리
+main.normalize.col.oldName = 변경 전
+main.normalize.col.newName = 변경 후
+main.normalize.col.note = 비고
+main.normalize.ok.one = {0}개 이름 바꾸기
+main.normalize.ok.other = {0:#,0}개 이름 바꾸기
+main.normalize.undo.one = 마지막 정규화 되돌리기 ({0}개)
+main.normalize.undo.other = 마지막 정규화 되돌리기 ({0:#,0}개)
+main.normalize.opTitle = 파일명 정규화
+
+# ---- 정규화 되돌리기 ----
+main.undo.title = 정규화 되돌리기
+main.undo.message.one = 마지막 파일명 정규화에서 바꾼 {0}개 파일의 이름을 원래대로 되돌립니다.\n그 사이 옮기거나 지운 파일은 건너뜁니다.
+main.undo.message.other = 마지막 파일명 정규화에서 바꾼 {0:#,0}개 파일의 이름을 원래대로 되돌립니다.\n그 사이 옮기거나 지운 파일은 건너뜁니다.
+main.undo.ok.one = {0}개 이름 되돌리기
+main.undo.ok.other = {0:#,0}개 이름 되돌리기
+main.undo.opTitle = 정규화 되돌리기
+
+# ---- 선택 이동 ----
+main.move.title = 선택 이동
+main.move.needSelection = 이동할 메일을 먼저 선택하세요.
+main.move.browseDesc.one = 선택한 {0}개를 옮길 폴더
+main.move.browseDesc.other = 선택한 {0:#,0}개를 옮길 폴더
+main.move.confirmMessage.one = 선택한 {0}개 파일을 다음 폴더로 옮깁니다.\n{1}
+main.move.confirmMessage.other = 선택한 {0:#,0}개 파일을 다음 폴더로 옮깁니다.\n{1}
+main.move.outsideNote = \n\n백업 폴더 밖이므로 옮긴 뒤에는 이 목록에 나오지 않습니다.
+main.move.ok.one = {0}개 옮기기
+main.move.ok.other = {0:#,0}개 옮기기
+
+# ---- 선택 삭제 ----
+main.delete.title = 선택 삭제
+main.delete.needSelection = 삭제할 메일을 목록에서 먼저 선택하세요.
+main.delete.confirmMessage.one = 선택한 {0}개 파일을 휴지통으로 보냅니다.\nWindows 휴지통에서 복원할 수 있습니다.
+main.delete.confirmMessage.other = 선택한 {0:#,0}개 파일을 휴지통으로 보냅니다.\nWindows 휴지통에서 복원할 수 있습니다.
+main.delete.ok.one = {0}개 휴지통으로 보내기
+main.delete.ok.other = {0:#,0}개 휴지통으로 보내기
+
+# ---- Outlook 백업 ----
+main.outlook.title = Outlook 백업
+main.outlook.needFolder = 먼저 메일을 저장할 백업 폴더를 선택하세요.
+
+# ---- 중복 정리 ----
+main.dedupe.title = 중복 정리
+main.dedupe.none = 정리할 중복 파일이 없습니다.
+main.dedupe.dialogTitle = 중복 정리 - 미리보기
+main.dedupe.summary.one = 같은 메일로 확인된 파일 {0}개를 휴지통으로 보내고, 각 묶음의 원본 1개씩은 남깁니다.\n남길 파일 우선순위: 정규화된 이름 → msg 형식 → 먼저 들어온 파일. ('유사' 메일은 대상이 아닙니다)
+main.dedupe.summary.other = 같은 메일로 확인된 파일 {0:#,0}개를 휴지통으로 보내고, 각 묶음의 원본 1개씩은 남깁니다.\n남길 파일 우선순위: 정규화된 이름 → msg 형식 → 먼저 들어온 파일. ('유사' 메일은 대상이 아닙니다)
+main.dedupe.col.group = 묶음
+main.dedupe.col.toTrash = 휴지통으로 보낼 파일
+main.dedupe.col.toKeep = 남길 파일
+main.dedupe.col.subject = 제목
+main.dedupe.ok.one = {0}개 휴지통으로
+main.dedupe.ok.other = {0:#,0}개 휴지통으로
+main.dedupe.opTitle = 중복 정리
+
+# ---- 폴더 선택 대화상자 ----
+main.browse.description = 메일(.msg/.eml) 백업 폴더를 선택하세요

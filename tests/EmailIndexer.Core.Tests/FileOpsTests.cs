@@ -4,6 +4,7 @@ using System.Linq;
 using EmailIndexer.Core.Files;
 using EmailIndexer.Core.Index;
 using EmailIndexer.Core.Mail;
+using EmailIndexer.Core.Text;
 using EmailIndexer.Core.View;
 using MimeKit;
 using Xunit;
@@ -130,7 +131,7 @@ public class FileOpsTests : IDisposable
 
         var plans = FileOps.PlanRenames(rows);
         Assert.Equal(2, plans.Count(p => p.Status == PlanStatus.Rename));
-        Assert.Single(plans, p => p.Status == PlanStatus.Skip && p.Note == "읽기 오류 파일");
+        Assert.Single(plans, p => p.Status == PlanStatus.Skip && p.Note == L.T("plan.skip.error"));
         var names = plans.Where(p => p.Status == PlanStatus.Rename).Select(p => p.NewName).ToList();
         Assert.Contains(names, n => n.EndsWith("_W35 team agenda_첨부O.eml"));
         Assert.Contains(names, n => n.EndsWith("_W35 team agenda_첨부O (2).eml"));

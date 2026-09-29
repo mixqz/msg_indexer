@@ -14,4 +14,8 @@
   <ItemGroup>
     <InternalsVisibleTo Include="EmailIndexer.Core.Tests" />
   </ItemGroup>
+  <ItemGroup>
+    <!-- 번역 파일은 dll 안에 내장 (exe 하나 유지) -->
+    <EmbeddedResource Include="Lang\*.lang" LogicalName="lang.%(Filename)" />
+  </ItemGroup>
 </Project>

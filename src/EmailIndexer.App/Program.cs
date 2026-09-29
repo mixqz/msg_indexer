@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using EmailIndexer.Core.Text;
 using EmailIndexer.Core.View;
 
 namespace EmailIndexer.App
@@ -28,7 +29,9 @@ namespace EmailIndexer.App
 
             // exe에 폴더를 끌어다 놓거나 "EmailIndexer.exe 폴더"로 실행하면 그 폴더를 연다
             string? folder = args.Length == 1 && Directory.Exists(args[0]) ? args[0] : null;
-            Application.Run(new MainForm(AppSettings.Load(), folder));
+            var settings = AppSettings.Load();
+            EmailIndexer.Core.Text.L.SetLanguage(settings.Language); // 기본은 영어, [설정]에서 바꾼 언어는 다음 실행부터
+            Application.Run(new MainForm(settings, folder));
             return 0;
         }
 
@@ -45,9 +48,7 @@ namespace EmailIndexer.App
             if (fatal) return;
             try
             {
-                MessageBox.Show($"예상하지 못한 오류가 발생했습니다.\n{ex.Message}\n\n" +
-                                "방금 하던 작업을 다시 시도해 보고, 계속되면 프로그램을 껐다 다시 켜세요. 메일 파일에는 영향이 없습니다.\n" +
-                                $"같은 문제가 반복되면 이 기록 파일을 담당자에게 보내 주세요:\n{log}", "오류",
+                MessageBox.Show(L.F("outlook.crash.message", ex.Message, log), L.T("outlook.crash.title"),
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch { }

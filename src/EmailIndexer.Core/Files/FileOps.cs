@@ -1,4 +1,5 @@
 using System;
+using EmailIndexer.Core.Text;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,7 +27,7 @@ namespace EmailIndexer.Core.Files
     {
         public int Done { get; set; }
         public List<string> Failures { get; } = new List<string>();
-        public override string ToString() => Failures.Count == 0 ? $"{Done}건 완료" : $"{Done}건 완료, {Failures.Count}건 실패";
+        public override string ToString() => Failures.Count == 0 ? L.F("ops.done", Done) : L.F("ops.doneWithFailures", Done, Failures.Count);
     }
 
     /// <summary>
@@ -51,12 +52,12 @@ namespace EmailIndexer.Core.Files
                 var old = r.Mail.FilePath;
                 var p = new RenamePlan { Row = r, OldPath = old, NewPath = old };
                 plans.Add(p);
-                if (r.Mail.IsError) { p.Status = PlanStatus.Skip; p.Note = "읽기 오류 파일"; continue; }
+                if (r.Mail.IsError) { p.Status = PlanStatus.Skip; p.Note = L.T("plan.skip.error"); continue; }
 
                 var dir = Path.GetDirectoryName(old) ?? "";
                 var target = FileNameRule.BuildForDirectory(r, dir);
-                if (target == null) { p.Status = PlanStatus.Error; p.Note = "폴더 경로가 너무 김"; continue; }
-                if (FileNameRule.IsAlready(Path.GetFileName(old), target)) { p.Status = PlanStatus.Skip; p.Note = "이미 규칙대로"; continue; }
+                if (target == null) { p.Status = PlanStatus.Error; p.Note = L.T("plan.error.pathTooLong"); continue; }
+                if (FileNameRule.IsAlready(Path.GetFileName(old), target)) { p.Status = PlanStatus.Skip; p.Note = L.T("plan.skip.already"); continue; }
 
                 if (!taken.TryGetValue(dir, out var used))
                     taken[dir] = used = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -67,12 +68,12 @@ namespace EmailIndexer.Core.Files
                     name = FileNameRule.WithNumber(target, n);
                     if (n > 999) { name = ""; break; }
                 }
-                if (name.Length == 0) { p.Status = PlanStatus.Error; p.Note = "같은 이름이 너무 많음"; continue; }
+                if (name.Length == 0) { p.Status = PlanStatus.Error; p.Note = L.T("plan.error.tooMany"); continue; }
                 used.Add(name);
                 p.NewPath = Path.Combine(dir, name);
                 p.Status = PlanStatus.Rename;
-                if (name != target) p.Note = "같은 이름이 있어 번호 붙임";
-                else if (target != FileNameRule.Build(r)) p.Note = "경로 길이 제한으로 제목 줄임";
+                if (name != target) p.Note = L.T("plan.note.numbered");
+                else if (target != FileNameRule.Build(r)) p.Note = L.T("plan.note.trimmed");
             }
             return plans;
         }
@@ -89,7 +90,7 @@ namespace EmailIndexer.Core.Files
             {
                 try
                 {
-                    if (File.Exists(p.NewPath)) throw new IOException("같은 이름의 파일이 생김");
+                    if (File.Exists(p.NewPath)) throw new IOException(L.T("ops.err.targetExists"));
                     File.Move(p.OldPath, p.NewPath);
                     undo.Append(Rel(root, p.OldPath)).Append('\t').Append(Rel(root, p.NewPath)).Append('\n');
                     ActionLog.Write(root, "RENAME", Rel(root, p.OldPath), Rel(root, p.NewPath));
@@ -136,8 +137,8 @@ namespace EmailIndexer.Core.Files
                 var newPath = Path.Combine(root, parts[1]);
                 try
                 {
-                    if (!File.Exists(newPath)) throw new IOException("바뀐 이름의 파일이 없음 (이동·삭제됨)");
-                    if (File.Exists(oldPath)) throw new IOException("원래 이름의 파일이 이미 있음");
+                    if (!File.Exists(newPath)) throw new IOException(L.T("ops.err.renamedMissing"));
+                    if (File.Exists(oldPath)) throw new IOException(L.T("ops.err.originalExists"));
                     File.Move(newPath, oldPath);
                     ActionLog.Write(root, "RENAME_UNDO", parts[1], parts[0]);
                     res.Done++;
@@ -165,7 +166,7 @@ namespace EmailIndexer.Core.Files
                     var name = Path.GetFileName(src);
                     var dest = Path.Combine(destDir, name);
                     for (int n = 2; File.Exists(dest); n++) dest = Path.Combine(destDir, FileNameRule.WithNumber(name, n));
-                    if (dest.Length > FileNameRule.MaxPath) throw new PathTooLongException("대상 경로가 너무 김");
+                    if (dest.Length > FileNameRule.MaxPath) throw new PathTooLongException(L.T("ops.err.destTooLong"));
                     File.Move(src, dest);
                     ActionLog.Write(root, "MOVE", Rel(root, src), dest);
                     res.Done++;
@@ -186,7 +187,7 @@ namespace EmailIndexer.Core.Files
             {
                 if (trash.SendToRecycleBin(r.Mail.FilePath, out var err))
                 {
-                    ActionLog.Write(root, action, r.Entry.RelPath, r.Entry.KeeperRelPath != null ? "남긴 파일: " + r.Entry.KeeperRelPath : "");
+                    ActionLog.Write(root, action, r.Entry.RelPath, r.Entry.KeeperRelPath != null ? "kept: " + r.Entry.KeeperRelPath : "");
                     res.Done++;
                 }
                 else

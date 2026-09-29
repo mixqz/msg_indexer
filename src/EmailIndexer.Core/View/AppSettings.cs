@@ -21,6 +21,8 @@ namespace EmailIndexer.Core.View
         [DataMember] public int WindowH { get; set; } = 780;
         [DataMember] public bool WindowMaximized { get; set; }
         [DataMember] public bool PreviewAsText { get; set; }
+        /// <summary>화면 언어 (en/ko/es/fr/ja/zh). 비어 있으면 영어.</summary>
+        [DataMember] public string Language { get; set; } = "en";
 
         public static string DefaultPath =>
             Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "EmailIndexer", "settings.json");
@@ -36,6 +38,7 @@ namespace EmailIndexer.Core.View
                 s.MyAddresses ??= new List<string>();
                 s.ColumnWidths ??= new Dictionary<string, int>();
                 s.BackupRoot ??= "";
+                s.Language = Text.L.Normalize(s.Language); // 없거나 모르는 값이면 영어
                 return s;
             }
             catch

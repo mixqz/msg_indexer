@@ -1,0 +1,48 @@
+# Email Archive Indexer — 한국어 — 대화상자 (dlg.*)
+
+# ---- 미리보기 창 ----
+dlg.preview.title = 미리보기
+dlg.preview.titleWithFile = 미리보기 - {0}
+dlg.preview.subjectAccessible = 제목
+dlg.preview.noSubject = (제목 없음)
+dlg.preview.viewText = 텍스트 보기
+dlg.preview.viewFormatted = 서식 보기
+dlg.preview.prev = ◀ 이전
+dlg.preview.next = 다음 ▶
+dlg.preview.copyBody = 본문 복사
+dlg.preview.openInOutlook = Outlook으로 열기
+dlg.preview.showInFolder = 폴더에서 보기
+dlg.preview.close = 닫기
+
+# ---- 미리보기: 머리글 행 이름 ----
+dlg.preview.hdr.from = 발신자
+dlg.preview.hdr.to = 받는사람
+dlg.preview.hdr.cc = 참조
+dlg.preview.hdr.date = 일시
+dlg.preview.hdr.attachments = 첨부
+
+# ---- 미리보기: 일시/일정/첨부 값 ----
+dlg.preview.meetingSuffix =   ·  일정: {0}
+dlg.preview.attachmentNone = 없음
+dlg.preview.attachmentCount.one = {0}개 ({1})
+dlg.preview.attachmentCount.other = {0}개 ({1})
+
+# ---- 미리보기: 링크 열기 확인 ----
+dlg.preview.link.title = 링크 열기
+dlg.preview.link.message = 메일 속 링크를 기본 브라우저로 엽니다.\n보낸 사람을 신뢰할 때만 여세요.\n\n{0}
+dlg.preview.link.open = 브라우저로 열기
+
+# ---- 실행 전 확인 표 ----
+dlg.plan.cancel = 취소
+
+# ---- 설정 ----
+dlg.settings.title = 설정
+dlg.settings.help = 내 이메일 주소 (한 줄에 하나)\n발신자가 이 주소인 메일은 '보낸 메일'로 보고, 파일명·정렬에 발신 시각을 씁니다.\nOutlook 백업을 실행하면 계정 주소가 자동으로 추가됩니다.
+dlg.settings.cancel = 취소
+dlg.settings.save = 저장
+dlg.settings.envCheck = 실행 환경 점검
+
+# ---- 공통 화면 도우미 (Ui.cs) ----
+dlg.ui.confirm.cancel = 취소
+dlg.ui.open.failedTitle = 열기 실패
+dlg.ui.open.failedMessage = 파일을 열 수 없습니다.\n{0}\n\n{1}\n\nOutlook이 설치되어 .msg/.eml에 연결되어 있는지 확인하세요.

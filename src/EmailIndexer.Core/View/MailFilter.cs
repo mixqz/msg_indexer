@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using EmailIndexer.Core.Index;
 using EmailIndexer.Core.Mail;
+using EmailIndexer.Core.Text;
 
 namespace EmailIndexer.Core.View
 {
@@ -142,24 +143,28 @@ namespace EmailIndexer.Core.View
         {
             var d = new List<string>();
             if (DateFrom.HasValue || DateTo.HasValue)
-                d.Add($"{DateFrom?.ToString("yy-MM-dd") ?? "처음"}~{DateTo?.ToString("yy-MM-dd") ?? "지금"}");
+                d.Add(L.F("filter.dateRange",
+                    DateFrom?.ToString("d", L.Culture) ?? L.T("filter.dateStart"),
+                    DateTo?.ToString("d", L.Culture) ?? L.T("filter.dateNow")));
             if (Directions.Count == 1) d.Add(Display.Direction(Directions.First()));
-            if (HasAttachments.HasValue) d.Add(HasAttachments.Value ? "첨부O" : "첨부X");
+            if (HasAttachments.HasValue) d.Add(L.T(HasAttachments.Value ? "filter.attYes" : "filter.attNo"));
             if (Meetings.Count > 0) d.Add(string.Join("/", Meetings.Select(Display.Meeting)));
             if (Statuses.Count > 0) d.Add(string.Join("/", Statuses.Select(StatusName)));
             if (Formats.Count == 1) d.Add(Formats.First() == MailFormat.Msg ? "msg" : "eml");
-            if (!string.IsNullOrEmpty(Folder)) d.Add("폴더: " + Folder);
-            if (!string.IsNullOrEmpty(SenderEmail)) d.Add("발신자: " + SenderEmail);
-            if (!string.IsNullOrWhiteSpace(Search)) d.Add($"검색: {Search.Trim()}" + (Scope == SearchScope.All ? "" : $" ({ScopeName(Scope)})"));
+            if (!string.IsNullOrEmpty(Folder)) d.Add(L.F("filter.folder", Folder));
+            if (!string.IsNullOrEmpty(SenderEmail)) d.Add(L.F("filter.sender", SenderEmail));
+            if (!string.IsNullOrWhiteSpace(Search))
+                d.Add(Scope == SearchScope.All ? L.F("filter.search", Search.Trim()) : L.F("filter.searchScoped", Search.Trim(), ScopeName(Scope)));
             return d;
         }
 
         public static string StatusName(StatusFlag s)
-            => s == StatusFlag.Duplicate ? "중복" : s == StatusFlag.Similar ? "유사" : s == StatusFlag.Error ? "오류" : "미정규화";
+            => L.T(s == StatusFlag.Duplicate ? "status.duplicate" : s == StatusFlag.Similar ? "status.similar"
+                 : s == StatusFlag.Error ? "status.error" : "status.notNormalized");
 
         public static string ScopeName(SearchScope s)
-            => s == SearchScope.Subject ? "제목" : s == SearchScope.People ? "사람" : s == SearchScope.Body ? "본문"
-             : s == SearchScope.Attachments ? "첨부명" : "전체";
+            => L.T(s == SearchScope.Subject ? "scope.subject" : s == SearchScope.People ? "scope.people"
+                 : s == SearchScope.Body ? "scope.body" : s == SearchScope.Attachments ? "scope.attachments" : "scope.all");
     }
 
     public static class MailSort

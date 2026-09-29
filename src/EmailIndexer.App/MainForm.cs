@@ -10,6 +10,7 @@ using EmailIndexer.Core;
 using EmailIndexer.Core.Files;
 using EmailIndexer.Core.Index;
 using EmailIndexer.Core.Mail;
+using EmailIndexer.Core.Text;
 using EmailIndexer.Core.View;
 
 namespace EmailIndexer.App
@@ -19,21 +20,23 @@ namespace EmailIndexer.App
     {
         private sealed class Col
         {
-            public string Name = ""; public SortColumn Sort; public int Width; public HorizontalAlignment Align;
+            // Id: 저장·정렬용 언어 중립 식별자 (ColumnWidths 키). NameKey: 화면 표시용 번역 키.
+            public string Id = ""; public string NameKey = ""; public SortColumn Sort; public int Width; public HorizontalAlignment Align;
             public Func<MailRow, string> Get = _ => "";
+            public string Name => L.T(NameKey);
         }
 
         private static readonly Col[] Columns =
         {
-            new Col { Name = "일시", Sort = SortColumn.Time, Width = 128, Get = r => r.LocalTime.ToString("yyyy-MM-dd HH:mm") },
-            new Col { Name = "구분", Sort = SortColumn.Direction, Width = 44, Get = r => Display.Direction(r.Direction) },
-            new Col { Name = "발신자", Sort = SortColumn.Sender, Width = 220, Get = r => r.Mail.SenderName },
-            new Col { Name = "제목", Sort = SortColumn.Subject, Width = 420, Get = r => r.Mail.IsError ? "[오류] " + r.Mail.ParseError : r.Mail.Subject },
-            new Col { Name = "첨부", Sort = SortColumn.Attach, Width = 48, Align = HorizontalAlignment.Center, Get = r => r.Mail.HasAttachments ? r.Mail.AttachmentNames.Count + "개" : "" },
-            new Col { Name = "일정", Sort = SortColumn.Meeting, Width = 48, Align = HorizontalAlignment.Center, Get = r => Display.Meeting(r.Mail.Meeting) },
-            new Col { Name = "크기", Sort = SortColumn.Size, Width = 72, Align = HorizontalAlignment.Right, Get = r => Display.Size(r.Mail.FileSize) },
-            new Col { Name = "상태", Sort = SortColumn.Status, Width = 80, Get = Display.Status },
-            new Col { Name = "폴더", Sort = SortColumn.Folder, Width = 160, Get = r => r.Folder },
+            new Col { Id = "time", NameKey = "main.col.time", Sort = SortColumn.Time, Width = 128, Get = r => r.LocalTime.ToString("yyyy-MM-dd HH:mm") },
+            new Col { Id = "dir", NameKey = "main.col.dir", Sort = SortColumn.Direction, Width = 44, Get = r => Display.Direction(r.Direction) },
+            new Col { Id = "sender", NameKey = "main.col.sender", Sort = SortColumn.Sender, Width = 220, Get = r => r.Mail.SenderName },
+            new Col { Id = "subject", NameKey = "main.col.subject", Sort = SortColumn.Subject, Width = 420, Get = r => r.Mail.IsError ? "[" + Display.Error(r.Mail) + "]" : r.Mail.Subject },
+            new Col { Id = "attach", NameKey = "main.col.attach", Sort = SortColumn.Attach, Width = 48, Align = HorizontalAlignment.Center, Get = r => r.Mail.HasAttachments ? L.P("main.cell.attachCount", r.Mail.AttachmentNames.Count) : "" },
+            new Col { Id = "meeting", NameKey = "main.col.meeting", Sort = SortColumn.Meeting, Width = 48, Align = HorizontalAlignment.Center, Get = r => Display.Meeting(r.Mail.Meeting) },
+            new Col { Id = "size", NameKey = "main.col.size", Sort = SortColumn.Size, Width = 72, Align = HorizontalAlignment.Right, Get = r => Display.Size(r.Mail.FileSize) },
+            new Col { Id = "status", NameKey = "main.col.status", Sort = SortColumn.Status, Width = 80, Get = Display.Status },
+            new Col { Id = "folder", NameKey = "main.col.folder", Sort = SortColumn.Folder, Width = 160, Get = r => r.Folder },
         };
 
         private readonly AppSettings _settings;
@@ -58,19 +61,19 @@ namespace EmailIndexer.App
         private readonly ComboBox _period = new ComboBox { DropDownStyle = ComboBoxStyle.DropDownList, Width = 190 };
         private readonly DateTimePicker _from = new DateTimePicker { Format = DateTimePickerFormat.Custom, CustomFormat = "yy-MM-dd", Width = 88, Enabled = false };
         private readonly DateTimePicker _to = new DateTimePicker { Format = DateTimePickerFormat.Custom, CustomFormat = "yy-MM-dd", Width = 88, Enabled = false };
-        private readonly CheckBox _dirIn = Chk("받음"), _dirOut = Chk("보냄");
-        private readonly CheckBox _attYes = Chk("있음"), _attNo = Chk("없음");
+        private readonly CheckBox _dirIn = Chk("main.chk.dirIn"), _dirOut = Chk("main.chk.dirOut");
+        private readonly CheckBox _attYes = Chk("main.chk.attYes"), _attNo = Chk("main.chk.attNo");
         private readonly Dictionary<MeetingKind, CheckBox> _meet = new Dictionary<MeetingKind, CheckBox>
         {
-            [MeetingKind.Request] = Chk("초대"), [MeetingKind.Accepted] = Chk("수락"), [MeetingKind.Declined] = Chk("거절"),
-            [MeetingKind.Tentative] = Chk("미정"), [MeetingKind.Canceled] = Chk("취소"),
+            [MeetingKind.Request] = Chk("main.chk.meetRequest"), [MeetingKind.Accepted] = Chk("main.chk.meetAccepted"), [MeetingKind.Declined] = Chk("main.chk.meetDeclined"),
+            [MeetingKind.Tentative] = Chk("main.chk.meetTentative"), [MeetingKind.Canceled] = Chk("main.chk.meetCanceled"),
         };
         private readonly Dictionary<StatusFlag, CheckBox> _status = new Dictionary<StatusFlag, CheckBox>
         {
-            [StatusFlag.Duplicate] = Chk("중복"), [StatusFlag.Similar] = Chk("유사"),
-            [StatusFlag.Error] = Chk("오류"), [StatusFlag.NotNormalized] = Chk("미정규화"),
+            [StatusFlag.Duplicate] = Chk("main.chk.statusDuplicate"), [StatusFlag.Similar] = Chk("main.chk.statusSimilar"),
+            [StatusFlag.Error] = Chk("main.chk.statusError"), [StatusFlag.NotNormalized] = Chk("main.chk.statusNotNormalized"),
         };
-        private readonly CheckBox _fmtMsg = Chk("msg"), _fmtEml = Chk("eml");
+        private readonly CheckBox _fmtMsg = Chk("main.chk.fmtMsg"), _fmtEml = Chk("main.chk.fmtEml");
         private readonly TreeView _tree = new TreeView { Width = 196, Height = 130, HideSelection = false, BorderStyle = BorderStyle.FixedSingle };
         private readonly ListBox _senders = new ListBox { Width = 196, Height = 190, IntegralHeight = false, BorderStyle = BorderStyle.FixedSingle };
         // 목록
@@ -82,14 +85,13 @@ namespace EmailIndexer.App
         private readonly Label _emptyHint = new Label
         {
             Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleCenter, ForeColor = SystemColors.GrayText, Cursor = Cursors.Hand,
-            Text = "메일 백업 폴더를 선택하세요.\n\n[폴더 변경]을 누르거나, 탐색기에서 폴더를 이 창으로 끌어다 놓으면 됩니다.",
         };
         // 상태줄
         private readonly ToolStripStatusLabel _statusLeft = new ToolStripStatusLabel { Spring = true, TextAlign = ContentAlignment.MiddleLeft };
         private readonly ToolStripProgressBar _progress = new ToolStripProgressBar { Visible = false, Width = 160 };
         private readonly ToolStripStatusLabel _counts = new ToolStripStatusLabel();
 
-        private static CheckBox Chk(string text) => new CheckBox { Text = text, AutoSize = true, Margin = new Padding(3, 1, 3, 1) };
+        private static CheckBox Chk(string key) => new CheckBox { Text = L.T(key), AutoSize = true, Margin = new Padding(3, 1, 3, 1) };
 
         /// <summary>'유사' 행 글자색: 흰 배경 대비 5.7:1 (기존 DarkOrange는 2.3:1로 읽기 어려움).</summary>
         private static readonly Color SimilarText = Color.FromArgb(166, 77, 0);
@@ -105,8 +107,9 @@ namespace EmailIndexer.App
             MinimumSize = new Size(900, 560);
             RestoreWindow();
 
-            _btnScan = Ui.Btn("스캔 (F5)", (_, __) => StartScan(), 96); // '스캔 취소'로 바뀌어도 너비가 흔들리지 않게
+            _btnScan = Ui.Btn(L.T("main.btn.scan"), (_, __) => StartScan(), 96); // '스캔 취소'로 바뀌어도 너비가 흔들리지 않게
             Icon = Ui.AppIcon ?? Icon;
+            _emptyHint.Text = L.T("main.empty.chooseFolder");
 
             var body = BuildBody();
             var top = BuildTop();
@@ -125,12 +128,16 @@ namespace EmailIndexer.App
 
         private Control BuildTop()
         {
-            var t = new TableLayoutPanel { Dock = DockStyle.Top, Height = 52, ColumnCount = 9, Padding = new Padding(14, 10, 16, 4), BackColor = Theme.AppBg };
+            // 번역이 길어 한 줄에 다 안 들어가면 버튼 묶음을 둘째 줄로 내린다 (잘림 방지)
+            var t = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 5, RowCount = 2, Padding = new Padding(14, 10, 16, 4), BackColor = Theme.AppBg };
             t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // 아이콘
             t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // 앱 이름
             t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // '백업 폴더'
             t.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
-            for (int i = 0; i < 5; i++) t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
+            t.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize)); // 버튼 묶음
+            t.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            t.RowStyles.Add(new RowStyle(SizeType.AutoSize));
+            var buttons = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0), Anchor = AnchorStyles.Right };
             var logo = new PictureBox
             {
                 Size = new Size(22, 22), SizeMode = PictureBoxSizeMode.Zoom, Anchor = AnchorStyles.Left, Margin = new Padding(0, 0, 8, 0),
@@ -139,24 +146,39 @@ namespace EmailIndexer.App
             t.Controls.Add(logo, 0, 0);
             t.Controls.Add(new Label
             {
-                Text = "Email Archive Indexer", AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 0, 24, 0),
+                Text = L.T("main.top.appName"), AutoSize = true, Anchor = AnchorStyles.Left, Margin = new Padding(0, 0, 24, 0),
                 Font = new Font(Ui.Base.FontFamily, 11F, FontStyle.Bold),
             }, 1, 0);
-            t.Controls.Add(new Label { Text = "백업 폴더", AutoSize = true, ForeColor = Theme.Subtle, Anchor = AnchorStyles.Left }, 2, 0);
+            t.Controls.Add(new Label { Text = L.T("main.top.backupFolder"), AutoSize = true, ForeColor = Theme.Subtle, Anchor = AnchorStyles.Left }, 2, 0);
             _folderBox.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             _folderBox.Margin = new Padding(6, 3, 8, 3);
             _folderBox.BackColor = Theme.Surface;
             t.Controls.Add(_folderBox, 3, 0);
-            t.Controls.Add(Ui.Btn("폴더 변경", (_, __) => ChooseFolder()), 4, 0);
-            t.Controls.Add(_btnScan, 5, 0);
+            buttons.Controls.Add(Ui.Btn(L.T("main.btn.changeFolder"), (_, __) => ChooseFolder()));
+            buttons.Controls.Add(_btnScan);
             // 이 화면의 주 동작 1개만 강조색
-            var outlook = Ui.Primary(Ui.Btn("Outlook 백업", (_, __) => OpenOutlookBackup()));
-            new ToolTip().SetToolTip(outlook, "Outlook(classic)의 받은편지함·보낸편지함을 msg로 저장 (꺼져 있으면 자동 실행)");
-            t.Controls.Add(outlook, 6, 0);
-            t.Controls.Add(Ui.Btn("설정", (_, __) => OpenSettings()), 7, 0);
-            var help = Ui.Btn("도움말 (F1)", (_, __) => OpenHelp());
-            new ToolTip().SetToolTip(help, "각 기능 설명과 단축키");
-            t.Controls.Add(help, 8, 0);
+            var outlook = Ui.Primary(Ui.Btn(L.T("main.btn.outlookBackup"), (_, __) => OpenOutlookBackup()));
+            new ToolTip().SetToolTip(outlook, L.T("main.tip.outlookBackup"));
+            buttons.Controls.Add(outlook);
+            buttons.Controls.Add(Ui.Btn(L.T("main.btn.settings"), (_, __) => OpenSettings()));
+            var help = Ui.Btn(L.T("main.btn.help"), (_, __) => OpenHelp());
+            new ToolTip().SetToolTip(help, L.T("main.tip.help"));
+            buttons.Controls.Add(help);
+            t.Controls.Add(buttons, 4, 0);
+            const int minFolderBox = 220;
+            void Reflow()
+            {
+                var fixedW = t.Padding.Horizontal + Enumerable.Range(0, 3).Select(ci => t.GetControlFromPosition(ci, 0))
+                    .Where(c => c != null).Sum(c => c!.PreferredSize.Width + c.Margin.Horizontal); // 아이콘+앱 이름+'백업 폴더' 
+                var twoRows = t.ClientSize.Width < fixedW + minFolderBox + buttons.PreferredSize.Width;
+                var inRow2 = t.GetRow(buttons) == 1;
+                if (twoRows == inRow2) return;
+                t.SuspendLayout();
+                if (twoRows) { t.SetCellPosition(buttons, new TableLayoutPanelCellPosition(0, 1)); t.SetColumnSpan(buttons, 5); buttons.Anchor = AnchorStyles.Left; buttons.Margin = new Padding(0, 6, 0, 0); }
+                else { t.SetColumnSpan(buttons, 1); t.SetCellPosition(buttons, new TableLayoutPanelCellPosition(4, 0)); buttons.Anchor = AnchorStyles.Right; buttons.Margin = new Padding(0); }
+                t.ResumeLayout();
+            }
+            t.Resize += (_, __) => Reflow();
             return t;
         }
 
@@ -187,29 +209,29 @@ namespace EmailIndexer.App
             var head = new TableLayoutPanel { ColumnCount = 2, Width = 200, Height = 30, Margin = new Padding(0, 0, 0, 10) };
             head.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100));
             head.ColumnStyles.Add(new ColumnStyle(SizeType.AutoSize));
-            head.Controls.Add(new Label { Text = "필터", Font = new Font(Ui.Base.FontFamily, 11F, FontStyle.Bold), AutoSize = true, Anchor = AnchorStyles.Left }, 0, 0);
+            head.Controls.Add(new Label { Text = L.T("main.filter.title"), Font = new Font(Ui.Base.FontFamily, 11F, FontStyle.Bold), AutoSize = true, Anchor = AnchorStyles.Left }, 0, 0);
             var reset = new LinkLabel
             {
-                Text = "초기화", AutoSize = true, Anchor = AnchorStyles.Right, LinkBehavior = LinkBehavior.HoverUnderline,
+                Text = L.T("main.filter.reset"), AutoSize = true, Anchor = AnchorStyles.Right, LinkBehavior = LinkBehavior.HoverUnderline,
                 LinkColor = Theme.Accent, ActiveLinkColor = Theme.Accent,
             };
             reset.LinkClicked += (_, __) => ResetFilters();
             head.Controls.Add(reset, 1, 0);
             flow.Controls.Add(head);
 
-            _period.Items.AddRange(new object[] { "전체 기간", "오늘", "최근 7일", "최근 30일", "올해", "직접 지정" });
+            _period.Items.AddRange(new object[] { L.T("main.period.all"), L.T("main.period.today"), L.T("main.period.last7"), L.T("main.period.last30"), L.T("main.period.thisYear"), L.T("main.period.custom") });
             _period.SelectedIndex = 0;
             _period.FlatStyle = FlatStyle.Flat;
             _period.Width = 200;
             var dates = Row(_from, new Label { Text = "~", AutoSize = true, Padding = new Padding(0, 5, 0, 0) }, _to);
-            flow.Controls.Add(Group("기간", _period, dates));
-            flow.Controls.Add(Group("받음 / 보냄", Row(_dirIn, _dirOut)));
-            flow.Controls.Add(Group("첨부", Row(_attYes, _attNo)));
-            flow.Controls.Add(Group("일정", Row(_meet[MeetingKind.Request], _meet[MeetingKind.Accepted], _meet[MeetingKind.Declined]),
+            flow.Controls.Add(Group(L.T("main.filter.period"), _period, dates));
+            flow.Controls.Add(Group(L.T("main.filter.dirInOut"), Row(_dirIn, _dirOut)));
+            flow.Controls.Add(Group(L.T("main.filter.attach"), Row(_attYes, _attNo)));
+            flow.Controls.Add(Group(L.T("main.filter.meeting"), Row(_meet[MeetingKind.Request], _meet[MeetingKind.Accepted], _meet[MeetingKind.Declined]),
                 Row(_meet[MeetingKind.Tentative], _meet[MeetingKind.Canceled])));
-            flow.Controls.Add(Group("상태", Row(_status[StatusFlag.Duplicate], _status[StatusFlag.Similar], _status[StatusFlag.Error]),
+            flow.Controls.Add(Group(L.T("main.filter.status"), Row(_status[StatusFlag.Duplicate], _status[StatusFlag.Similar], _status[StatusFlag.Error]),
                 Row(_status[StatusFlag.NotNormalized])));
-            flow.Controls.Add(Group("형식", Row(_fmtMsg, _fmtEml)));
+            flow.Controls.Add(Group(L.T("main.filter.format"), Row(_fmtMsg, _fmtEml)));
             foreach (var box in new Control[] { _tree, _senders })
             {
                 box.BackColor = Theme.AppBg;
@@ -221,14 +243,20 @@ namespace EmailIndexer.App
             _tree.FullRowSelect = true;
             _senders.BorderStyle = BorderStyle.None;
             _senders.ItemHeight = 22;
-            flow.Controls.Add(Group("폴더", _tree));
-            flow.Controls.Add(Group("발신자 TOP 30", _senders));
+            flow.Controls.Add(Group(L.T("main.filter.folder"), _tree));
+            flow.Controls.Add(Group(L.T("main.filter.topSenders"), _senders));
             return flow;
         }
 
         private static FlowLayoutPanel Row(params Control[] cs)
         {
-            var p = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = new Padding(0) };
+            // 긴 번역(예: 프랑스어)으로 한 줄(필터 칸 200px)에 안 들어가면 세로로 쌓는다
+            var width = cs.Sum(c => c.PreferredSize.Width + c.Margin.Horizontal);
+            var p = new FlowLayoutPanel
+            {
+                AutoSize = true, WrapContents = false, Margin = new Padding(0),
+                FlowDirection = width > 212 ? FlowDirection.TopDown : FlowDirection.LeftToRight,
+            };
             p.Controls.AddRange(cs);
             return p;
         }
@@ -250,7 +278,7 @@ namespace EmailIndexer.App
         {
             var panel = new Panel { Dock = DockStyle.Fill, Padding = new Padding(12, 12, 16, 4), BackColor = Theme.AppBg };
 
-            var searchRow = new FlowLayoutPanel { Dock = DockStyle.Top, Height = 40, WrapContents = false, Padding = new Padding(0) };
+            var searchRow = new FlowLayoutPanel { Dock = DockStyle.Top, AutoSize = true, WrapContents = true, Padding = new Padding(0, 0, 0, 6) };
             // 검색창: 흰 카드 안에 테두리 없는 입력칸 (둥근 느낌의 넉넉한 여백)
             var searchCard = Theme.Card(new Padding(10, 7, 10, 4));
             searchCard.Size = new Size(460, 32);
@@ -260,8 +288,8 @@ namespace EmailIndexer.App
             _search.BackColor = Theme.Surface;
             searchCard.Controls.Add(_search);
             searchCard.Click += (_, __) => _search.Focus();
-            Ui.SetCue(_search, "검색 — 제목·사람·본문·첨부파일명 (여러 단어 = 모두 포함, \"따옴표\" = 구문)");
-            searchRow.Controls.Add(new Label { Text = "검색", AutoSize = true, Font = Ui.Bold, ForeColor = Theme.Subtle, Padding = new Padding(0, 8, 4, 0) });
+            Ui.SetCue(_search, L.T("main.search.cue"));
+            searchRow.Controls.Add(new Label { Text = L.T("main.search.label"), AutoSize = true, Font = Ui.Bold, ForeColor = Theme.Subtle, Padding = new Padding(0, 8, 4, 0) });
             searchRow.Controls.Add(searchCard);
             foreach (SearchScope s in Enum.GetValues(typeof(SearchScope)))
             {
@@ -297,14 +325,14 @@ namespace EmailIndexer.App
                 Dock = DockStyle.Bottom, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink,
                 WrapContents = true, Padding = new Padding(0, 8, 0, 4),
             };
-            actions.Controls.Add(Ui.Btn("미리보기 (Enter)", (_, __) => OpenPreview()));
-            actions.Controls.Add(Ui.Btn("열기 (Ctrl+O)", (_, __) => OpenSelected()));
-            actions.Controls.Add(Ui.Btn("폴더에서 보기", (_, __) => { var r = FocusedRow(); if (r != null) Ui.ShowInFolder(r.Mail.FilePath); }));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.preview"), (_, __) => OpenPreview()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.open"), (_, __) => OpenSelected()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.showInFolder"), (_, __) => { var r = FocusedRow(); if (r != null) Ui.ShowInFolder(r.Mail.FilePath); }));
             actions.Controls.Add(new Label { Width = 16 });
-            actions.Controls.Add(Ui.Btn("파일명 정규화", (_, __) => DoNormalize()));
-            actions.Controls.Add(Ui.Btn("선택 이동", (_, __) => DoMove()));
-            actions.Controls.Add(Ui.Btn("선택 삭제 (Del)", (_, __) => DoDelete()));
-            actions.Controls.Add(Ui.Btn("중복 정리", (_, __) => DoDedupe()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.normalize"), (_, __) => DoNormalize()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.move"), (_, __) => DoMove()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.delete"), (_, __) => DoDelete()));
+            actions.Controls.Add(Ui.Btn(L.T("main.action.dedupe"), (_, __) => DoDedupe()));
 
             panel.Controls.Add(listHost);
             panel.Controls.Add(appliedRow);
@@ -312,24 +340,41 @@ namespace EmailIndexer.App
             panel.Controls.Add(actions);
             // Tab 순서: 검색 → 목록 → 동작 버튼 (화면에서 읽히는 순서)
             searchRow.TabIndex = 0; listHost.TabIndex = 1; actions.TabIndex = 2; appliedRow.TabIndex = 3;
-            _search.AccessibleName = "메일 검색";
-            _list.AccessibleName = "메일 목록";
-            _list.AccessibleDescription = "Enter: 미리보기, Ctrl+O: Outlook으로 열기, Del: 휴지통으로 삭제";
-            _folderBox.AccessibleName = "백업 폴더 경로";
-            _tree.AccessibleName = "폴더 필터";
-            _senders.AccessibleName = "발신자 필터";
-            _period.AccessibleName = "기간 필터";
-            _from.AccessibleName = "시작일";
-            _to.AccessibleName = "종료일";
-            foreach (var rb in _scopeButtons) rb.AccessibleName = "검색 범위: " + rb.Text;
+            _search.AccessibleName = L.T("main.acc.search");
+            _list.AccessibleName = L.T("main.acc.list");
+            _list.AccessibleDescription = L.T("main.acc.listDesc");
+            _folderBox.AccessibleName = L.T("main.acc.folderBox");
+            _tree.AccessibleName = L.T("main.acc.tree");
+            _senders.AccessibleName = L.T("main.acc.senders");
+            _period.AccessibleName = L.T("main.acc.period");
+            _from.AccessibleName = L.T("main.acc.from");
+            _to.AccessibleName = L.T("main.acc.to");
+            foreach (var rb in _scopeButtons) rb.AccessibleName = L.F("main.acc.scope", rb.Text);
             return panel;
         }
 
         private Control BuildStatus()
         {
-            var s = new StatusStrip { SizingGrip = true };
+            var s = new StatusStrip { SizingGrip = true, ShowItemToolTips = true };
+            _statusLeft.TextChanged += (_, __) => _statusLeft.ToolTipText = _statusLeft.Text; // 잘려도 마우스를 올리면 전체 문구
             s.Items.AddRange(new ToolStripItem[] { _statusLeft, _progress, _counts });
             return s;
+        }
+
+        /// <summary>짧은 값 열(구분·일정·상태·첨부)은 번역된 값·제목이 다 보이는 너비로.</summary>
+        private int FitWidth(Col c)
+        {
+            IEnumerable<string> values;
+            switch (c.Id)
+            {
+                case "dir": values = new[] { Display.Direction(MailDirection.Received), Display.Direction(MailDirection.Sent) }; break;
+                case "meeting": values = Enum.GetValues(typeof(MeetingKind)).Cast<MeetingKind>().Select(Display.Meeting); break;
+                case "status": values = new[] { "status.error", "status.duplicate", "status.keeper", "status.similar", "status.normalized" }.Select(L.T); break;
+                case "attach": values = new[] { L.P("main.cell.attachCount", 99) }; break;
+                default: return 0;
+            }
+            var font = _list.Font ?? Font;
+            return values.Concat(new[] { c.Name + " ▼" }).Max(v => TextRenderer.MeasureText(v ?? "", font).Width) + 18;
         }
 
         private void BuildColumns()
@@ -337,26 +382,26 @@ namespace EmailIndexer.App
             _list.Columns.Clear();
             foreach (var c in Columns)
             {
-                var w = _settings.ColumnWidths.TryGetValue(c.Name, out var saved) && saved > 20 ? saved : c.Width;
+                var w = _settings.ColumnWidths.TryGetValue(c.Id, out var saved) && saved > 20 ? saved : Math.Max(c.Width, FitWidth(c));
                 _list.Columns.Add(c.Name, w, c.Align);
             }
             UpdateSortHeader();
 
             var menu = new ContextMenuStrip();
-            menu.Items.Add("미리보기", null, (_, __) => OpenPreview());
-            menu.Items.Add("열기 (Outlook)", null, (_, __) => OpenSelected());
-            menu.Items.Add("폴더에서 보기", null, (_, __) => { var r = FocusedRow(); if (r != null) Ui.ShowInFolder(r.Mail.FilePath); });
-            menu.Items.Add("경로 복사", null, (_, __) =>
+            menu.Items.Add(L.T("main.menu.preview"), null, (_, __) => OpenPreview());
+            menu.Items.Add(L.T("main.menu.open"), null, (_, __) => OpenSelected());
+            menu.Items.Add(L.T("main.menu.showInFolder"), null, (_, __) => { var r = FocusedRow(); if (r != null) Ui.ShowInFolder(r.Mail.FilePath); });
+            menu.Items.Add(L.T("main.menu.copyPath"), null, (_, __) =>
             {
                 var paths = SelectedRows().Select(r => r.Mail.FilePath).ToList();
                 if (paths.Count > 0) Clipboard.SetText(string.Join(Environment.NewLine, paths));
             });
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add("파일명 정규화", null, (_, __) => DoNormalize());
-            menu.Items.Add("선택 이동…", null, (_, __) => DoMove());
-            menu.Items.Add("휴지통으로 삭제", null, (_, __) => DoDelete());
+            menu.Items.Add(L.T("main.menu.normalize"), null, (_, __) => DoNormalize());
+            menu.Items.Add(L.T("main.menu.move"), null, (_, __) => DoMove());
+            menu.Items.Add(L.T("main.menu.trash"), null, (_, __) => DoDelete());
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add("이 발신자만 보기", null, (_, __) =>
+            menu.Items.Add(L.T("main.menu.thisSenderOnly"), null, (_, __) =>
             {
                 var r = FocusedRow();
                 if (r == null) return;
@@ -477,7 +522,7 @@ namespace EmailIndexer.App
             var root = _startFolder ?? _settings.BackupRoot;
             if (string.IsNullOrEmpty(root) || !Directory.Exists(root))
             {
-                _statusLeft.Text = "백업 폴더를 선택하세요.";
+                _statusLeft.Text = L.T("main.status.chooseFolder");
                 return;
             }
             await SetRootAsync(root, loadCacheFirst: true);
@@ -494,7 +539,7 @@ namespace EmailIndexer.App
             _folderBox.Text = root;
             if (loadCacheFirst)
             {
-                _statusLeft.Text = "캐시 불러오는 중…";
+                _statusLeft.Text = L.T("main.status.loadingCache");
                 _loading = true;
                 UpdateEmptyHint();
                 var loaded = await Task.Run(() => IndexStore.Load(root));
@@ -512,7 +557,7 @@ namespace EmailIndexer.App
 
         private void ChooseFolder()
         {
-            using var dlg = new FolderBrowserDialog { Description = "메일(.msg/.eml) 백업 폴더를 선택하세요", ShowNewFolderButton = false };
+            using var dlg = new FolderBrowserDialog { Description = L.T("main.browse.description"), ShowNewFolderButton = false };
             if (Directory.Exists(_settings.BackupRoot)) dlg.SelectedPath = _settings.BackupRoot;
             if (dlg.ShowDialog(this) == DialogResult.OK) SetRoot(dlg.SelectedPath);
         }
@@ -524,14 +569,14 @@ namespace EmailIndexer.App
             if (string.IsNullOrEmpty(root) || !Directory.Exists(root)) { ChooseFolder(); return; }
 
             var cts = _scanCts = new CancellationTokenSource();
-            _btnScan.Text = "스캔 취소";
+            _btnScan.Text = L.T("main.btn.scanCancel");
             UpdateEmptyHint();
             _progress.Visible = true;
             _progress.Style = ProgressBarStyle.Marquee;
             var progress = new Progress<ScanProgress>(p =>
             {
                 if (cts.IsCancellationRequested) return;
-                _statusLeft.Text = p.Total > 0 ? $"{p.Phase} {p.Done:#,0} / {p.Total:#,0}" : p.Phase + "…";
+                _statusLeft.Text = p.Total > 0 ? L.F("main.scan.progress", p.Phase, p.Done, p.Total) : L.F("main.scan.progressIndeterminate", p.Phase);
                 if (p.Total > 0)
                 {
                     _progress.Style = ProgressBarStyle.Continuous;
@@ -546,33 +591,30 @@ namespace EmailIndexer.App
                 SetEntries(result.Entries);
                 _statusLeft.Text = Summary(result);
                 if (result.AutoTrashed.Count > 0)
+                {
+                    var list = string.Join("\n", result.AutoTrashed.Take(10).Select(kv => "· " + Path.GetFileName(kv.Key))) +
+                        (result.AutoTrashed.Count > 10 ? L.F("main.autoTrash.more", result.AutoTrashed.Count - 10) : "");
                     MessageBox.Show(this,
-                        $"이미 있는 메일과 같은 파일 {result.AutoTrashed.Count:#,0}개가 새로 들어와 휴지통으로 보냈습니다. 원본은 그대로 남아 있습니다.\n\n" +
-                        string.Join("\n", result.AutoTrashed.Take(10).Select(kv => "· " + Path.GetFileName(kv.Key))) +
-                        (result.AutoTrashed.Count > 10 ? $"\n… 외 {result.AutoTrashed.Count - 10}개" : "") +
-                        "\n\n필요하면 Windows 휴지통에서 복원할 수 있으며, 복원한 파일은 다시 지우지 않습니다.",
-                        "새 중복 파일 정리", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        L.P("main.autoTrash.body", result.AutoTrashed.Count, list),
+                        L.T("main.autoTrash.title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
                 if (result.TrashFailures.Count > 0)
-                    MessageBox.Show(this, "새 중복 파일 일부를 휴지통으로 보내지 못했습니다 (목록에 '중복'으로 표시됨):\n\n" +
-                                          string.Join("\n", result.TrashFailures.Take(10)) +
-                                          "\n\n다른 프로그램(Outlook 등)이 파일을 열고 있다면 닫은 뒤 [스캔]을 다시 누르세요.",
-                        "중복 정리", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(this, L.F("main.trashFail.body", string.Join("\n", result.TrashFailures.Take(10))),
+                        L.T("main.trashFail.title"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-            catch (OperationCanceledException) { _statusLeft.Text = "스캔을 취소했습니다."; }
+            catch (OperationCanceledException) { _statusLeft.Text = L.T("main.status.scanCanceled"); }
             catch (Exception ex)
             {
-                _statusLeft.Text = "스캔 실패 — [스캔]을 눌러 다시 시도하세요";
+                _statusLeft.Text = L.T("main.status.scanFailed");
                 MessageBox.Show(this,
-                    $"백업 폴더를 읽지 못했습니다.\n{root}\n\n{ex.Message}\n\n" +
-                    "폴더가 그대로 있는지, 접근 권한이 있는지 확인한 뒤 [스캔]을 다시 누르세요. " +
-                    "계속 실패하면 [폴더 변경]으로 폴더를 다시 선택하세요.",
-                    "스캔 실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    L.F("main.scanFail.body", root, ex.Message),
+                    L.T("main.scanFail.title"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
             {
                 if (ReferenceEquals(_scanCts, cts)) _scanCts = null;
                 cts.Dispose();
-                _btnScan.Text = "스캔 (F5)";
+                _btnScan.Text = L.T("main.btn.scan");
                 _progress.Visible = false;
                 UpdateEmptyHint();
             }
@@ -580,15 +622,15 @@ namespace EmailIndexer.App
 
         private static string Summary(ScanResult r)
         {
-            var parts = new List<string> { $"스캔 완료 {r.Elapsed.TotalSeconds:0.0}초" };
-            if (r.FirstScan) parts.Add("첫 스캔");
-            if (r.CacheWasCorrupt) parts.Add("캐시 재구축");
-            parts.Add($"신규 {r.Added:#,0}");
-            if (r.Changed > 0) parts.Add($"변경 {r.Changed:#,0}");
-            if (r.Moved > 0) parts.Add($"이동 {r.Moved:#,0}");
-            if (r.Removed > 0) parts.Add($"사라짐 {r.Removed:#,0}");
-            if (r.AutoTrashed.Count > 0) parts.Add($"새 중복 {r.AutoTrashed.Count}건 휴지통으로 이동");
-            if (r.Errors > 0) parts.Add($"오류 {r.Errors:#,0}");
+            var parts = new List<string> { L.F("main.summary.done", r.Elapsed.TotalSeconds) };
+            if (r.FirstScan) parts.Add(L.T("main.summary.firstScan"));
+            if (r.CacheWasCorrupt) parts.Add(L.T("main.summary.cacheRebuilt"));
+            parts.Add(L.F("main.summary.added", r.Added));
+            if (r.Changed > 0) parts.Add(L.F("main.summary.changed", r.Changed));
+            if (r.Moved > 0) parts.Add(L.F("main.summary.moved", r.Moved));
+            if (r.Removed > 0) parts.Add(L.F("main.summary.removed", r.Removed));
+            if (r.AutoTrashed.Count > 0) parts.Add(L.P("main.summary.autoTrashed", r.AutoTrashed.Count));
+            if (r.Errors > 0) parts.Add(L.F("main.summary.errors", r.Errors));
             return string.Join(" · ", parts);
         }
 
@@ -611,25 +653,24 @@ namespace EmailIndexer.App
             _hintAction = null;
             if (string.IsNullOrEmpty(_settings.BackupRoot))
             {
-                text = "메일 백업 폴더를 선택하세요.\n\n여기를 누르거나 [폴더 변경]을 누르세요. 탐색기에서 폴더를 이 창으로 끌어다 놓아도 됩니다.";
+                text = L.T("main.empty.chooseFolder");
                 _hintAction = ChooseFolder;
             }
             else if (_all.Count == 0)
             {
                 if (_loading || _scanCts != null)
-                    text = "메일 목록을 만드는 중…\n\n처음 여는 폴더는 파일 수에 따라 시간이 걸립니다. 진행 상황은 아래 상태줄에 표시됩니다.";
+                    text = L.T("main.empty.building");
                 else
                 {
-                    text = "이 폴더(하위 폴더 포함)에서 .msg / .eml 파일을 찾지 못했습니다.\n\n" +
-                           "다른 폴더를 쓰려면 여기를 누르세요. Outlook에서 가져오려면 [Outlook 백업]을 누르세요.";
+                    text = L.T("main.empty.noFiles");
                     _hintAction = ChooseFolder;
                 }
             }
             else if (_view.Count == 0)
             {
-                text = "조건에 맞는 메일이 없습니다.\n\n" +
-                       (string.IsNullOrWhiteSpace(_search.Text) ? "" : $"검색어: \"{_search.Text.Trim()}\"\n") +
-                       "여기를 누르면 검색어와 필터를 모두 초기화합니다.";
+                text = string.IsNullOrWhiteSpace(_search.Text)
+                    ? L.T("main.empty.noMatches")
+                    : L.F("main.empty.noMatchesWithSearch", _search.Text.Trim());
                 _hintAction = ResetFilters;
             }
             _emptyHint.Visible = text != null;
@@ -642,7 +683,7 @@ namespace EmailIndexer.App
             var selected = _filter.Folder;
             _tree.BeginUpdate();
             _tree.Nodes.Clear();
-            var root = _tree.Nodes.Add($"(전체) {_all.Count:#,0}");
+            var root = _tree.Nodes.Add(L.F("main.tree.all", _all.Count));
             root.Tag = null;
             var map = new Dictionary<string, TreeNode>(StringComparer.OrdinalIgnoreCase) { [""] = root };
             var counts = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
@@ -659,7 +700,7 @@ namespace EmailIndexer.App
             {
                 var cut = p.LastIndexOf('\\');
                 var parent = cut < 0 ? root : map[p.Substring(0, cut)];
-                var node = parent.Nodes.Add($"{(cut < 0 ? p : p.Substring(cut + 1))} ({counts[p]:#,0})");
+                var node = parent.Nodes.Add(L.F("main.tree.node", cut < 0 ? p : p.Substring(cut + 1), counts[p]));
                 node.Tag = p;
                 map[p] = node;
             }
@@ -682,9 +723,9 @@ namespace EmailIndexer.App
             _suppress = true;
             _senders.BeginUpdate();
             _senders.Items.Clear();
-            _senders.Items.Add(new SenderItem { Key = null, Label = "(전체 발신자)" });
+            _senders.Items.Add(new SenderItem { Key = null, Label = L.T("main.sender.all") });
             foreach (var (key, name, count) in MailSort.TopSenders(_all, 30))
-                _senders.Items.Add(new SenderItem { Key = key, Label = $"{(string.IsNullOrEmpty(name) ? key : name)} ({count})" });
+                _senders.Items.Add(new SenderItem { Key = key, Label = L.F("main.sender.item", string.IsNullOrEmpty(name) ? key : name, count) });
             _senders.EndUpdate();
             _suppress = false;
         }
@@ -725,7 +766,7 @@ namespace EmailIndexer.App
             _view.Sort(MailSort.By(_sortCol, _sortAsc));
             RefreshList(keepFocusRel);
             var d = _filter.Describe();
-            _applied.Text = d.Count == 0 ? "" : "적용: " + string.Join("  ·  ", d);
+            _applied.Text = d.Count == 0 ? "" : L.F("main.applied", string.Join("  ·  ", d));
             UpdateEmptyHint();
         }
 
@@ -771,11 +812,13 @@ namespace EmailIndexer.App
         private void UpdateSortHeader()
         {
             for (int i = 0; i < Columns.Length; i++)
-                _list.Columns[i].Text = Columns[i].Name + (Columns[i].Sort == _sortCol ? (_sortAsc ? " ▲" : " ▼") : "");
+                _list.Columns[i].Text = Columns[i].Sort == _sortCol
+                    ? L.F(_sortAsc ? "main.sort.asc" : "main.sort.desc", Columns[i].Name)
+                    : Columns[i].Name;
         }
 
         private void UpdateCounts()
-            => _counts.Text = $"전체 {_all.Count:#,0} · 표시 {_view.Count:#,0} · 선택 {_list.SelectedIndices.Count:#,0}";
+            => _counts.Text = L.F("main.counts", _all.Count, _view.Count, _list.SelectedIndices.Count);
 
         private void ResetFilters()
         {
@@ -823,7 +866,7 @@ namespace EmailIndexer.App
         {
             var rows = SelectedRows();
             if (rows.Count == 0) { var r = FocusedRow(); if (r != null) rows.Add(r); }
-            if (rows.Count > 5 && !Ui.Confirm(this, "열기", $"선택한 {rows.Count}개 파일을 Outlook에서 한꺼번에 엽니다.", $"{rows.Count}개 열기")) return;
+            if (rows.Count > 5 && !Ui.Confirm(this, L.T("main.open.title"), L.F("main.open.message", rows.Count), L.F("main.open.ok", rows.Count))) return;
             foreach (var r in rows) Ui.OpenFile(this, r.Mail.FilePath);
         }
 
@@ -834,6 +877,9 @@ namespace EmailIndexer.App
             TrySaveSettings();
             foreach (var r in _all) r.Recalc(_settings.MyAddresses);
             ApplyFilter();
+            if (f.LanguageChanged)
+                MessageBox.Show(this, L.TIn(_settings.Language, "settings.restartToApply"), "Email Archive Indexer",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         // ---------------- 파일 관리 (명세 4·6·9장) ----------------
@@ -844,7 +890,7 @@ namespace EmailIndexer.App
             if (string.IsNullOrEmpty(_settings.BackupRoot) || _all.Count == 0) return false;
             if (_scanCts != null)
             {
-                MessageBox.Show(this, "스캔 중입니다. 스캔이 끝난 뒤 다시 시도하세요.", "잠시만요", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(this, L.T("main.busy.scanning"), L.T("main.busy.title"), MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
             return true;
@@ -854,12 +900,12 @@ namespace EmailIndexer.App
         private (List<MailRow> rows, string scope) TargetRows()
         {
             var sel = SelectedRows();
-            return sel.Count > 0 ? (sel, $"선택한 {sel.Count:#,0}개") : (_view.ToList(), $"현재 표시된 {_view.Count:#,0}개 전체");
+            return sel.Count > 0 ? (sel, L.P("main.target.selected", sel.Count)) : (_view.ToList(), L.P("main.target.viewAll", _view.Count));
         }
 
         private void AfterFileOp(string title, OpResult res)
         {
-            _statusLeft.Text = $"{title}: {res}";
+            _statusLeft.Text = L.F("main.status.fileOp", title, res);
             if (res.Failures.Count > 0)
                 MessageBox.Show(this, $"{res}\n\n" + string.Join("\n", res.Failures.Take(15)) + (res.Failures.Count > 15 ? "\n…" : ""),
                     title, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -881,17 +927,16 @@ namespace EmailIndexer.App
             int err = plans.Count(p => p.Status == PlanStatus.Error);
             var lines = plans.OrderBy(p => p.Status).Select(p => new PlanDialog.Line
             {
-                Cells = new[] { p.Status == PlanStatus.Rename ? "변경" : p.Status == PlanStatus.Skip ? "건너뜀" : "불가", p.OldName, p.NewName, p.Note },
+                Cells = new[] { p.Status == PlanStatus.Rename ? L.T("main.normalize.status.rename") : p.Status == PlanStatus.Skip ? L.T("main.normalize.status.skip") : L.T("main.normalize.status.error"), p.OldName, p.NewName, p.Note },
                 Color = p.Status == PlanStatus.Rename ? (Color?)null : p.Status == PlanStatus.Skip ? SystemColors.GrayText : Color.Firebrick,
             }).ToList();
             var undoFile = FileOps.LatestUndo(_settings.BackupRoot);
 
-            using var dlg = new PlanDialog("파일명 정규화 - 미리보기",
-                $"대상: {scope}   →   변경 {n:#,0} · 건너뜀 {skip:#,0} · 불가 {err:#,0}\n" +
-                "규칙: 날짜_시간_발신자_제목_첨부O/X  (받은 메일=수신 시각, 보낸 메일=발신 시각). 실행 후 [되돌리기]로 원래 이름으로 돌릴 수 있습니다.",
-                new[] { "처리", "변경 전", "변경 후", "비고" }, new[] { 70, 420, 460, 140 }, lines,
-                $"{n:#,0}개 이름 바꾸기", n > 0,
-                undoFile != null ? $"마지막 정규화 되돌리기 ({FileOps.UndoCount(undoFile)}개)" : null,
+            using var dlg = new PlanDialog(L.T("main.normalize.title"),
+                L.F("main.normalize.summary", scope, n, skip, err),
+                new[] { L.T("main.normalize.col.action"), L.T("main.normalize.col.oldName"), L.T("main.normalize.col.newName"), L.T("main.normalize.col.note") }, new[] { 70, 420, 460, 140 }, lines,
+                L.P("main.normalize.ok", n), n > 0,
+                undoFile != null ? L.P("main.normalize.undo", FileOps.UndoCount(undoFile)) : null,
                 undoFile != null ? () => DoUndoRename(undoFile) : (Action?)null);
             var choice = dlg.ShowDialog(this);
             if (choice == DialogResult.Retry && undoFile != null) { DoUndoRename(undoFile); return; }
@@ -901,53 +946,53 @@ namespace EmailIndexer.App
             OpResult res;
             try { res = FileOps.ApplyRenames(_settings.BackupRoot, plans); }
             finally { Cursor = Cursors.Default; }
-            AfterFileOp("파일명 정규화", res);
+            AfterFileOp(L.T("main.normalize.opTitle"), res);
         }
 
         private void DoUndoRename(string undoFile)
         {
             if (!ReadyForFileOps()) return;
             var n = FileOps.UndoCount(undoFile);
-            if (!Ui.Confirm(this, "정규화 되돌리기", $"마지막 파일명 정규화에서 바꾼 {n:#,0}개 파일의 이름을 원래대로 되돌립니다.\n그 사이 옮기거나 지운 파일은 건너뜁니다.",
-                    $"{n:#,0}개 이름 되돌리기")) return;
-            AfterFileOp("정규화 되돌리기", FileOps.UndoRenames(_settings.BackupRoot, undoFile));
+            if (!Ui.Confirm(this, L.T("main.undo.title"), L.P("main.undo.message", n),
+                    L.P("main.undo.ok", n))) return;
+            AfterFileOp(L.T("main.undo.opTitle"), FileOps.UndoRenames(_settings.BackupRoot, undoFile));
         }
 
         private void DoMove()
         {
             if (!ReadyForFileOps()) return;
             var rows = SelectedRows();
-            if (rows.Count == 0) { MessageBox.Show(this, "이동할 메일을 먼저 선택하세요.", "선택 이동"); return; }
-            using var dlg = new FolderBrowserDialog { Description = $"선택한 {rows.Count:#,0}개를 옮길 폴더", SelectedPath = _settings.BackupRoot, ShowNewFolderButton = true };
+            if (rows.Count == 0) { MessageBox.Show(this, L.T("main.move.needSelection"), L.T("main.move.title")); return; }
+            using var dlg = new FolderBrowserDialog { Description = L.P("main.move.browseDesc", rows.Count), SelectedPath = _settings.BackupRoot, ShowNewFolderButton = true };
             if (dlg.ShowDialog(this) != DialogResult.OK) return;
             var outside = !Path.GetFullPath(dlg.SelectedPath).StartsWith(_settings.BackupRoot, StringComparison.OrdinalIgnoreCase);
-            if (!Ui.Confirm(this, "선택 이동", $"선택한 {rows.Count:#,0}개 파일을 다음 폴더로 옮깁니다.\n{dlg.SelectedPath}" +
-                                              (outside ? "\n\n백업 폴더 밖이므로 옮긴 뒤에는 이 목록에 나오지 않습니다." : ""),
-                    $"{rows.Count:#,0}개 옮기기")) return;
-            AfterFileOp("선택 이동", FileOps.Move(_settings.BackupRoot, rows, dlg.SelectedPath));
+            if (!Ui.Confirm(this, L.T("main.move.title"), L.P("main.move.confirmMessage", rows.Count, dlg.SelectedPath) +
+                                              (outside ? L.T("main.move.outsideNote") : ""),
+                    L.P("main.move.ok", rows.Count))) return;
+            AfterFileOp(L.T("main.move.title"), FileOps.Move(_settings.BackupRoot, rows, dlg.SelectedPath));
         }
 
         private void DoDelete()
         {
             if (!ReadyForFileOps()) return;
             var rows = SelectedRows();
-            if (rows.Count == 0) { MessageBox.Show(this, "삭제할 메일을 목록에서 먼저 선택하세요.", "선택 삭제"); return; }
-            if (!Ui.Confirm(this, "선택 삭제", $"선택한 {rows.Count:#,0}개 파일을 휴지통으로 보냅니다.\nWindows 휴지통에서 복원할 수 있습니다.",
-                    $"{rows.Count:#,0}개 휴지통으로 보내기", destructive: true)) return;
-            AfterFileOp("선택 삭제", FileOps.Trash(_settings.BackupRoot, rows, new WindowsTrash()));
+            if (rows.Count == 0) { MessageBox.Show(this, L.T("main.delete.needSelection"), L.T("main.delete.title")); return; }
+            if (!Ui.Confirm(this, L.T("main.delete.title"), L.P("main.delete.confirmMessage", rows.Count),
+                    L.P("main.delete.ok", rows.Count), destructive: true)) return;
+            AfterFileOp(L.T("main.delete.title"), FileOps.Trash(_settings.BackupRoot, rows, new WindowsTrash()));
         }
 
         private void OpenOutlookBackup()
         {
             if (string.IsNullOrEmpty(_settings.BackupRoot) || !Directory.Exists(_settings.BackupRoot))
             {
-                MessageBox.Show(this, "먼저 메일을 저장할 백업 폴더를 선택하세요.", "Outlook 백업");
+                MessageBox.Show(this, L.T("main.outlook.needFolder"), L.T("main.outlook.title"));
                 ChooseFolder();
                 return;
             }
             if (_scanCts != null)
             {
-                MessageBox.Show(this, "스캔 중입니다. 스캔이 끝난 뒤 다시 시도하세요.", "잠시만요");
+                MessageBox.Show(this, L.T("main.busy.scanning"), L.T("main.busy.title"));
                 return;
             }
             using var f = new OutlookBackupForm(_settings.BackupRoot, _settings, _all.Select(r => r.Mail.MessageId));
@@ -965,18 +1010,17 @@ namespace EmailIndexer.App
         {
             if (!ReadyForFileOps()) return;
             var dups = FileOps.DuplicatesToRemove(_all);
-            if (dups.Count == 0) { MessageBox.Show(this, "정리할 중복 파일이 없습니다.", "중복 정리"); return; }
+            if (dups.Count == 0) { MessageBox.Show(this, L.T("main.dedupe.none"), L.T("main.dedupe.title")); return; }
             var lines = dups.OrderBy(d => d.Entry.DupGroup).Select(d => new PlanDialog.Line
             {
                 Cells = new[] { d.Entry.DupGroup.ToString(), d.Entry.RelPath, d.Entry.KeeperRelPath ?? "", d.Mail.Subject },
             }).ToList();
-            using var dlg = new PlanDialog("중복 정리 - 미리보기",
-                $"같은 메일로 확인된 파일 {dups.Count:#,0}개를 휴지통으로 보내고, 각 묶음의 원본 1개씩은 남깁니다.\n" +
-                "남길 파일 우선순위: 정규화된 이름 → msg 형식 → 먼저 들어온 파일. ('유사' 메일은 대상이 아닙니다)",
-                new[] { "묶음", "휴지통으로 보낼 파일", "남길 파일", "제목" }, new[] { 50, 380, 380, 280 }, lines,
-                $"{dups.Count:#,0}개 휴지통으로", true);
+            using var dlg = new PlanDialog(L.T("main.dedupe.dialogTitle"),
+                L.P("main.dedupe.summary", dups.Count),
+                new[] { L.T("main.dedupe.col.group"), L.T("main.dedupe.col.toTrash"), L.T("main.dedupe.col.toKeep"), L.T("main.dedupe.col.subject") }, new[] { 50, 380, 380, 280 }, lines,
+                L.P("main.dedupe.ok", dups.Count), true);
             if (dlg.ShowDialog(this) != DialogResult.OK) return;
-            AfterFileOp("중복 정리", FileOps.Trash(_settings.BackupRoot, dups, new WindowsTrash(), "TRASH_DUPLICATE"));
+            AfterFileOp(L.T("main.dedupe.opTitle"), FileOps.Trash(_settings.BackupRoot, dups, new WindowsTrash(), "TRASH_DUPLICATE"));
         }
 
         // ---------------- 창·설정 저장 ----------------
@@ -1002,7 +1046,7 @@ namespace EmailIndexer.App
             var b = WindowState == FormWindowState.Normal ? Bounds : RestoreBounds;
             _settings.WindowX = b.X; _settings.WindowY = b.Y; _settings.WindowW = b.Width; _settings.WindowH = b.Height;
             for (int i = 0; i < Columns.Length && i < _list.Columns.Count; i++)
-                _settings.ColumnWidths[Columns[i].Name] = _list.Columns[i].Width;
+                _settings.ColumnWidths[Columns[i].Id] = _list.Columns[i].Width;
             TrySaveSettings();
         }
 

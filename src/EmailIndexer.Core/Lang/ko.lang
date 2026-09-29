@@ -1,0 +1,78 @@
+# Email Archive Indexer — 한국어
+
+# ---- 메일 방향 / 일정 / 상태 ----
+dir.received = 받음
+dir.sent = 보냄
+meeting.request = 초대
+meeting.accepted = 수락
+meeting.declined = 거절
+meeting.tentative = 미정
+meeting.canceled = 취소
+meeting.other = 일정
+status.error = 오류
+status.duplicate = 중복
+status.keeper = 중복(원본)
+status.similar = 유사
+status.normalized = 정규화됨
+status.notNormalized = 미정규화
+
+# ---- 검색 범위 / 필터 요약 ----
+scope.all = 전체
+scope.subject = 제목
+scope.people = 사람
+scope.body = 본문
+scope.attachments = 첨부명
+filter.attYes = 첨부 있음
+filter.attNo = 첨부 없음
+filter.dateRange = {0} ~ {1}
+filter.dateStart = 처음
+filter.dateNow = 지금
+filter.folder = 폴더: {0}
+filter.sender = 발신자: {0}
+filter.search = 검색: {0}
+filter.searchScoped = 검색: {0} ({1})
+
+# ---- 읽기 오류 ----
+err.empty = 빈 파일
+err.access = 파일 접근 권한 없음
+err.locked = 다른 프로그램이 사용 중
+err.notfound = 파일 없음
+err.notmail = 메일 형식이 아님 (발신자·날짜·제목 헤더 없음)
+err.corrupt = 손상되었거나 메일 형식이 아닌 파일 ({0})
+
+# ---- 스캔 진행 ----
+scan.phase.list = 파일 목록 확인
+scan.phase.read = 메일 읽는 중
+scan.phase.save = 캐시 저장
+
+# ---- 파일 작업 ----
+ops.done = {0}건 완료
+ops.doneWithFailures = {0}건 완료, {1}건 실패
+plan.skip.error = 읽기 오류 파일
+plan.skip.already = 이미 규칙대로
+plan.error.pathTooLong = 폴더 경로가 너무 김
+plan.error.tooMany = 같은 이름이 너무 많음
+plan.note.numbered = 같은 이름이 있어 번호 붙임
+plan.note.trimmed = 경로 길이 제한으로 제목 줄임
+ops.err.targetExists = 같은 이름의 파일이 생김
+ops.err.renamedMissing = 바뀐 이름의 파일이 없음 (이동·삭제됨)
+ops.err.originalExists = 원래 이름의 파일이 이미 있음
+ops.err.destTooLong = 대상 경로가 너무 김
+
+# ---- 미리보기 ----
+preview.readFailed = 본문을 읽지 못했습니다: {0}
+
+# ---- Outlook 백업 ----
+backup.stats = {0}: 확인 {1} · 저장 {2} · 건너뜀 {3} · 실패 {4}
+backup.folderError = {0}: 폴더를 읽는 중 오류 — {1}
+backup.err.noFile = Outlook이 저장했다고 했지만 파일이 생기지 않았습니다
+backup.warnUnreadable = [경고] 저장은 됐지만 내용을 읽지 못함: {0} ({1})
+backup.err.access = 저장 폴더에 쓸 권한이 없습니다
+backup.err.pathTooLong = 경로가 너무 깁니다
+backup.err.notFound = Outlook에서 항목을 찾을 수 없습니다 (이동·삭제됨)
+backup.err.exchange = Exchange 서버 연결 문제 (온라인 모드·네트워크 확인)
+backup.err.aborted = Outlook에서 작업이 취소되었습니다 (보안 확인 창 거부 등)
+backup.err.tooMany = Outlook이 동시에 열 수 있는 항목 한도를 넘었습니다. 잠시 후 다시 시도하세요.
+
+# ---- 설정 ----
+settings.restartToApply = 다음에 앱을 시작할 때부터 새 언어로 표시됩니다.

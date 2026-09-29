@@ -1,0 +1,55 @@
+# Email Archive Indexer — 한국어 — Outlook 영역
+
+# ---- Outlook 백업 창 ----
+outlook.backup.title = Outlook 백업
+outlook.backup.opt.sinceLast = 마지막 백업 이후
+outlook.backup.opt.recent = 최근
+outlook.backup.opt.days = 일
+outlook.backup.opt.all = 전체
+outlook.backup.rangeLabel = 기간:
+outlook.backup.intro = Outlook(classic)의 [받은편지함]·[보낸편지함] 메일을 .msg 파일로 저장합니다. Outlook이 꺼져 있으면 자동으로 실행합니다. Outlook의 원본 메일은 그대로 둡니다.\n저장 위치: {0}   (하위 폴더 없이 바로 저장, 파일명은 정규화 규칙 적용)\n이미 백업된 메일은 건너뜁니다. Outlook에 보안 확인 창이 뜨면 '허용'을 눌러 주세요.
+outlook.backup.failBox = 실패·경고 (메일별 사유)
+outlook.backup.start = 백업 시작
+outlook.backup.stop = 중지
+outlook.backup.close = 닫기
+outlook.backup.openLog = 기록 파일 열기
+outlook.backup.stopping = \n중지하는 중… 현재 메일 저장이 끝나면 닫을 수 있습니다.
+outlook.backup.ready = 기간을 고른 뒤 [백업 시작]을 누르세요.
+outlook.backup.connecting = Outlook에 연결하는 중…
+outlook.backup.running = 백업 중…\n{0}
+outlook.backup.errorGeneric = 백업 중 오류: {0}
+outlook.backup.unknownError = 알 수 없는 오류
+outlook.backup.doneStopped = 중지됨. 
+outlook.backup.doneComplete = 완료. 
+outlook.backup.summary = 확인 {0} · 저장 {1} · 건너뜀(이미 백업됨) {2} · 실패 {3}
+outlook.backup.myAddresses = \n내 주소 자동 등록: {0}
+outlook.backup.noneChecked = 확인한 메일이 없습니다. 기간을 '전체'로 바꿔 보거나 Outlook에서 폴더가 동기화되었는지 확인하세요.
+
+# ---- Outlook COM 연결 / 실행 ----
+outlook.com.newOnly = 새 Outlook만 설치되어 있습니다. 자동 백업은 Outlook(classic)에서만 됩니다.\n새 Outlook 오른쪽 위의 '새 Outlook' 스위치를 꺼서 classic으로 전환하세요.
+outlook.com.notInstalled = Outlook(classic)이 설치되어 있지 않습니다.
+outlook.com.permByApp = 이 앱이
+outlook.com.permByOutlook = Outlook이
+outlook.com.permMismatch = Outlook은 실행 중이지만 연결할 수 없습니다. {0} '관리자 권한'으로 실행되어 권한 수준이 서로 다른 것으로 보입니다.\nOutlook과 이 앱을 모두 일반 권한(더블클릭)으로 다시 실행하세요.\n(기존 앱에서 백업이 항상 0개였던 대표적인 원인입니다)
+outlook.com.connectFailed = Outlook 연결 실패: {0}
+outlook.com.launching = Outlook(classic)을 실행하는 중… (프로필 선택 창이 뜨면 선택해 주세요)
+outlook.com.launchFailed = Outlook(classic)을 실행하지 못했습니다: {0}\nOutlook을 직접 켠 뒤 다시 시도하세요.
+outlook.com.waitCancelled = Outlook 실행을 기다리다 중지했습니다.
+outlook.com.newOpened = Outlook(classic) 대신 '새 Outlook'이 열렸습니다. 새 Outlook은 자동 백업을 지원하지 않습니다.\n새 Outlook 오른쪽 위의 '새 Outlook' 스위치를 꺼서 classic으로 전환한 뒤 다시 시도하세요.
+outlook.com.waiting = Outlook이 준비되기를 기다리는 중… ({0}초)
+outlook.com.timeout = Outlook이 2분 안에 준비되지 않았습니다. 프로필 선택·로그인 창이 떠 있다면 완료한 뒤 다시 시도하세요.
+outlook.com.timeoutNewNote = \n(새 Outlook이 실행 중이라면 classic으로 전환이 필요합니다)
+outlook.com.defaultAccount = 기본 계정
+outlook.folder.inbox = 받은편지함
+outlook.folder.sent = 보낸편지함
+
+# ---- 프로그램 오류 창 ----
+outlook.crash.title = 오류
+outlook.crash.message = 예상하지 못한 오류가 발생했습니다.\n{0}\n\n방금 하던 작업을 다시 시도해 보고, 계속되면 프로그램을 껐다 다시 켜세요. 메일 파일에는 영향이 없습니다.\n같은 문제가 반복되면 이 기록 파일을 담당자에게 보내 주세요:\n{1}
+
+# ---- 실행 환경 점검 창 ----
+outlook.env.title = {0} {1} — 실행 환경 점검
+outlook.env.heading = ✅ 앱이 정상 실행되었습니다. 아래 내용을 [정보 복사]로 전달해 주세요.
+outlook.env.copy = 정보 복사
+outlook.env.copied = 복사됨 ✓
+outlook.env.close = 닫기

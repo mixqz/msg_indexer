@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using EmailIndexer.Core.Text;
 
 namespace EmailIndexer.App
 {
@@ -12,9 +14,22 @@ namespace EmailIndexer.App
         public static readonly Font Base = CreateFont(9F);
         public static readonly Font Bold = new Font(Base, FontStyle.Bold);
 
+        /// <summary>
+        /// 언어별 기본 글꼴 (Windows 기본 탑재). 한국어 Malgun Gothic, 일본어 Yu Gothic UI,
+        /// 중국어 Microsoft YaHei UI, 영어·스페인어·프랑스어 Segoe UI. 없으면 시스템 글꼴.
+        /// </summary>
         private static Font CreateFont(float size)
         {
-            foreach (var name in new[] { "Malgun Gothic", "NanumGothic" })
+            string[] prefs;
+            switch (EmailIndexer.Core.Text.L.Language)
+            {
+                case "ko": prefs = new[] { "Malgun Gothic" }; break;
+                case "ja": prefs = new[] { "Yu Gothic UI", "Meiryo UI" }; break;
+                case "zh": prefs = new[] { "Microsoft YaHei UI", "Microsoft YaHei" }; break;
+                default: prefs = new[] { "Segoe UI" }; break;
+            }
+            // 한글 이름·제목이 섞인 메일도 많아, 서양 언어에서도 대체 글꼴로 Malgun Gothic을 둔다
+            foreach (var name in prefs.Concat(new[] { "Malgun Gothic", "NanumGothic" }))
             {
                 var f = new Font(name, size);
                 if (f.Name == name) return f;
@@ -102,8 +117,8 @@ namespace EmailIndexer.App
             try { Process.Start(new ProcessStartInfo(path) { UseShellExecute = true }); }
             catch (Exception ex)
             {
-                MessageBox.Show(owner, $"파일을 열 수 없습니다.\n{path}\n\n{ex.Message}\n\nOutlook이 설치되어 .msg/.eml에 연결되어 있는지 확인하세요.",
-                    "열기 실패", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(owner, L.F("dlg.ui.open.failedMessage", path, ex.Message),
+                    L.T("dlg.ui.open.failedTitle"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -135,7 +150,7 @@ namespace EmailIndexer.App
             };
             var text = new Label { Text = message, AutoSize = true, MaximumSize = new Size(460, 0), Margin = new Padding(0, 4, 0, 14) };
             var bar = new FlowLayoutPanel { AutoSize = true, FlowDirection = FlowDirection.RightToLeft, Dock = DockStyle.Fill, Margin = new Padding(0) };
-            var cancel = new Button { Text = "취소", DialogResult = DialogResult.Cancel, AutoSize = true, MinimumSize = new Size(80, 28) };
+            var cancel = new Button { Text = L.T("dlg.ui.confirm.cancel"), DialogResult = DialogResult.Cancel, AutoSize = true, MinimumSize = new Size(80, 28) };
             var ok = new Button { Text = okText, DialogResult = DialogResult.OK, AutoSize = true, MinimumSize = new Size(80, 28) };
             bar.Controls.Add(cancel);
             bar.Controls.Add(ok);

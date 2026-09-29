@@ -1,0 +1,56 @@
+# Email Archive Indexer — English (source language) — Outlook area
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural forms)
+
+# ---- Outlook backup window ----
+outlook.backup.title = Outlook backup
+outlook.backup.opt.sinceLast = Since last backup
+outlook.backup.opt.recent = Last
+outlook.backup.opt.days = days
+outlook.backup.opt.all = All
+outlook.backup.rangeLabel = Range:
+outlook.backup.intro = Saves the mail in your Outlook (classic) Inbox and Sent Items as .msg files. If Outlook is closed, it starts automatically. The original mail in Outlook is left untouched.\nSave location: {0}   (saved directly, with no subfolders; file names follow the naming rule)\nMail that's already backed up is skipped. If Outlook shows a security prompt, click Allow.
+outlook.backup.failBox = Failures and warnings (reason per message)
+outlook.backup.start = Start backup
+outlook.backup.stop = Stop
+outlook.backup.close = Close
+outlook.backup.openLog = Open log file
+outlook.backup.stopping = \nStopping… you can close once the current message finishes saving.
+outlook.backup.ready = Pick a range, then click Start backup.
+outlook.backup.connecting = Connecting to Outlook…
+outlook.backup.running = Backing up…\n{0}
+outlook.backup.errorGeneric = Error during backup: {0}
+outlook.backup.unknownError = Unknown error
+outlook.backup.doneStopped = Stopped. 
+outlook.backup.doneComplete = Done. 
+outlook.backup.summary = Checked {0} · saved {1} · skipped (already backed up) {2} · failed {3}
+outlook.backup.myAddresses = \nMy addresses added automatically: {0}
+outlook.backup.noneChecked = No mail was checked. Try setting the range to All, or check that the folders are synced in Outlook.
+
+# ---- Outlook COM connection / launch ----
+outlook.com.newOnly = Only new Outlook is installed. Automatic backup works only with Outlook (classic).\nTurn off the 'new Outlook' switch at the top right of new Outlook to switch to classic.
+outlook.com.notInstalled = Outlook (classic) is not installed.
+outlook.com.permByApp = this app
+outlook.com.permByOutlook = Outlook
+outlook.com.permMismatch = Outlook is running, but it can't be connected to. It looks like {0} is running as administrator, so the two are running at different permission levels.\nRestart both Outlook and this app with standard permissions (double-click).\n(This is the most common reason backups always came out empty in the old app.)
+outlook.com.connectFailed = Couldn't connect to Outlook: {0}
+outlook.com.launching = Starting Outlook (classic)… (if a profile picker appears, please choose one)
+outlook.com.launchFailed = Couldn't start Outlook (classic): {0}\nStart Outlook yourself, then try again.
+outlook.com.waitCancelled = Stopped while waiting for Outlook to start.
+outlook.com.newOpened = 'New Outlook' opened instead of Outlook (classic). New Outlook doesn't support automatic backup.\nTurn off the 'new Outlook' switch at the top right of new Outlook to switch to classic, then try again.
+outlook.com.waiting = Waiting for Outlook to get ready… ({0}s)
+outlook.com.timeout = Outlook wasn't ready within 2 minutes. If a profile picker or sign-in window is open, finish it and try again.
+outlook.com.timeoutNewNote = \n(If new Outlook is running, you need to switch to classic.)
+outlook.com.defaultAccount = Default account
+outlook.folder.inbox = Inbox
+outlook.folder.sent = Sent Items
+
+# ---- Program crash dialog ----
+outlook.crash.title = Error
+outlook.crash.message = An unexpected error occurred.\n{0}\n\nTry the last thing you were doing again, and if it keeps happening, close and reopen the program. Your mail files are not affected.\nIf the same problem repeats, please send this log file to your administrator:\n{1}
+
+# ---- Environment check window ----
+outlook.env.title = {0} {1} — Environment check
+outlook.env.heading = ✅ The app started normally. Please share the details below using Copy info.
+outlook.env.copy = Copy info
+outlook.env.copied = Copied ✓
+outlook.env.close = Close

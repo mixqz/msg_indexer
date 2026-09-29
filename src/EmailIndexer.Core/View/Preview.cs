@@ -40,7 +40,7 @@ namespace EmailIndexer.Core.View
             }
             catch (Exception ex)
             {
-                pc.Error = "본문을 읽지 못했습니다: " + ex.Message;
+                pc.Error = L.F("preview.readFailed", ex.Message);
                 pc.Text = CleanText(info.BodyText);
                 pc.Html = TextAsHtml(pc.Text);
             }

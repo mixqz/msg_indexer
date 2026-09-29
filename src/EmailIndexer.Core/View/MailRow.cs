@@ -1,4 +1,5 @@
 using System;
+using EmailIndexer.Core.Text;
 using System.Collections.Generic;
 using System.IO;
 using EmailIndexer.Core.Index;
@@ -46,35 +47,45 @@ namespace EmailIndexer.Core.View
         {
             switch (k)
             {
-                case MeetingKind.Request: return "초대";
-                case MeetingKind.Accepted: return "수락";
-                case MeetingKind.Declined: return "거절";
-                case MeetingKind.Tentative: return "미정";
-                case MeetingKind.Canceled: return "취소";
-                case MeetingKind.Other: return "일정";
+                case MeetingKind.Request: return L.T("meeting.request");
+                case MeetingKind.Accepted: return L.T("meeting.accepted");
+                case MeetingKind.Declined: return L.T("meeting.declined");
+                case MeetingKind.Tentative: return L.T("meeting.tentative");
+                case MeetingKind.Canceled: return L.T("meeting.canceled");
+                case MeetingKind.Other: return L.T("meeting.other");
                 default: return "";
             }
         }
 
-        public static string Direction(MailDirection d) => d == MailDirection.Sent ? "보냄" : "받음";
+        public static string Direction(MailDirection d) => L.T(d == MailDirection.Sent ? "dir.sent" : "dir.received");
 
         public static string Status(MailRow r)
         {
-            if (r.Mail.IsError) return "오류";
+            if (r.Mail.IsError) return L.T("status.error");
             switch (r.Entry.Dup)
             {
-                case DupStatus.Duplicate: return "중복";
-                case DupStatus.Keeper: return "중복(원본)";
-                case DupStatus.Similar: return "유사";
+                case DupStatus.Duplicate: return L.T("status.duplicate");
+                case DupStatus.Keeper: return L.T("status.keeper");
+                case DupStatus.Similar: return L.T("status.similar");
             }
-            return r.Normalized ? "정규화됨" : "";
+            return r.Normalized ? L.T("status.normalized") : "";
+        }
+
+        /// <summary>읽기 오류 사유 (캐시에는 "코드\t상세"로 저장, 표시할 때 현재 언어로).</summary>
+        public static string Error(MailInfo m)
+        {
+            var e = m.ParseError;
+            if (string.IsNullOrEmpty(e)) return "";
+            var tab = e!.IndexOf('\t');
+            if (tab < 0) return e.StartsWith("err.") ? L.T(e) : e; // 이전 버전 캐시의 문장은 그대로
+            return L.F(e.Substring(0, tab), e.Substring(tab + 1));
         }
 
         public static string Size(long bytes)
         {
-            if (bytes < 1024) return bytes + " B";
-            if (bytes < 1024 * 1024) return (bytes / 1024.0).ToString("#,0") + " KB";
-            return (bytes / 1024.0 / 1024.0).ToString("#,0.0") + " MB";
+            if (bytes < 1024) return bytes.ToString(L.Culture) + " B";
+            if (bytes < 1024 * 1024) return (bytes / 1024.0).ToString("#,0", L.Culture) + " KB";
+            return (bytes / 1024.0 / 1024.0).ToString("#,0.0", L.Culture) + " MB";
         }
     }
 }

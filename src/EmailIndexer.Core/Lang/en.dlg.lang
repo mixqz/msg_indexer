@@ -1,0 +1,49 @@
+# Email Archive Indexer — English (source language) — dialogs (dlg.*)
+# Format: key = value   (\n = line break, {0} {1} = placeholders, key.one / key.other = plural)
+
+# ---- Preview window ----
+dlg.preview.title = Preview
+dlg.preview.titleWithFile = Preview - {0}
+dlg.preview.subjectAccessible = Subject
+dlg.preview.noSubject = (No subject)
+dlg.preview.viewText = View as text
+dlg.preview.viewFormatted = View formatted
+dlg.preview.prev = ◀ Previous
+dlg.preview.next = Next ▶
+dlg.preview.copyBody = Copy body
+dlg.preview.openInOutlook = Open in Outlook
+dlg.preview.showInFolder = Show in folder
+dlg.preview.close = Close
+
+# ---- Preview: header row labels ----
+dlg.preview.hdr.from = From
+dlg.preview.hdr.to = To
+dlg.preview.hdr.cc = Cc
+dlg.preview.hdr.date = Date
+dlg.preview.hdr.attachments = Attachments
+
+# ---- Preview: date/meeting/attachment values ----
+dlg.preview.meetingSuffix =   ·  Meeting: {0}
+dlg.preview.attachmentNone = None
+dlg.preview.attachmentCount.one = {0} attachment ({1})
+dlg.preview.attachmentCount.other = {0} attachments ({1})
+
+# ---- Preview: open-link confirmation ----
+dlg.preview.link.title = Open link
+dlg.preview.link.message = This opens a link from the message in your default browser.\nOpen it only if you trust the sender.\n\n{0}
+dlg.preview.link.open = Open in browser
+
+# ---- Plan dialog ----
+dlg.plan.cancel = Cancel
+
+# ---- Settings ----
+dlg.settings.title = Settings
+dlg.settings.help = My email addresses (one per line)\nMail from these senders is treated as sent mail, and the sent time is used for the file name and sorting.\nRunning an Outlook backup adds your account address automatically.
+dlg.settings.cancel = Cancel
+dlg.settings.save = Save
+dlg.settings.envCheck = Check environment
+
+# ---- Shared UI helpers (Ui.cs) ----
+dlg.ui.confirm.cancel = Cancel
+dlg.ui.open.failedTitle = Couldn't open
+dlg.ui.open.failedMessage = Couldn't open the file.\n{0}\n\n{1}\n\nMake sure Outlook is installed and associated with .msg/.eml files.

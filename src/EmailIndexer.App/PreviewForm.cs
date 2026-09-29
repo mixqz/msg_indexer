@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
+using EmailIndexer.Core.Text;
 using EmailIndexer.Core.View;
 
 namespace EmailIndexer.App
@@ -20,7 +21,7 @@ namespace EmailIndexer.App
         {
             Dock = DockStyle.Top, Font = new Font(Ui.Base.FontFamily, 12F, FontStyle.Bold), ReadOnly = true, Multiline = true,
             WordWrap = true, BorderStyle = BorderStyle.None, BackColor = Theme.AppBg, TabStop = false,
-            AccessibleName = "제목",
+            AccessibleName = L.T("dlg.preview.subjectAccessible"),
         };
         private readonly TableLayoutPanel _meta = new TableLayoutPanel { Dock = DockStyle.Top, AutoSize = true, ColumnCount = 2, Padding = new Padding(10, 4, 12, 10) };
         private readonly Panel _bodyHost = new Panel { Dock = DockStyle.Fill };
@@ -33,7 +34,7 @@ namespace EmailIndexer.App
         public PreviewForm(IList<MailRow> rows, int index, AppSettings settings)
         {
             _rows = rows; _index = index; _settings = settings;
-            Text = "미리보기";
+            Text = L.T("dlg.preview.title");
             Font = Ui.Base;
             Icon = Ui.AppIcon ?? Icon;
             Size = new Size(960, 760);
@@ -54,18 +55,18 @@ namespace EmailIndexer.App
             }
             catch { _web = null; } // 서식 보기를 쓸 수 없는 환경 → 텍스트만
 
-            _toggle = Ui.Btn("텍스트 보기", (_, __) => { _settings.PreviewAsText = !_settings.PreviewAsText; ShowBody(); }, 110);
-            _prev = Ui.Btn("◀ 이전", (_, __) => Move(-1), 80);
-            _next = Ui.Btn("다음 ▶", (_, __) => Move(+1), 80);
+            _toggle = Ui.Btn(L.T("dlg.preview.viewText"), (_, __) => { _settings.PreviewAsText = !_settings.PreviewAsText; ShowBody(); }, 110);
+            _prev = Ui.Btn(L.T("dlg.preview.prev"), (_, __) => Move(-1), 80);
+            _next = Ui.Btn(L.T("dlg.preview.next"), (_, __) => Move(+1), 80);
 
             var bar = new FlowLayoutPanel { Dock = DockStyle.Bottom, AutoSize = true, AutoSizeMode = AutoSizeMode.GrowAndShrink, Padding = new Padding(6, 6, 6, 2), WrapContents = true };
             bar.Controls.AddRange(new Control[]
             {
                 _prev, _next, _toggle,
-                Ui.Btn("본문 복사", (_, __) => { if (_content != null) Clipboard.SetText(_content.Text.Length > 0 ? _content.Text : " "); }),
-                Ui.Btn("Outlook으로 열기", (_, __) => Ui.OpenFile(this, Current.Mail.FilePath)),
-                Ui.Btn("폴더에서 보기", (_, __) => Ui.ShowInFolder(Current.Mail.FilePath)),
-                Ui.Btn("닫기", (_, __) => Close(), 70),
+                Ui.Btn(L.T("dlg.preview.copyBody"), (_, __) => { if (_content != null) Clipboard.SetText(_content.Text.Length > 0 ? _content.Text : " "); }),
+                Ui.Btn(L.T("dlg.preview.openInOutlook"), (_, __) => Ui.OpenFile(this, Current.Mail.FilePath)),
+                Ui.Btn(L.T("dlg.preview.showInFolder"), (_, __) => Ui.ShowInFolder(Current.Mail.FilePath)),
+                Ui.Btn(L.T("dlg.preview.close"), (_, __) => Close(), 70),
                 _path,
             });
 
@@ -105,18 +106,18 @@ namespace EmailIndexer.App
         {
             var r = Current;
             var m = r.Mail;
-            Text = $"미리보기 - {r.FileName}";
-            _subject.Text = string.IsNullOrEmpty(m.Subject) ? "(제목 없음)" : m.Subject;
+            Text = L.F("dlg.preview.titleWithFile", r.FileName);
+            _subject.Text = string.IsNullOrEmpty(m.Subject) ? L.T("dlg.preview.noSubject") : m.Subject;
             FitSubject();
             var meeting = Display.Meeting(m.Meeting);
             var rows = new List<(string, string)>
             {
-                ("발신자", m.SenderName + (m.SenderEmail.Length > 0 && m.SenderEmail != m.SenderName ? $" <{m.SenderEmail}>" : "")),
-                ("받는사람", Short(string.Join("; ", m.To))),
+                (L.T("dlg.preview.hdr.from"), m.SenderName + (m.SenderEmail.Length > 0 && m.SenderEmail != m.SenderName ? $" <{m.SenderEmail}>" : "")),
+                (L.T("dlg.preview.hdr.to"), Short(string.Join("; ", m.To))),
             };
-            if (m.Cc.Count > 0) rows.Add(("참조", Short(string.Join("; ", m.Cc))));
-            rows.Add(("일시", $"{r.LocalTime:yyyy-MM-dd (ddd) HH:mm:ss}  ·  {Display.Direction(r.Direction)}{(meeting.Length > 0 ? "  ·  일정: " + meeting : "")}"));
-            rows.Add(("첨부", m.HasAttachments ? $"{m.AttachmentNames.Count}개 ({Short(string.Join(", ", m.AttachmentNames))})" : "없음"));
+            if (m.Cc.Count > 0) rows.Add((L.T("dlg.preview.hdr.cc"), Short(string.Join("; ", m.Cc))));
+            rows.Add((L.T("dlg.preview.hdr.date"), $"{r.LocalTime.ToString("yyyy-MM-dd (ddd) HH:mm:ss", L.Culture)}  ·  {Display.Direction(r.Direction)}{(meeting.Length > 0 ? L.F("dlg.preview.meetingSuffix", meeting) : "")}"));
+            rows.Add((L.T("dlg.preview.hdr.attachments"), m.HasAttachments ? L.P("dlg.preview.attachmentCount", m.AttachmentNames.Count, Short(string.Join(", ", m.AttachmentNames))) : L.T("dlg.preview.attachmentNone")));
             _meta.SuspendLayout();
             _meta.Controls.Clear();
             _meta.RowStyles.Clear();
@@ -155,7 +156,7 @@ namespace EmailIndexer.App
         {
             if (_content == null) return;
             bool asText = _settings.PreviewAsText || _web == null;
-            _toggle.Text = asText ? "서식 보기" : "텍스트 보기";
+            _toggle.Text = asText ? L.T("dlg.preview.viewFormatted") : L.T("dlg.preview.viewText");
             _toggle.Enabled = _web != null;
             _bodyHost.Controls.Clear();
             if (asText)
@@ -181,7 +182,7 @@ namespace EmailIndexer.App
             var u = e.Url;
             if (u.Scheme == Uri.UriSchemeHttp || u.Scheme == Uri.UriSchemeHttps || u.Scheme == Uri.UriSchemeMailto)
             {
-                var ok = Ui.Confirm(this, "링크 열기", $"메일 속 링크를 기본 브라우저로 엽니다.\n보낸 사람을 신뢰할 때만 여세요.\n\n{u}", "브라우저로 열기");
+                var ok = Ui.Confirm(this, L.T("dlg.preview.link.title"), L.F("dlg.preview.link.message", u), L.T("dlg.preview.link.open"));
                 if (ok) try { Process.Start(new ProcessStartInfo(u.ToString()) { UseShellExecute = true }); } catch { }
             }
         }

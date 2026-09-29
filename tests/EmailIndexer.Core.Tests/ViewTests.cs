@@ -152,19 +152,19 @@ public class ViewTests
         var f = new MailFilter { HasAttachments = true, Search = "한빛마트", Scope = SearchScope.Subject };
         f.Meetings.Add(MeetingKind.Request);
         var d = f.Describe();
-        Assert.Contains("첨부O", d);
-        Assert.Contains("초대", d);
-        Assert.Contains("검색: 한빛마트 (제목)", d);
+        Assert.Contains("With attachments", d);
+        Assert.Contains("Invite", d);
+        Assert.Contains("Search: 한빛마트 (Subject)", d);
     }
 
     [Fact]
     public void Display_strings()
     {
         Assert.Equal("142 KB", Display.Size(145408));
-        Assert.Equal("중복", Display.Status(Rows[3]));
-        Assert.Equal("오류", Display.Status(Rows[4]));
-        Assert.Equal("정규화됨", Display.Status(Row("260823_175434_Alex_W35_첨부O.msg", "x")));
-        Assert.Equal("수락", Display.Meeting(MeetingKind.Accepted));
+        Assert.Equal("Duplicate", Display.Status(Rows[3]));
+        Assert.Equal("Error", Display.Status(Rows[4]));
+        Assert.Equal("Renamed", Display.Status(Row("260823_175434_Alex_W35_첨부O.msg", "x")));
+        Assert.Equal("Accepted", Display.Meeting(MeetingKind.Accepted));
     }
 
     // ---- 미리보기 정리 ----
