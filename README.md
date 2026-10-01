@@ -2,9 +2,13 @@
 
 **English** · [한국어](README.ko.md) · [Español](README.es.md) · [Français](README.fr.md) · [日本語](README.ja.md) · [简体中文](README.zh.md)
 
-A portable Windows program for people who keep their mail as `.msg` / `.eml` files. It finds any mail in a backup folder of up to about 10,000 files in seconds, gives the files consistent names, cleans up duplicates, and backs up your Outlook (classic) Inbox and Sent Items automatically.
+Outlook data files grow large as mail accumulates. When indexing isn't working properly, even a message you know is there can fail to show up in search. Finding an old attachment can mean working through folders one by one.
 
-One `.exe` file, no installation, no administrator rights, no internet connection.
+Email Archive Indexer saves mail as individual files and indexes those files for search. It backs up your Outlook (classic) Inbox and Sent Items as `.msg` files, and also reads existing `.msg` / `.eml` archives. You can search subjects, senders and recipients, message bodies and attachment names without relying on Outlook's search index.
+
+The mail files stay in ordinary folders, so you can copy them to another drive or organize them however you like. The app can give them consistent names and help you clean up duplicates. Your original mail in Outlook stays untouched.
+
+It's a portable Windows program that runs from a single `.exe`. No installation or administrator rights are needed, and indexing and search work locally without an internet connection.
 
 ![Main window](docs/images/main-en.png)
 
